@@ -1,0 +1,68 @@
+{
+  "name": "@oasisailab/sponge-tool-terminal",
+  "description": "Six model-facing persistent PTY tools with owner isolation and generic background-job integration",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/terminal/tool-terminal"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-terminal": "workspace:^",
+    "@oasisailab/sponge-output-retention": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-include": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-terminal": "workspace:^",
+    "@oasisailab/sponge-terminal-bash": "workspace:^",
+    "@oasisailab/sponge-output-retention": "workspace:^",
+    "@oasisailab/sponge-sandbox": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-jobs": "workspace:^",
+    "@oasisailab/sponge-jobs-local": "workspace:^",
+    "@oasisailab/sponge-tool-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

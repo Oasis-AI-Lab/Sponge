@@ -1,0 +1,64 @@
+{
+  "name": "@oasisailab/sponge-tool-fs-search",
+  "description": "Model-facing filesystem discovery tools (glob, grep) backed by the packaged ripgrep binary (@vscode/ripgrep)",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/fs/tool-fs-search"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@vscode/ripgrep": "^1.18.0",
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-output-retention": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-spill": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-timeout": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-output-retention": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-spill": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-timeout": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

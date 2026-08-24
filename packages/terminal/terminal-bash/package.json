@@ -1,0 +1,59 @@
+{
+  "name": "@oasisailab/sponge-terminal-bash",
+  "description": "Persistent shell PTY backend over the Sponge subprocess terminal primitive",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/terminal/terminal-bash"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-terminal": "workspace:^",
+    "@oasisailab/sponge-sandbox": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "dependencies": {
+    "@oasisailab/sponge-pwsh-local": "workspace:^",
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-terminal": "workspace:^",
+    "@oasisailab/sponge-sandbox": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}
