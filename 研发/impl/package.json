@@ -1,0 +1,16 @@
+{
+  "name": "sponge-slice-base",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Base Slice — the base abstract class of the Sponge paradigm (TypeScript).",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc && node --test \"dist/tests/**/*.test.js\""
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^22.0.0"
+  }
+}
