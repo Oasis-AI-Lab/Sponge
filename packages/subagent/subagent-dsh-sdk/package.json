@@ -1,0 +1,60 @@
+{
+  "name": "@oasisailab/sponge-subagent-dsh-sdk",
+  "description": "Out-of-process SDK subagent backend: drives a child Sponge runtime subprocess over stdio JSON-RPC through the TypeScript SDK client",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/subagent/subagent-dsh-sdk"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-sdk-client": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-loader-smoke": "workspace:^",
+    "@oasisailab/sponge-sdk-client": "workspace:^",
+    "@oasisailab/sponge-sdk-protocol": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

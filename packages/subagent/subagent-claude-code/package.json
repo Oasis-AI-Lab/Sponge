@@ -1,0 +1,68 @@
+{
+  "name": "@oasisailab/sponge-subagent-claude-code",
+  "description": "One-shot Claude Code subagent provider over the official Agent SDK",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/subagent/subagent-claude-code"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "cordis.patch.yml",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-timeout": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.93.0",
+    "@anthropic-ai/claude-agent-sdk": "0.3.220",
+    "@oasisailab/sponge-schemastery": "workspace:^",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-loader-smoke": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-subprocess": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-timeout": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

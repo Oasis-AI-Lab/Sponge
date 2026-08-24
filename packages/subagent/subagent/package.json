@@ -1,0 +1,106 @@
+{
+  "name": "@oasisailab/sponge-subagent",
+  "description": "Abstract subagent seam (ctx.subagents): named-provider registry for delegating to child agents",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/subagent/subagent"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client.d.ts",
+      "default": "./lib/types/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-presets": "workspace:^",
+    "@oasisailab/sponge-brand": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-sandbox": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-persistence": "workspace:^",
+    "@oasisailab/sponge-session-projection": "workspace:^",
+    "@oasisailab/sponge-session-projection-cache": "workspace:^",
+    "@oasisailab/sponge-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-user-approval": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "peerDependenciesMeta": {
+    "@oasisailab/sponge-agent-presets": {
+      "optional": true
+    },
+    "@oasisailab/sponge-sandbox": {
+      "optional": true
+    },
+    "@oasisailab/sponge-sandbox-policy": {
+      "optional": true
+    },
+    "@oasisailab/sponge-session-persistence": {
+      "optional": true
+    },
+    "@oasisailab/sponge-session-projection": {
+      "optional": true
+    },
+    "@oasisailab/sponge-session-projection-cache": {
+      "optional": true
+    },
+    "@oasisailab/sponge-jobs": {
+      "optional": true
+    },
+    "@oasisailab/sponge-user-approval": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-presets": "workspace:^",
+    "@oasisailab/sponge-brand": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-sandbox": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-persistence": "workspace:^",
+    "@oasisailab/sponge-session-projection": "workspace:^",
+    "@oasisailab/sponge-session-projection-cache": "workspace:^",
+    "@oasisailab/sponge-storage": "workspace:^",
+    "@oasisailab/sponge-storage-domain": "workspace:^",
+    "@oasisailab/sponge-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-user-approval": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}
