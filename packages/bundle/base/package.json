@@ -1,0 +1,128 @@
+{
+  "name": "@oasisailab/sponge-base",
+  "description": "The shared dsh core as a profile bundle: every profile's first patch layer, inserting the base plugin rows over the empty profile root",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/bundle/base"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "cordis.patch.yml",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "dependencies": {
+    "@oasisailab/sponge-cordis-plugin-hmr": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-timer": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-default-model": "workspace:^",
+    "@oasisailab/sponge-agent-loop": "workspace:^",
+    "@oasisailab/sponge-attachment-local": "workspace:^",
+    "@oasisailab/sponge-shell-env": "workspace:^",
+    "@oasisailab/sponge-bash-sandbox": "workspace:^",
+    "@oasisailab/sponge-command-compact": "workspace:^",
+    "@oasisailab/sponge-command-feedback": "workspace:^",
+    "@oasisailab/sponge-command-goal": "workspace:^",
+    "@oasisailab/sponge-commands": "workspace:^",
+    "@oasisailab/sponge-compaction-basic": "workspace:^",
+    "@oasisailab/sponge-compaction-tool-result-pruner": "workspace:^",
+    "@oasisailab/sponge-credentials-local": "workspace:^",
+    "@oasisailab/sponge-fs-local": "workspace:^",
+    "@oasisailab/sponge-fs-observation-policy": "workspace:^",
+    "@oasisailab/sponge-fs-sandbox": "workspace:^",
+    "@oasisailab/sponge-goal": "workspace:^",
+    "@oasisailab/sponge-goal-round-driver": "workspace:^",
+    "@oasisailab/sponge-api-gateway": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-llm-deepseek": "workspace:^",
+    "@oasisailab/sponge-llm-pi-ai": "workspace:^",
+    "@oasisailab/sponge-llm-retry": "workspace:^",
+    "@oasisailab/sponge-permission-presets": "workspace:^",
+    "@oasisailab/sponge-plan-mode": "workspace:^",
+    "@oasisailab/sponge-pwsh-sandbox": "workspace:^",
+    "@oasisailab/sponge-repeat-tool-reminder": "workspace:^",
+    "@oasisailab/sponge-sandbox-local": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-checkpoint-policy": "workspace:^",
+    "@oasisailab/sponge-session-persistence-jsonl": "workspace:^",
+    "@oasisailab/sponge-session-projection": "workspace:^",
+    "@oasisailab/sponge-session-query-sqlite": "workspace:^",
+    "@oasisailab/sponge-session-telemetry-otel": "workspace:^",
+    "@oasisailab/sponge-session-title": "workspace:^",
+    "@oasisailab/sponge-session-title-first-prompt-llm": "workspace:^",
+    "@oasisailab/sponge-settings-file": "workspace:^",
+    "@oasisailab/sponge-skill": "workspace:^",
+    "@oasisailab/sponge-skill-badge": "workspace:^",
+    "@oasisailab/sponge-skill-filesystem": "workspace:^",
+    "@oasisailab/sponge-spill-local": "workspace:^",
+    "@oasisailab/sponge-spill-policy": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-subagent-fork-in-process": "workspace:^",
+    "@oasisailab/sponge-subagent-spawn-in-process": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-jobs-local": "workspace:^",
+    "@oasisailab/sponge-tool-call-timeout-policy": "workspace:^",
+    "@oasisailab/sponge-token-meter": "workspace:^",
+    "@oasisailab/sponge-tool-bash": "workspace:^",
+    "@oasisailab/sponge-tool-fs": "workspace:^",
+    "@oasisailab/sponge-tool-fs-search": "workspace:^",
+    "@oasisailab/sponge-tool-goal": "workspace:^",
+    "@oasisailab/sponge-tool-pwsh": "workspace:^",
+    "@oasisailab/sponge-tool-ralph": "workspace:^",
+    "@oasisailab/sponge-tool-skill": "workspace:^",
+    "@oasisailab/sponge-tool-str-replace-editor": "workspace:^",
+    "@oasisailab/sponge-tool-subagent": "workspace:^",
+    "@oasisailab/sponge-tool-subagent-control": "workspace:^",
+    "@oasisailab/sponge-tool-subagent-report": "workspace:^",
+    "@oasisailab/sponge-tool-jobs": "workspace:^",
+    "@oasisailab/sponge-tool-todo": "workspace:^",
+    "@oasisailab/sponge-tool-web": "workspace:^",
+    "@oasisailab/sponge-tool-workflow": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-typert-loader": "workspace:^",
+    "@oasisailab/sponge-typert-registry": "workspace:^",
+    "@oasisailab/sponge-user-approval": "workspace:^",
+    "@oasisailab/sponge-user-questions": "workspace:^",
+    "@oasisailab/sponge-web": "workspace:^",
+    "@oasisailab/sponge-web-search-deepseek": "workspace:^",
+    "@oasisailab/sponge-workflow-worker-thread": "workspace:^",
+    "@oasisailab/sponge-agent-instructions": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

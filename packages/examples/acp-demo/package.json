@@ -1,0 +1,76 @@
+{
+  "name": "@oasisailab/sponge-acp-demo",
+  "description": "ACP automation server app: agent spine + JSONL persistence + ACP transport, with a JSON-RPC stdio bin",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/examples/acp-demo"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "bin": {
+    "dsh-acp-demo": "lib/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./bin": {
+      "types": "./lib/types/bin.d.ts",
+      "default": "./lib/bin.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/bin.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-cordis-plugin-include": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-acp": "workspace:^",
+    "@oasisailab/sponge-agent-spine-demo": "workspace:^",
+    "@oasisailab/sponge-app-boot": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-session-checkpoint-policy": "workspace:^",
+    "@oasisailab/sponge-session-persistence-jsonl": "workspace:^",
+    "@oasisailab/sponge-session-query": "workspace:^",
+    "@oasisailab/sponge-session-query-sqlite": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-agent-instructions": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-include": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-acp": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-spine-demo": "workspace:^",
+    "@oasisailab/sponge-app-boot": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-session-checkpoint-policy": "workspace:^",
+    "@oasisailab/sponge-session-persistence-jsonl": "workspace:^",
+    "@oasisailab/sponge-session-query": "workspace:^",
+    "@oasisailab/sponge-session-query-sqlite": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-agent-instructions": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "name": "@oasisailab/sponge-agent-spine-demo",
+  "description": "The default executor-less/UI-less agent spine with fallback session titles, provider-routed retry, and optional persisted goals",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/examples/agent-spine-demo"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-cordis-plugin-timer": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-loop": "workspace:^",
+    "@oasisailab/sponge-goal": "workspace:^",
+    "@oasisailab/sponge-goal-round-driver": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-home-paths": "workspace:^",
+    "@oasisailab/sponge-llm-retry": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-title": "workspace:^",
+    "@oasisailab/sponge-skill": "workspace:^",
+    "@oasisailab/sponge-skill-filesystem": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-jobs-local": "workspace:^",
+    "@oasisailab/sponge-shell-env": "workspace:^",
+    "@oasisailab/sponge-tool-bash": "workspace:^",
+    "@oasisailab/sponge-tool-goal": "workspace:^",
+    "@oasisailab/sponge-tool-skill": "workspace:^",
+    "@oasisailab/sponge-tool-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-agent-instructions": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-timer": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-loop": "workspace:^",
+    "@oasisailab/sponge-shell-env": "workspace:^",
+    "@oasisailab/sponge-bash-local": "workspace:^",
+    "@oasisailab/sponge-bash-sandbox": "workspace:^",
+    "@oasisailab/sponge-fs-local": "workspace:^",
+    "@oasisailab/sponge-fs-observation-policy": "workspace:^",
+    "@oasisailab/sponge-fs-sandbox": "workspace:^",
+    "@oasisailab/sponge-goal": "workspace:^",
+    "@oasisailab/sponge-goal-round-driver": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-home-paths": "workspace:^",
+    "@oasisailab/sponge-llm-retry": "workspace:^",
+    "@oasisailab/sponge-subprocess-local": "workspace:^",
+    "@oasisailab/sponge-sandbox-local": "workspace:^",
+    "@oasisailab/sponge-sandbox-policy": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-title": "workspace:^",
+    "@oasisailab/sponge-skill": "workspace:^",
+    "@oasisailab/sponge-skill-filesystem": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-jobs": "workspace:^",
+    "@oasisailab/sponge-jobs-local": "workspace:^",
+    "@oasisailab/sponge-tool-bash": "workspace:^",
+    "@oasisailab/sponge-tool-fs": "workspace:^",
+    "@oasisailab/sponge-tool-goal": "workspace:^",
+    "@oasisailab/sponge-tool-skill": "workspace:^",
+    "@oasisailab/sponge-tool-jobs": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-agent-instructions": "workspace:^",
+    "@oasisailab/sponge-node-addon-landlock-run": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  }
+}
