@@ -1,0 +1,75 @@
+{
+  "name": "@oasisailab/sponge-api-gateway",
+  "description": "Typert Remote Host dispatcher and Client API endpoint",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/api/gateway"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./types": {
+      "types": "./lib/types/types.d.ts",
+      "default": "./lib/types/types.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@oasisailab/sponge-typert-registry",
+        "@oasisailab/sponge-client-connection"
+      ],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "scripts": {
+    "bundle": "tsdown",
+    "watch": "tsdown --watch"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-typert-protocol": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-typert-registry": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-host-webserver": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-typert-registry": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "zod": "^4.4.3"
+  }
+}

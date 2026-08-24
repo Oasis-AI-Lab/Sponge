@@ -1,0 +1,53 @@
+{
+  "name": "@oasisailab/sponge-client-web",
+  "description": "Web boot kernel: static module table, Cordis loader, framework-free boot page, and UI-renderer handoff",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/web"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-client-modules": "workspace:^",
+    "@oasisailab/sponge-client-ui-renderer": "workspace:^",
+    "@oasisailab/sponge-client-ui-primitives": "workspace:^",
+    "@oasisailab/sponge-client-ui-slots": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.0",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/**/*.css",
+    "lib/types/**/*.d.ts"
+  ]
+}

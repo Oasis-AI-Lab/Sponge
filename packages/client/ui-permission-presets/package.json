@@ -1,0 +1,85 @@
+{
+  "name": "@oasisailab/sponge-client-ui-permission-presets",
+  "description": "Permission surfaces: a new-session default in General settings and a current-session /permission popup over the permissions projection",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/ui-permission-presets"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@oasisailab/sponge-client-connection",
+        "@oasisailab/sponge-client-locale",
+        "@oasisailab/sponge-client-runtime",
+        "@oasisailab/sponge-client-ui-commands",
+        "@oasisailab/sponge-api-remotes",
+        "@oasisailab/sponge-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "bundle": "tsdown",
+    "watch": "tsdown --watch"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-commands": "workspace:^",
+    "@oasisailab/sponge-client-ui-settings": "workspace:^",
+    "@oasisailab/sponge-client-ui-input-trigger": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-permission-presets": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-test-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-commands": "workspace:^",
+    "@oasisailab/sponge-client-ui-primitives": "workspace:^",
+    "@oasisailab/sponge-client-ui-settings": "workspace:^",
+    "@oasisailab/sponge-client-ui-input-trigger": "workspace:^",
+    "@oasisailab/sponge-client-ui-slots": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-permission-presets": "workspace:^",
+    "@types/react": "~18.3.1",
+    "react": "^18.2.0"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.d.ts"
+  ]
+}

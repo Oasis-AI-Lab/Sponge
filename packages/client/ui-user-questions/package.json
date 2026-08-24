@@ -1,0 +1,80 @@
+{
+  "name": "@oasisailab/sponge-client-ui-user-questions",
+  "description": "Web ask_user_question feature: host tool mount plus composer-takeover question UI",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/ui-user-questions"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@oasisailab/sponge-client-locale",
+        "@oasisailab/sponge-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "bundle": "tsdown",
+    "watch": "tsdown --watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "clsx": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-conversation": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-user-questions": "workspace:^",
+    "@types/react": "~18.3.1",
+    "@oasisailab/sponge-client-ui-primitives": "workspace:^",
+    "@oasisailab/sponge-client-ui-slots": "workspace:^",
+    "react": "^18.2.0",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-conversation": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.d.ts"
+  ]
+}

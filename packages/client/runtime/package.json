@@ -1,0 +1,94 @@
+{
+  "name": "@oasisailab/sponge-client-runtime",
+  "description": "Client core services: SlotRegistry, SessionRuntime (scope tree + object layer)",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/runtime"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@oasisailab/sponge-client-connection",
+        "@oasisailab/sponge-typert-registry",
+        "@oasisailab/sponge-api-remotes"
+      ],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "immer": "^10.1.1",
+    "zustand": "~4.4.7"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-typert-protocol": "workspace:^",
+    "@oasisailab/sponge-typert-registry": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-attachment": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-commands": "workspace:^",
+    "@oasisailab/sponge-host-apiproxy": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-llm-retry": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-projection": "workspace:^",
+    "@oasisailab/sponge-session-title": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-timeout": "workspace:^",
+    "@oasisailab/sponge-typert-protocol": "workspace:^",
+    "@oasisailab/sponge-typert-registry": "workspace:^",
+    "@types/react": "~18.3.1",
+    "@oasisailab/sponge-client-ui-slots": "workspace:^",
+    "react": "^18.2.0",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-attachment": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-commands": "workspace:^",
+    "@oasisailab/sponge-host-apiproxy": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-llm-retry": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-projection": "workspace:^",
+    "@oasisailab/sponge-session-title": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.d.ts"
+  ]
+}

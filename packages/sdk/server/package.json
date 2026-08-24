@@ -1,0 +1,62 @@
+{
+  "name": "@oasisailab/sponge-sdk-jsonrpc-server",
+  "description": "Stdio JSON-RPC server plugin for out-of-process Sponge SDK clients",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/sdk/server"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-llm-deepseek": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-sdk-protocol": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-agent-spine-demo": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-llm-deepseek": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-sdk-protocol": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-session-persistence-jsonl": "workspace:^",
+    "@oasisailab/sponge-subagent": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "@oasisailab/sponge-client-connection",
+  "description": "Wire consumer layer: HTTP-up/WebSocket-down client, ConnectionController dual streams with reconnect, and fixture api",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/connection"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^",
+    "ws": "^8.21.0"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "peerDependencies": {
+    "@oasisailab/sponge-host-webserver": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-attachment": "workspace:^",
+    "@oasisailab/sponge-host-apiproxy": "workspace:^",
+    "@oasisailab/sponge-commands": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-host-webserver": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@types/ws": "^8.18.1",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@oasisailab/sponge-attachment": "workspace:^",
+    "@oasisailab/sponge-host-apiproxy": "workspace:^",
+    "@oasisailab/sponge-commands": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^"
+  }
+}

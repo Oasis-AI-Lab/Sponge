@@ -1,0 +1,52 @@
+{
+  "name": "@oasisailab/sponge-agent-tool-presentation",
+  "description": "Agent-plane presentation selector: composes one agent's tools as Code Mode, native, or both",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/core/agent-tool-presentation"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-agent": "workspace:^",
+    "@oasisailab/sponge-code-runtime": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-scope": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-system-prompt": "workspace:^",
+    "@oasisailab/sponge-tools": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

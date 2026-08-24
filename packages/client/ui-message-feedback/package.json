@@ -1,0 +1,84 @@
+{
+  "name": "@oasisailab/sponge-client-ui-message-feedback",
+  "description": "Per-message feedback controls contributed to the assistant-message action strip, backed by the messageFeedback Host Remote",
+  "version": "0.1.0-rc.8",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/client/ui-message-feedback"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@oasisailab/sponge-client-runtime",
+        "@oasisailab/sponge-api-remotes",
+        "@oasisailab/sponge-client-locale",
+        "@oasisailab/sponge-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  },
+  "scripts": {
+    "bundle": "tsdown",
+    "watch": "tsdown --watch"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-conversation": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-message-feedback": "workspace:^",
+    "@oasisailab/sponge-typert-protocol": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-api-remotes": "workspace:^",
+    "@oasisailab/sponge-client-connection": "workspace:^",
+    "@oasisailab/sponge-client-locale": "workspace:^",
+    "@oasisailab/sponge-client-runtime": "workspace:^",
+    "@oasisailab/sponge-client-test-runtime": "workspace:^",
+    "@oasisailab/sponge-client-ui-conversation": "workspace:^",
+    "@oasisailab/sponge-client-ui-primitives": "workspace:^",
+    "@oasisailab/sponge-client-ui-slots": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-message-feedback": "workspace:^",
+    "@oasisailab/sponge-typert-protocol": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.js",
+    "lib/types/**/*.d.ts"
+  ]
+}
