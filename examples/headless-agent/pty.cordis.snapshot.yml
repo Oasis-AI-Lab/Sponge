@@ -1,0 +1,24 @@
+# Keyless opt-in PTY composition for the headless stream-json snapshot.
+- id: base
+  name: '@oasisailab/sponge-cordis-plugin-include'
+  config:
+    path: ./cordis.yml
+    patches:
+      - id: llm-deepseek
+        name: '@oasisailab/sponge-llm-deepseek'
+        disabled: true
+      - insert:
+          - id: sandbox-policy
+            name: '@oasisailab/sponge-sandbox-policy'
+            config:
+              mode: danger-full-access
+          - id: pty
+            name: '@oasisailab/sponge-terminal'
+          - id: pty-snapshot-backend
+            name: '../acp-agent/pty-snapshot-backend.mjs'
+          - id: tool-terminal
+            name: '@oasisailab/sponge-tool-terminal'
+            config:
+              maxResultBytes: 64
+          - id: llm-replay
+            name: '@oasisailab/sponge-llm-replay'

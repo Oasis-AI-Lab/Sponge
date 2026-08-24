@@ -1,0 +1,18 @@
+# Replay counterpart to goal.cordis.yml. It includes cordis.yml directly because
+# a config patch cannot target an entry behind a nested include, then restates
+# the goal overlay while replacing the live model with keyless replay.
+- id: base
+  name: '@oasisailab/sponge-cordis-plugin-include'
+  config:
+    path: ./cordis.yml
+    patches:
+      - id: llm-deepseek
+        name: '@oasisailab/sponge-llm-deepseek'
+        disabled: true
+      - insert:
+          - id: goal
+            name: '@oasisailab/sponge-goal'
+          - id: tool-goal
+            name: '@oasisailab/sponge-tool-goal'
+          - id: llm-replay
+            name: '@oasisailab/sponge-llm-replay'

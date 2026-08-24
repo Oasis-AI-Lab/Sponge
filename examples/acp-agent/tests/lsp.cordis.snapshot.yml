@@ -1,0 +1,29 @@
+# Keyless replay keeps the LSP composition intact and replaces only the model adapter.
+- id: base
+  name: '@oasisailab/sponge-cordis-plugin-include'
+  config:
+    path: ../cordis.yml
+    patches:
+      - id: llm-deepseek
+        name: '@oasisailab/sponge-llm-deepseek'
+        disabled: true
+      - insert:
+          - id: lsp
+            name: '@oasisailab/sponge-lsp'
+          - id: lsp-stdio
+            name: '@oasisailab/sponge-lsp-stdio'
+            config:
+              servers:
+                fixture:
+                  command: !!js process.execPath
+                  args: ['./lsp-server.mjs']
+                  extensionToLanguage:
+                    '.ts': typescript
+          - id: timeout-policy
+            name: '@oasisailab/sponge-tool-call-timeout-policy'
+          - id: tool-lsp
+            name: '@oasisailab/sponge-tool-lsp'
+            config:
+              maxLocations: 1
+          - id: llm-replay
+            name: '@oasisailab/sponge-llm-replay'

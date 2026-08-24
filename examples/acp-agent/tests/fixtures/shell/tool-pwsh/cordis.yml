@@ -1,0 +1,27 @@
+# Minimal tool-pwsh composition: real app boot path, real pwsh executor, real
+# foreground + background tool calls; driven by the package's loader.spec.ts.
+- id: system-prompt
+  name: '@oasisailab/sponge-system-prompt'
+
+- id: tools
+  name: '@oasisailab/sponge-tools'
+
+- id: subprocess
+  name: '@oasisailab/sponge-subprocess-local'
+
+- id: bash
+  name: '@oasisailab/sponge-pwsh-local'
+  config:
+    graceMs: 200
+
+- id: shell-env
+  name: '@oasisailab/sponge-shell-env'
+
+- id: tasks
+  name: '@oasisailab/sponge-jobs-local'
+
+- id: tool-jobs
+  name: '@oasisailab/sponge-tool-jobs'
+
+- id: tool-pwsh
+  name: '@oasisailab/sponge-tool-pwsh'

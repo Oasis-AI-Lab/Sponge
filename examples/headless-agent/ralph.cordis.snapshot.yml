@@ -1,0 +1,12 @@
+# Replay counterpart to cordis.yml for the shipped Ralph-loop snapshot.
+- id: base
+  name: '@oasisailab/sponge-cordis-plugin-include'
+  config:
+    path: ./cordis.yml
+    patches:
+      - id: llm-deepseek
+        name: '@oasisailab/sponge-llm-deepseek'
+        disabled: true
+      - insert:
+          - id: llm-replay
+            name: '@oasisailab/sponge-llm-replay'

@@ -1,0 +1,27 @@
+# Keyless replay counterpart to pty.cordis.yml.
+- id: base
+  name: '@oasisailab/sponge-cordis-plugin-include'
+  config:
+    path: ./cordis.yml
+    patches:
+      - id: llm-deepseek
+        name: '@oasisailab/sponge-llm-deepseek'
+        disabled: true
+      - insert:
+          - id: pty
+            name: '@oasisailab/sponge-terminal'
+          - id: pty-snapshot-backend
+            name: './pty-snapshot-backend.mjs'
+          - id: tool-terminal
+            name: '@oasisailab/sponge-tool-terminal'
+            config:
+              maxResultBytes: 64
+          - id: llm-replay
+            name: '@oasisailab/sponge-llm-replay'
+            config:
+              providers:
+                - id: deepseek-official
+                  name: DeepSeek
+                  models:
+                    - id: deepseek-v4-flash
+                    - id: deepseek-v4-pro
