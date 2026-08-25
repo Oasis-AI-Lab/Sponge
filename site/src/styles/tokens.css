@@ -1,0 +1,17 @@
+/* Aurora UI — design tokens */
+:root {
+  --bg: #0a0a12;
+  --aurora-1: #22d3ee; /* cyan */
+  --aurora-2: #a78bfa; /* violet */
+  --aurora-3: #f472b6; /* pink */
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --glow: 0 0 40px rgba(167, 139, 250, 0.35);
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --max-width: 1100px;
+}

@@ -1,0 +1,76 @@
+---
+// Fixed aurora background: slow-drifting gradient blobs over a star field.
+// CSS-only, zero JS. Respects prefers-reduced-motion.
+---
+<div class="aurora" aria-hidden="true">
+  <div class="stars"></div>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+
+<style>
+  .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.5) 50%, transparent 50%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255, 255, 255, 0.4) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 40% 70%, rgba(255, 255, 255, 0.35) 50%, transparent 50%),
+      radial-gradient(1px 1px at 85% 60%, rgba(255, 255, 255, 0.45) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 10% 80%, rgba(255, 255, 255, 0.3) 50%, transparent 50%);
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.3;
+    will-change: transform;
+  }
+  .b1 {
+    width: 55vw;
+    height: 55vw;
+    top: -18%;
+    left: -12%;
+    background: radial-gradient(circle, var(--aurora-1), transparent 70%);
+    animation: drift1 26s ease-in-out infinite alternate;
+  }
+  .b2 {
+    width: 50vw;
+    height: 50vw;
+    top: 30%;
+    right: -15%;
+    background: radial-gradient(circle, var(--aurora-2), transparent 70%);
+    animation: drift2 32s ease-in-out infinite alternate;
+  }
+  .b3 {
+    width: 45vw;
+    height: 45vw;
+    bottom: -20%;
+    left: 30%;
+    background: radial-gradient(circle, var(--aurora-3), transparent 70%);
+    animation: drift3 38s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(6vw, 4vh) scale(1.15); }
+  }
+  @keyframes drift2 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(-5vw, -6vh) scale(1.2); }
+  }
+  @keyframes drift3 {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(4vw, -3vh) scale(1.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+import type { LandingContent } from "../data/landing";
+
+interface Props {
+  t: LandingContent;
+}
+const { t } = Astro.props;
+---
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <p class="kicker">{t.hero.kicker}</p>
+    <h1 class="title">{t.hero.title}</h1>
+    <p class="tagline">{t.hero.tagline}</p>
+    <div class="ctas">
+      <a class="btn primary" href={t.hero.ctaPrimaryHref}>{t.hero.ctaPrimary}</a>
+      <a class="btn" href={t.hero.ctaSecondaryHref}>{t.hero.ctaSecondary}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flaw">
+  <div class="container">
+    <div class="glass panel">
+      <h2>{t.flaw.title}</h2>
+      <p class="lead">{t.flaw.body}</p>
+      <div class="chips">
+        {t.flaw.items.map((item) => <span class="chip">{item}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mechanisms">
+  <div class="container">
+    <h2 class="section-title">{t.mechanisms.title}</h2>
+    <div class="grid">
+      {
+        t.mechanisms.items.map((m) => (
+          <div class:list={["glass", "card", { glow: m.glow }]}>
+            <h3>{m.name}</h3>
+            <p>{m.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ambitions">
+  <div class="container">
+    <h2 class="section-title">{t.ambitions.title}</h2>
+    <div class="ambitions">
+      {
+        t.ambitions.items.map((a) => (
+          <div class="glass ambition">
+            <h3>{a.name}</h3>
+            <p>{a.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ecosystem">
+  <div class="container">
+    <div class="glass panel">
+      <h2>{t.ecosystem.title}</h2>
+      <p class="lead">{t.ecosystem.body}</p>
+      <div class="layers">
+        {
+          t.ecosystem.layers.map((layer) => (
+            <div class="layer">
+              <span class="layer-level">{layer.level}</span>
+              <span class="layer-name">{layer.name}</span>
+              <span class="layer-role">{layer.role}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mvp">
+  <div class="container">
+    <div class="glass panel mvp">
+      <h2>{t.mvp.title}</h2>
+      <ul>
+        {t.mvp.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cta">
+  <div class="container cta-inner">
+    <a class="btn primary" href={t.cta.docsHref}>{t.cta.docsLabel}</a>
+    <a class="btn" href={t.cta.paperHref}>{t.cta.paperLabel}</a>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    min-height: 78vh;
+    padding-top: 2rem;
+  }
+  .hero-inner {
+    text-align: center;
+  }
+  .kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.8rem;
+    color: var(--aurora-2);
+    margin-bottom: 1.5rem;
+  }
+  .title {
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    background: linear-gradient(120deg, var(--aurora-1), var(--aurora-2), var(--aurora-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1.75rem;
+  }
+  .tagline {
+    max-width: 46rem;
+    margin: 0 auto 2.5rem;
+    font-size: 1.15rem;
+    color: var(--text-dim);
+  }
+  .ctas {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .section {
+    padding: 4.5rem 0 0;
+  }
+  .section-title {
+    font-size: 1.9rem;
+    margin-bottom: 1.75rem;
+  }
+  .panel {
+    padding: 2.5rem;
+  }
+  .lead {
+    color: var(--text-dim);
+    max-width: 44rem;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .chip {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    color: var(--text-dim);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    padding: 1.75rem;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+  }
+  .card.glow {
+    border-color: var(--aurora-2);
+    box-shadow: var(--glow);
+  }
+  .card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+  }
+  .card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+  }
+  .ambitions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+  }
+  .ambition {
+    padding: 1.5rem;
+  }
+  .ambition h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .ambition p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .layer {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius-sm);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    font-size: 0.92rem;
+  }
+  .layer-level {
+    color: var(--aurora-2);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-width: 7rem;
+  }
+  .layer-name {
+    font-weight: 600;
+    min-width: 12rem;
+  }
+  .layer-role {
+    color: var(--text-dim);
+  }
+  .mvp ul {
+    margin-top: 1.25rem;
+    padding-left: 1.2rem;
+    color: var(--text-dim);
+  }
+  .mvp li + li {
+    margin-top: 0.4rem;
+  }
+  .cta-inner {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 2rem;
+  }
+</style>

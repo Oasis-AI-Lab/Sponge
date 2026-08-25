@@ -1,0 +1,16 @@
+---
+import Base from "../../../layouts/Base.astro";
+import ConceptPage from "../../../components/ConceptPage.astro";
+import { zh } from "../../../data/concepts";
+
+export function getStaticPaths() {
+  return zh.map((c) => ({ params: { slug: c.slug } }));
+}
+const { slug } = Astro.params;
+const concept = zh.find((c) => c.slug === slug)!;
+---
+<Base title={`${concept.name} — Sponge`} lang="zh">
+  <div class="container">
+    <ConceptPage t={concept} all={zh} lang="zh" />
+  </div>
+</Base>

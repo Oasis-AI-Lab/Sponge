@@ -1,0 +1,68 @@
+---
+import "../styles/global.css";
+import Aurora from "../components/Aurora.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  lang: "en" | "zh";
+  description?: string;
+}
+const { title, lang, description } = Astro.props;
+
+const descriptionText =
+  description ??
+  (lang === "zh"
+    ? "Sponge — 一种 AI 系统范式：可自我演化、可自由重组、调度驱动的切片化系统。"
+    : "Sponge — an AI system paradigm: self-evolving, freely recomposable, scheduler-driven sliced systems.");
+
+const titleText = `${title} — Sponge`;
+const ogLocale = lang === "zh" ? "zh_CN" : "en_US";
+const ogUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.pathname;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={descriptionText} />
+    <title>{titleText}</title>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sponge" />
+    <meta property="og:title" content={titleText} />
+    <meta property="og:description" content={descriptionText} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:image:width" content="2560" />
+    <meta property="og:image:height" content="1440" />
+    <meta property="og:image:alt" content="Sponge — an AI system paradigm" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titleText} />
+    <meta name="twitter:description" content={descriptionText} />
+    <meta name="twitter:image" content="/og.png" />
+  </head>
+  <body>
+    <Aurora />
+    <Nav lang={lang} />
+    <main>
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

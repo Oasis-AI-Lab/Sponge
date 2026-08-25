@@ -1,0 +1,42 @@
+---
+interface Props {
+  code: string;
+  msg: string;
+  home: string;
+  href: string;
+}
+const { code, msg, home, href } = Astro.props;
+---
+<section class="nf">
+  <div class="container nf-inner">
+    <h1 class="code">{code}</h1>
+    <p class="msg" id="nf-msg">{msg}</p>
+    <a class="btn primary" href={href} id="nf-home">
+      {home}
+    </a>
+  </div>
+</section>
+
+<style>
+  .nf {
+    display: flex;
+    align-items: center;
+    min-height: 68vh;
+  }
+  .nf-inner {
+    text-align: center;
+  }
+  .code {
+    font-size: clamp(4rem, 14vw, 9rem);
+    background: linear-gradient(120deg, var(--aurora-1), var(--aurora-2), var(--aurora-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.75rem;
+  }
+  .msg {
+    color: var(--text-dim);
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+  }
+</style>

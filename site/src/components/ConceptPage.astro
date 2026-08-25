@@ -1,0 +1,231 @@
+---
+import type { ConceptContent } from "../data/concepts";
+import type { StatusLevel } from "../data/content";
+
+interface Props {
+  t: ConceptContent;
+  all: ConceptContent[];
+  lang: "en" | "zh";
+}
+const { t, all, lang } = Astro.props;
+const root = lang === "zh" ? "/zh" : "";
+const statusLabel: Record<StatusLevel, string> =
+  lang === "zh"
+    ? { stable: "成熟", proposal: "提案", draft: "待形式化" }
+    : { stable: "Stable", proposal: "Proposal", draft: "Draft" };
+const labels =
+  lang === "zh"
+    ? {
+        definition: "定义",
+        properties: "关键属性",
+        relationships: "关系",
+        boundary: "边界",
+        openQuestions: "开放问题",
+      }
+    : {
+        definition: "Definition",
+        properties: "Key properties",
+        relationships: "Relationships",
+        boundary: "Boundary",
+        openQuestions: "Open questions",
+      };
+---
+<div class="concept-layout">
+  <aside class="concept-nav">
+    <nav>
+      {
+        all.map((c) => (
+          <a
+            href={`${root}/concepts/${c.slug}/`}
+            class:list={["concept-link", { active: c.slug === t.slug }]}
+          >
+            <span class:list={["dot", c.status]}></span>
+            <span class="concept-name">{c.name}</span>
+            <span class="concept-term">{c.term}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </aside>
+  <article class="concept-card glass">
+    <header class="concept-header">
+      <span class:list={["badge", t.status]}>{statusLabel[t.status]}</span>
+      <h1>
+        {t.name} <span class="term">{t.term}</span>
+      </h1>
+      <p class="positioning">{t.positioning}</p>
+    </header>
+    <section class="concept-section">
+      <h2>{labels.definition}</h2>
+      <p>{t.definition}</p>
+    </section>
+    <section class="concept-section">
+      <h2>{labels.properties}</h2>
+      <ul>
+        {t.properties.map((p) => (
+          <li>{p}</li>
+        ))}
+      </ul>
+    </section>
+    <section class="concept-section">
+      <h2>{labels.relationships}</h2>
+      <ul>
+        {t.relationships.map((r) => (
+          <li>{r}</li>
+        ))}
+      </ul>
+    </section>
+    <section class="concept-section">
+      <h2>{labels.boundary}</h2>
+      <ul>
+        {t.boundary.map((b) => (
+          <li>{b}</li>
+        ))}
+      </ul>
+    </section>
+    {t.openQuestions && (
+      <section class="concept-section">
+        <h2>{labels.openQuestions}</h2>
+        <ul>
+          {t.openQuestions.map((q) => (
+            <li>{q}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</div>
+
+<style>
+  .concept-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 2rem;
+    align-items: start;
+    padding-top: 3rem;
+  }
+  .concept-nav {
+    position: sticky;
+    top: 5.5rem;
+  }
+  .concept-nav nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .concept-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .concept-link:hover {
+    background: var(--glass);
+    color: var(--text);
+  }
+  .concept-link.active {
+    background: var(--glass);
+    color: var(--text);
+    font-weight: 600;
+  }
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot.stable {
+    background: var(--aurora-1);
+  }
+  .dot.proposal {
+    background: #facc15;
+  }
+  .dot.draft {
+    background: #fb923c;
+  }
+  .concept-term {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+  .concept-card {
+    padding: 2.5rem;
+  }
+  .concept-header {
+    margin-bottom: 2rem;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    margin-bottom: 1rem;
+  }
+  .badge.stable {
+    color: var(--aurora-1);
+    border-color: rgba(34, 211, 238, 0.4);
+  }
+  .badge.proposal {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.4);
+  }
+  .badge.draft {
+    color: #fb923c;
+    border-color: rgba(251, 146, 60, 0.4);
+  }
+  .concept-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .concept-header .term {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .positioning {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    max-width: 40rem;
+  }
+  .concept-section {
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--glass-border);
+  }
+  .concept-section + .concept-section {
+    margin-top: 1.75rem;
+  }
+  .concept-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--aurora-2);
+  }
+  .concept-section p {
+    color: var(--text-dim);
+  }
+  .concept-section ul {
+    padding-left: 1.2rem;
+    color: var(--text-dim);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  @media (max-width: 860px) {
+    .concept-layout {
+      grid-template-columns: 1fr;
+    }
+    .concept-nav {
+      position: static;
+    }
+    .concept-nav nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+</style>

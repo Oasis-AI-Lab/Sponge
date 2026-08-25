@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+import NotFound from "../components/NotFound.astro";
+---
+<Base title="404 — Page not found" lang="en">
+  <NotFound code="404" msg="This page does not exist, or has moved." home="Back home" href="/" />
+</Base>
+
+<script is:inline>
+  // Static sites have a single 404 fallback. Localize it client-side by path.
+  (() => {
+    if (!location.pathname.startsWith("/zh/")) return;
+    const msg = document.getElementById("nf-msg");
+    const home = document.getElementById("nf-home");
+    if (msg) msg.textContent = "这个页面不存在，或已被移动。";
+    if (home) {
+      home.textContent = "返回首页";
+      home.setAttribute("href", "/zh/");
+    }
+    const t = document.querySelector("title");
+    if (t) t.textContent = "404 — 页面未找到 — Sponge";
+  })();
+</script>

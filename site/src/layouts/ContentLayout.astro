@@ -1,0 +1,15 @@
+---
+import Base from "./Base.astro";
+import ContentPage from "../components/ContentPage.astro";
+import type { ContentPageData } from "../data/content";
+
+interface Props {
+  title: string;
+  lang: "en" | "zh";
+  content: ContentPageData;
+}
+const { title, lang, content } = Astro.props;
+---
+<Base title={title} lang={lang}>
+  <ContentPage t={content} />
+</Base>

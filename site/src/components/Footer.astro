@@ -1,0 +1,32 @@
+---
+interface Props {
+  lang: "en" | "zh";
+}
+const { lang } = Astro.props;
+const t =
+  lang === "zh"
+    ? { line: "Sponge — 一种 AI 系统范式：可自我演化、可自由重组、调度驱动的切片化系统。", lab: "Oasis AI Lab" }
+    : { line: "Sponge — an AI system paradigm: self-evolving, freely recomposable, scheduler-driven sliced systems.", lab: "Oasis AI Lab" };
+---
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>{t.line}</span>
+    <span>{t.lab}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--glass-border);
+    margin-top: 6rem;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,120 @@
+---
+interface Props {
+  lang: "en" | "zh";
+}
+const { lang } = Astro.props;
+const t =
+  lang === "zh"
+    ? {
+        home: "首页",
+        paradigm: "范式",
+        concepts: "概念",
+        ecosystem: "生态",
+        docs: "文档",
+        paper: "论文",
+      }
+    : {
+        home: "Home",
+        paradigm: "Paradigm",
+        concepts: "Concepts",
+        ecosystem: "Ecosystem",
+        docs: "Docs",
+        paper: "Paper",
+      };
+const root = lang === "zh" ? "/zh" : "";
+const items = [
+  { href: `${root}/`, label: t.home },
+  { href: `${root}/paradigm/`, label: t.paradigm },
+  { href: `${root}/concepts/`, label: t.concepts },
+  { href: `${root}/ecosystem/`, label: t.ecosystem },
+  { href: `${root}/docs/`, label: t.docs },
+  { href: `${root}/paper/`, label: t.paper },
+];
+---
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href={root + "/"}>
+      <span class="logo-mark"></span>
+      Sponge
+    </a>
+    <nav>
+      {
+        items.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))
+      }
+    </nav>
+    <div class="lang">
+      <a href="/" class={lang === "en" ? "active" : ""}>EN</a>
+      <span class="sep">/</span>
+      <a href="/zh/" class={lang === "zh" ? "active" : ""}>中文</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 10, 18, 0.6);
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 3.75rem;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  .logo-mark {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: linear-gradient(120deg, var(--aurora-1), var(--aurora-3));
+    box-shadow: var(--glow);
+  }
+  nav {
+    display: flex;
+    gap: 1.25rem;
+    margin-left: auto;
+  }
+  nav a {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+  nav a:hover {
+    color: var(--text);
+  }
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+  }
+  .lang a {
+    color: var(--text-dim);
+  }
+  .lang a.active {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .sep {
+    color: var(--text-dim);
+  }
+  @media (max-width: 720px) {
+    nav {
+      display: none;
+    }
+  }
+</style>

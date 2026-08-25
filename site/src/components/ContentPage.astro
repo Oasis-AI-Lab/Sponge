@@ -1,0 +1,130 @@
+---
+import type { ContentPageData } from "../data/content";
+
+interface Props {
+  t: ContentPageData;
+}
+const { t } = Astro.props;
+---
+<section class="content-hero">
+  <div class="container content-hero-inner">
+    <p class="positioning">{t.positioning}</p>
+    <span class:list={["badge", t.status.level]}>{t.status.label}</span>
+  </div>
+</section>
+
+{
+  t.blocks.map((block) => (
+    <section class="section">
+      <div class="container">
+        <div class="glass panel">
+          <h2>{block.title}</h2>
+          {block.body && <p class="lead">{block.body}</p>}
+          {block.items && (
+            <div class="items">
+              {block.items.map((item) => (
+                <div class="item">
+                  <h3>{item.name}</h3>
+                  <p>{item.body}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  ))
+}
+
+<section class="section links-section">
+  <div class="container links">
+    {t.links.map((link) => (
+      <a class="btn" href={link.href}>
+        {link.label}
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .content-hero {
+    padding-top: 5rem;
+  }
+  .content-hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .positioning {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-family: var(--font-display);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    max-width: 52rem;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+  }
+  .badge.stable {
+    color: var(--aurora-1);
+    border-color: rgba(34, 211, 238, 0.4);
+  }
+  .badge.proposal {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.4);
+  }
+  .badge.draft {
+    color: #fb923c;
+    border-color: rgba(251, 146, 60, 0.4);
+  }
+  .section {
+    padding: 3rem 0 0;
+  }
+  .panel {
+    padding: 2.5rem;
+  }
+  .panel h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .lead {
+    color: var(--text-dim);
+    max-width: 48rem;
+    margin-bottom: 1.75rem;
+  }
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .item {
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--radius-sm);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+  }
+  .item h3 {
+    font-size: 1.02rem;
+    margin-bottom: 0.5rem;
+  }
+  .item p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+  .links-section {
+    padding-bottom: 2rem;
+  }
+  .links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

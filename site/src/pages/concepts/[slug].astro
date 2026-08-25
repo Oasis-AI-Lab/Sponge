@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import ConceptPage from "../../components/ConceptPage.astro";
+import { en } from "../../data/concepts";
+
+export function getStaticPaths() {
+  return en.map((c) => ({ params: { slug: c.slug } }));
+}
+const { slug } = Astro.params;
+const concept = en.find((c) => c.slug === slug)!;
+---
+<Base title={`${concept.name} — Sponge`} lang="en">
+  <div class="container">
+    <ConceptPage t={concept} all={en} lang="en" />
+  </div>
+</Base>

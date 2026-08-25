@@ -1,0 +1,111 @@
+---
+import type { ConceptContent } from "../data/concepts";
+import type { StatusLevel } from "../data/content";
+
+interface Props {
+  all: ConceptContent[];
+  lang: "en" | "zh";
+}
+const { all, lang } = Astro.props;
+const root = lang === "zh" ? "/zh" : "";
+const statusLabel: Record<StatusLevel, string> =
+  lang === "zh"
+    ? { stable: "成熟", proposal: "提案", draft: "待形式化" }
+    : { stable: "Stable", proposal: "Proposal", draft: "Draft" };
+const labels =
+  lang === "zh"
+    ? {
+        title: "概念与抽象类",
+        intro: "Sponge 的术语宪法：每个抽象类一页。切片是所有抽象类的基类；状态徽章标注每个概念的成熟度。",
+      }
+    : {
+        title: "Concepts & abstract classes",
+        intro: "The terminology constitution of Sponge: one page per abstract class. Slice is the base class of every abstract class; the status badge marks each concept's maturity.",
+      };
+---
+<section class="concept-index">
+  <div class="container">
+    <h1>{labels.title}</h1>
+    <p class="intro">{labels.intro}</p>
+    <div class="grid">
+      {
+        all.map((c) => (
+          <a href={`${root}/concepts/${c.slug}/`} class="glass card">
+            <span class:list={["badge", c.status]}>{statusLabel[c.status]}</span>
+            <h2>
+              {c.name} <span class="term">{c.term}</span>
+            </h2>
+            <p>{c.positioning}</p>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .concept-index {
+    padding-top: 5rem;
+  }
+  .concept-index h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+  }
+  .intro {
+    color: var(--text-dim);
+    max-width: 44rem;
+    margin-bottom: 2.5rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.6rem;
+    color: var(--text);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: var(--aurora-2);
+    box-shadow: var(--glow);
+    color: var(--text);
+  }
+  .badge {
+    align-self: flex-start;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+  }
+  .badge.stable {
+    color: var(--aurora-1);
+    border-color: rgba(34, 211, 238, 0.4);
+  }
+  .badge.proposal {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.4);
+  }
+  .badge.draft {
+    color: #fb923c;
+    border-color: rgba(251, 146, 60, 0.4);
+  }
+  .card h2 {
+    font-size: 1.3rem;
+  }
+  .card .term {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+  .card p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+</style>
