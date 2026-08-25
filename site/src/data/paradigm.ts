@@ -1,4 +1,5 @@
 import type { ContentPageData } from "./content";
+import { link } from "../lib/link";
 
 export const en: ContentPageData = {
   positioning:
@@ -95,8 +96,8 @@ export const en: ContentPageData = {
     },
   ],
   links: [
-    { label: "Concepts", href: "/concepts/" },
-    { label: "Ecosystem", href: "/ecosystem/" },
+    { label: "Concepts", href: link("/concepts/") },
+    { label: "Ecosystem", href: link("/ecosystem/") },
   ],
 };
 
@@ -195,7 +196,7 @@ export const zh: ContentPageData = {
     },
   ],
   links: [
-    { label: "概念", href: "/zh/concepts/" },
-    { label: "生态", href: "/zh/ecosystem/" },
+    { label: "概念", href: link("/zh/concepts/") },
+    { label: "生态", href: link("/zh/ecosystem/") },
   ],
 };

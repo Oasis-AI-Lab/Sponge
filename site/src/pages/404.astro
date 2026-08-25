@@ -1,21 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
 import NotFound from "../components/NotFound.astro";
+import { base } from "../lib/link";
 ---
 <Base title="404 — Page not found" lang="en">
-  <NotFound code="404" msg="This page does not exist, or has moved." home="Back home" href="/" />
+  <NotFound code="404" msg="This page does not exist, or has moved." home="Back home" href={`${base}/`} />
 </Base>
 
-<script is:inline>
+<script is:inline data-base={base}>
   // Static sites have a single 404 fallback. Localize it client-side by path.
   (() => {
-    if (!location.pathname.startsWith("/zh/")) return;
+    const base = document.currentScript.getAttribute("data-base");
+    if (!location.pathname.startsWith(`${base}/zh/`)) return;
     const msg = document.getElementById("nf-msg");
     const home = document.getElementById("nf-home");
     if (msg) msg.textContent = "这个页面不存在，或已被移动。";
     if (home) {
       home.textContent = "返回首页";
-      home.setAttribute("href", "/zh/");
+      home.setAttribute("href", `${base}/zh/`);
     }
     const t = document.querySelector("title");
     if (t) t.textContent = "404 — 页面未找到 — Sponge";

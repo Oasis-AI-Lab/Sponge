@@ -1,6 +1,7 @@
 ---
 import type { ConceptContent } from "../data/concepts";
 import type { StatusLevel } from "../data/content";
+import { base } from "../lib/link";
 
 interface Props {
   t: ConceptContent;
@@ -8,7 +9,7 @@ interface Props {
   lang: "en" | "zh";
 }
 const { t, all, lang } = Astro.props;
-const root = lang === "zh" ? "/zh" : "";
+const root = `${base}${lang === "zh" ? "/zh" : ""}`;
 const statusLabel: Record<StatusLevel, string> =
   lang === "zh"
     ? { stable: "成熟", proposal: "提案", draft: "待形式化" }

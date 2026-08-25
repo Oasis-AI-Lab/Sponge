@@ -1,4 +1,5 @@
 import type { ContentPageData } from "./content";
+import { link } from "../lib/link";
 
 export const en: ContentPageData = {
   positioning:
@@ -93,8 +94,8 @@ export const en: ContentPageData = {
     },
   ],
   links: [
-    { label: "Paradigm", href: "/paradigm/" },
-    { label: "Paper", href: "/paper/" },
+    { label: "Paradigm", href: link("/paradigm/") },
+    { label: "Paper", href: link("/paper/") },
   ],
 };
 
@@ -191,7 +192,7 @@ export const zh: ContentPageData = {
     },
   ],
   links: [
-    { label: "范式", href: "/zh/paradigm/" },
-    { label: "论文", href: "/zh/paper/" },
+    { label: "范式", href: link("/zh/paradigm/") },
+    { label: "论文", href: link("/zh/paper/") },
   ],
 };

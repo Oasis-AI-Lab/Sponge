@@ -38,7 +38,6 @@ Landing sections (approved outline): Hero → 缺陷论 (C1) → 三机制 (slic
 
 ### Out of scope (do not build now)
 - Backend / CMS / analytics.
-- Deployment target (none decided yet).
 - Full 论文 (paper) content — only an entry page.
 - Anything beyond the approved outline.
 
@@ -76,6 +75,7 @@ Exit: all routes resolve in both locales; nav links no longer 404. — **Done: 3
 | S1 | Landing verified (build green, preview OK) — **done 2026-08-25** |
 | S2 | Content pages done in EN + ZH — **done 2026-08-25** |
 | S3 | Verification + polish done — **done 2026-08-25** |
+| S4 | Deploy to GitHub Pages — **configured 2026-08-25** (`.github/workflows/site-pages.yml`; base-aware links via `src/lib/link.ts`; deploy URL `https://oasis-ai-lab.github.io/Sponge/`) |
 
 ## 8. npm audit — status & decision (2026-08-25)
 
@@ -86,7 +86,7 @@ Exit: all routes resolve in both locales; nav links no longer 404. — **Done: 3
 
 **All fixes require `astro@7.2.6`, a breaking major upgrade (5 → 7).**
 
-Decision: **defer.** The site is static-only, ships zero default JS, and exercises none of the affected runtime paths (no server islands, view transitions, spread props, slot names, or define:vars). SSRF targets request-time server features that a static build never runs. Impact = low in practice; a breaking major upgrade conflicts with the current stability-first posture and unknown deployment target. **Revisit when a deployment target is chosen**, then take either (a) upgrade to Astro 7 + re-verify the full build, or (b) apply platform-specific mitigations.
+Decision: **defer.** The site is static-only, ships zero default JS, and exercises none of the affected runtime paths (no server islands, view transitions, spread props, slot names, or define:vars). SSRF targets request-time server features that a static build never runs. Impact = low in practice; a breaking major upgrade conflicts with the current stability-first posture. **Deployment target now GitHub Pages (2026-08-25)** — revisit the upgrade once the site is live and traffic is real, then take either (a) upgrade to Astro 7 + re-verify the full build, or (b) apply platform-specific mitigations.
 
 ## 9. Open decisions for the team
 
@@ -94,4 +94,4 @@ Decision: **defer.** The site is static-only, ships zero default JS, and exercis
 2. Content strategy per page: full translation (EN+ZH) vs EN full + ZH summary? — **full translation (EN+ZH)**
 3. Docs pages: mirror impl/SPEC content, or link out? — **entry page; content mirrored as summarized sections**
 4. Fonts: Google Fonts (CDN) vs self-hosted (offline-friendly)? — **Google Fonts CDN**
-5. Deployment target (GitHub Pages / Vercel / none)? — **undecided; also gates the npm audit follow-up (see §8)**
+5. Deployment target (GitHub Pages / Vercel / none)? — **GitHub Pages (2026-08-25)**: no extra account, repo already on GitHub, Pages currently unused (docs-pages.yml never ran). Site deploys to `https://oasis-ai-lab.github.io/Sponge/`. Note: a future `docs-pages.yml` run would overwrite the Pages site — decide docs hosting separately if the docs site is ever needed.

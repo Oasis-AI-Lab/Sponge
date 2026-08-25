@@ -1,3 +1,5 @@
+import { link } from "../lib/link";
+
 export interface HeroContent {
   kicker: string;
   title: string;
@@ -60,9 +62,9 @@ export const en: LandingContent = {
     tagline:
       "Reconstructing the agent — from a conversational Q&A machine into a sliced system that is self-evolving, freely recomposable, and driven by an internal scheduler. The agent no longer only answers questions; it dwells in an information space it can control, reshape, and evolve.",
     ctaPrimary: "Explore the paradigm",
-    ctaPrimaryHref: "/paradigm/",
+    ctaPrimaryHref: link("/paradigm/"),
     ctaSecondary: "Read the paper",
-    ctaSecondaryHref: "/paper/",
+    ctaSecondaryHref: link("/paper/"),
   },
   flaw: {
     title: "The shared fatal assumption",
@@ -133,9 +135,9 @@ export const en: LandingContent = {
   },
   cta: {
     docsLabel: "Read the docs",
-    docsHref: "/docs/",
+    docsHref: link("/docs/"),
     paperLabel: "The paper",
-    paperHref: "/paper/",
+    paperHref: link("/paper/"),
   },
 };
 
@@ -146,9 +148,9 @@ export const zh: LandingContent = {
     tagline:
       "把智能体从「对话式问答机」重构为可自我演化、可自由重组、由内部调度系统驱动的切片化系统。智能体不再只是回答问题，而是栖息于一个它可以掌控、可以改造、可以进化的信息空间。",
     ctaPrimary: "探索范式",
-    ctaPrimaryHref: "/zh/paradigm/",
-    ctaSecondary: "阅读论文",
-    ctaSecondaryHref: "/zh/paper/",
+    ctaPrimaryHref: link("/zh/paradigm/"),
+    ctaSecondary: "读论文",
+    ctaSecondaryHref: link("/zh/paper/"),
   },
   flaw: {
     title: "共享的致命假设",
@@ -219,8 +221,8 @@ export const zh: LandingContent = {
   },
   cta: {
     docsLabel: "阅读文档",
-    docsHref: "/zh/docs/",
+    docsHref: link("/zh/docs/"),
     paperLabel: "论文",
-    paperHref: "/zh/paper/",
+    paperHref: link("/zh/paper/"),
   },
 };

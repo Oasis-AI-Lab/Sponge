@@ -1,4 +1,6 @@
 ---
+import { base } from "../lib/link";
+
 interface Props {
   lang: "en" | "zh";
 }
@@ -21,7 +23,7 @@ const t =
         docs: "Docs",
         paper: "Paper",
       };
-const root = lang === "zh" ? "/zh" : "";
+const root = `${base}${lang === "zh" ? "/zh" : ""}`;
 const items = [
   { href: `${root}/`, label: t.home },
   { href: `${root}/paradigm/`, label: t.paradigm },
@@ -45,9 +47,9 @@ const items = [
       }
     </nav>
     <div class="lang">
-      <a href="/" class={lang === "en" ? "active" : ""}>EN</a>
+      <a href={`${base}/`} class={lang === "en" ? "active" : ""}>EN</a>
       <span class="sep">/</span>
-      <a href="/zh/" class={lang === "zh" ? "active" : ""}>中文</a>
+      <a href={`${base}/zh/`} class={lang === "zh" ? "active" : ""}>中文</a>
     </div>
   </div>
 </header>
