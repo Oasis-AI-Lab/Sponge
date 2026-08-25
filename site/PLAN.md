@@ -75,7 +75,7 @@ Exit: all routes resolve in both locales; nav links no longer 404. — **Done: 3
 | S1 | Landing verified (build green, preview OK) — **done 2026-08-25** |
 | S2 | Content pages done in EN + ZH — **done 2026-08-25** |
 | S3 | Verification + polish done — **done 2026-08-25** |
-| S4 | Deploy to GitHub Pages — **configured 2026-08-25** (`.github/workflows/site-pages.yml`; base-aware links via `src/lib/link.ts`; deploy URL `https://oasis-ai-lab.github.io/Sponge/`) |
+| S4 | Deploy to GitHub Pages — **live 2026-08-25** (`.github/workflows/site-pages.yml`; base-aware links via `src/lib/link.ts`; deploy URL `https://oasis-ai-lab.github.io/Sponge/`) |
 
 ## 8. npm audit — status & decision (2026-08-25)
 
