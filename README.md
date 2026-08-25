@@ -1,59 +1,60 @@
-# DeepSeek Harness
+# Sponge
 
-English | [中文](README.zh.md)
+> **Sponge 是一种 AI 系统范式：把智能体从「对话式问答机」重构为「可自我演化、可自由重组、由内部调度系统驱动的切片化系统」。智能体不再只是回答问题，而是栖息于一个它可以掌控、可以改造、可以进化的信息空间。**
 
-DeepSeek Harness (`dsh`) is an open-source agent harness developed by [DeepSeek AI](https://deepseek.com).
+本仓库是 Sponge 的研发与实现所在——范式论述、收敛设计、契约与代码同仓。设计中枢见 [`研发/`](研发/README.md)。
 
-It uses an architecture where **everything is a plugin**, and is powered by [Cordis](https://github.com/cordiverse/cordis), whose design is described in [_A Programming Paradigm for Spatiotemporal Composability_](https://github.com/cordiverse/paper).
+## 一句话定位
 
-## Developer preview
+Sponge 的核心主张（详见 [`研发/00_总论与野心.md`](研发/00_总论与野心.md)）：
 
-DeepSeek Harness is currently in _developer preview_ and is iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
+1. **缺陷论（C1）**——对话式 / 检索式 / 长上下文 / 记忆模块化四大范式共享致命假设「智能体知道自己该问什么」，该假设在长周期、零到一、研究型任务上系统性失效；
+2. **切片化（C2）**——替代不是更大的上下文窗口，而是外部化、持久化、结构化的「当下状态」模型，由切片（自由容器、可子类化）承载；
+3. **调度驱动（C3）**——核心壁垒是内部调度系统（编排 / 主动释放 / 演化），不是脚手架；
+4. **可替换零部件（C4）**——信息源是可替换的角色，Statuz 只是第一个实现；
+5. **双形态（C5）**——FullyAgent / Coworker 是同一架构的两种配置，形态是配置而非架构差异。
 
-## Run
+## 仓库结构
 
-### Run from `npm`
-
-Install `Node.js`, then run:
-
-```sh
-npx @oasisailab/sponge web
+```
+研发/                 Sponge 范式论述与收敛设计中枢（中文）
+├── 00_总论与野心.md   定位与野心
+├── 01_范式论证.md     为什么现有范式是错的
+├── 02_概念与抽象类.md 术语宪法（切片/元素/信息源/场景/翻译器/接收器/通道/主体/域…）
+├── 03_架构与生态位.md Sponge 与 Statuz / WAM / Lemma / Sandboxer 的关系
+├── 04_收敛设计.md     ★ 设计中心：固定层/调度机制化/接口抽象
+├── 05_落地规划与里程碑.md  M0-M5
+├── 06_开放问题与决策.md    所有未决事项与决策的单一入口
+├── 契约/              每个板块的接口契约（实现的唯一依据）
+└── impl/              TypeScript 实现（英文）
+    ├── src/base/      ✅ 切片基类 + 内容寻址快照存储（已实现，测试全绿）
+    ├── src/{mechanism, role, content, runtime, tools}/   ⬜ 规划中
+    ├── experiment/    ⬜ 证伪实验（纯脚手架 vs Sponge）
+    └── apps/          ⬜ 最小表征应用（验证「地基不感知上层」）
+packages/ 等            底层插件化运行时代码（@oasisailab/sponge-*）
 ```
 
-The command starts the Web UI at `http://127.0.0.1:3080` by default and opens it in the default browser for a local launch. An SSH launch only prints the host URL because the SSH client or editor owns the local forwarded address. Pass `--no-open` to run the server without opening a browser. See [Web UI guide](docs/user/guide/index.md).
+## 阅读路线
 
-### Run from source
+- **新读者**：研发/00 → 01 → 02 → 03 → 04
+- **工程落地**：研发/04 → 05 → 契约/ → impl/
+- **实现进度**：[研发/impl/README.md](研发/impl/README.md)
 
-To run from a repository checkout:
+## 当前状态（2026-08-23）
 
-```sh
-git clone https://github.com/deepseek-ai/deepseek-harness.git
-cd deepseek-harness
-pnpm install
-pnpm run build
-pnpm dsh web
-```
+- **收敛设计进行中**：三条设计约束已确认——固定层约束 / 调度试金石 / 接口抽象约束（[研发/00 §四](研发/00_总论与野心.md)）；
+- **已定案**：翻译器与接收器（独立抽象类，构成「接收/转换」对）、原生表征 = 脚手架、载体 TypeScript（06 D-C/D-I）；
+- **提案中**：主体（存在形式待定：字段/域/kind/抽象类）、域（能动/权限模式轴候选）（06 D-J/D-K）；
+- **首个落地板块：切片**——基类实现完成，内容寻址快照 + 派生机制，10/10 测试通过。
 
-`pnpm run build` prepares the repository artifacts. `pnpm dsh web` uses those built artifacts without rebuilding.
+## 开发
 
-## Community and support
-
-- Feel free to submit feedback or bug reports through [GitHub Discussions](https://github.com/deepseek-ai/deepseek-harness/discussions).
-- Add the [`dsh-plugin`](https://github.com/topics/dsh-plugin) topic to your plugin repository for discoverability.
-- Join <a href="https://discord.gg/Ycq5dCaS4">DeepSeek Harness Discord community</a>.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Development
-
-Start with the [development guide](docs/development.md) and [architecture documentation](docs/architecture.md).
-
-For agents, follow [AGENTS.md](AGENTS.md).
+- 设计文档：`研发/`（中文工作台，允许混乱、可随时改）
+- 实现代码：`研发/impl/`（英文，`npm test` 一键编译+测试）
+- 开发规范见 [AGENTS.md](AGENTS.md) 与 [docs/](docs/)
 
 ## License
 
 [MIT](LICENSE)
 
-Third-party dependencies and their licenses are disclosed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+第三方依赖与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
