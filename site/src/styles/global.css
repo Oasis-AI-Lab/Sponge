@@ -13,7 +13,7 @@ html {
 body {
   font-family: var(--font-body);
   background: var(--bg);
-  color: var(--text);
+  color: var(--ink);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
@@ -25,12 +25,13 @@ h1, h2, h3 {
 }
 
 a {
-  color: var(--aurora-2);
+  color: var(--ink);
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 a:hover {
-  color: var(--aurora-1);
+  color: var(--bg);
+  background: var(--ink);
 }
 
 .container {
@@ -40,36 +41,36 @@ a:hover {
 }
 
 .glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
+  background: var(--bg);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-hard);
 }
 
 .btn {
   display: inline-block;
   padding: 0.7rem 1.5rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   font-weight: 600;
   font-size: 0.95rem;
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  color: var(--text);
-  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 }
 .btn:hover {
-  border-color: var(--aurora-2);
-  box-shadow: var(--glow);
-  transform: translateY(-1px);
-  color: var(--text);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+  color: var(--ink);
+  background: var(--bg);
 }
 .btn.primary {
-  background: linear-gradient(120deg, var(--aurora-1), var(--aurora-2));
-  color: #0a0a12;
-  border: none;
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
 }
 .btn.primary:hover {
-  color: #0a0a12;
-  box-shadow: 0 0 40px rgba(34, 211, 238, 0.4);
+  background: var(--bg);
+  color: var(--ink);
 }

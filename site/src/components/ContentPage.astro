@@ -66,24 +66,25 @@ const { t } = Astro.props;
   .badge {
     display: inline-block;
     padding: 0.3rem 0.9rem;
-    border-radius: 999px;
+    border-radius: 0;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.04em;
-    border: 1px solid var(--glass-border);
-    background: var(--glass);
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    color: var(--ink);
   }
   .badge.stable {
-    color: var(--aurora-1);
-    border-color: rgba(34, 211, 238, 0.4);
+    background: var(--bg);
+    box-shadow: var(--shadow-hard-sm);
   }
   .badge.proposal {
-    color: #facc15;
-    border-color: rgba(250, 204, 21, 0.4);
+    background: var(--ink);
+    color: var(--bg);
   }
   .badge.draft {
-    color: #fb923c;
-    border-color: rgba(251, 146, 60, 0.4);
+    border-style: dashed;
   }
   .section {
     padding: 3rem 0 0;
@@ -96,7 +97,7 @@ const { t } = Astro.props;
     margin-bottom: 1rem;
   }
   .lead {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     max-width: 48rem;
     margin-bottom: 1.75rem;
   }
@@ -107,16 +108,17 @@ const { t } = Astro.props;
   }
   .item {
     padding: 1.4rem 1.5rem;
-    border-radius: var(--radius-sm);
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
+    border-radius: 0;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-hard-sm);
   }
   .item h3 {
     font-size: 1.02rem;
     margin-bottom: 0.5rem;
   }
   .item p {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     font-size: 0.92rem;
   }
   .links-section {

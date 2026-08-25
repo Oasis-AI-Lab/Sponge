@@ -59,10 +59,8 @@ const items = [
     position: sticky;
     top: 0;
     z-index: 10;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(10, 10, 18, 0.6);
-    border-bottom: 1px solid var(--glass-border);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
   }
   .nav-inner {
     display: flex;
@@ -77,14 +75,15 @@ const items = [
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.1rem;
-    color: var(--text);
+    color: var(--ink);
   }
   .logo-mark {
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-    background: linear-gradient(120deg, var(--aurora-1), var(--aurora-3));
-    box-shadow: var(--glow);
+    width: 0.72rem;
+    height: 0.72rem;
+    transform: rotate(45deg);
+    background: var(--ink);
+    box-shadow: 2px 2px 0 var(--bg);
+    border: 1px solid var(--ink);
   }
   nav {
     display: flex;
@@ -92,11 +91,14 @@ const items = [
     margin-left: auto;
   }
   nav a {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     font-size: 0.92rem;
   }
   nav a:hover {
-    color: var(--text);
+    color: var(--ink);
+    background: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   .lang {
     display: flex;
@@ -105,14 +107,20 @@ const items = [
     font-size: 0.85rem;
   }
   .lang a {
-    color: var(--text-dim);
+    color: var(--ink-dim);
+  }
+  .lang a:hover {
+    color: var(--ink);
+    background: none;
   }
   .lang a.active {
-    color: var(--text);
+    color: var(--ink);
     font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   .sep {
-    color: var(--text-dim);
+    color: var(--ink-faint);
   }
   @media (max-width: 720px) {
     nav {

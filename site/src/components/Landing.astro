@@ -114,22 +114,21 @@ const { t } = Astro.props;
     text-transform: uppercase;
     letter-spacing: 0.3em;
     font-size: 0.8rem;
-    color: var(--aurora-2);
+    color: var(--ink-dim);
     margin-bottom: 1.5rem;
   }
   .title {
     font-size: clamp(3.5rem, 12vw, 8rem);
-    background: linear-gradient(120deg, var(--aurora-1), var(--aurora-2), var(--aurora-3));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.04em;
     margin-bottom: 1.75rem;
   }
   .tagline {
     max-width: 46rem;
     margin: 0 auto 2.5rem;
     font-size: 1.15rem;
-    color: var(--text-dim);
+    color: var(--ink-dim);
   }
   .ctas {
     display: flex;
@@ -148,7 +147,7 @@ const { t } = Astro.props;
     padding: 2.5rem;
   }
   .lead {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     max-width: 44rem;
   }
   .chips {
@@ -159,11 +158,11 @@ const { t } = Astro.props;
   }
   .chip {
     padding: 0.35rem 0.9rem;
-    border-radius: 999px;
+    border-radius: 0;
     font-size: 0.85rem;
-    border: 1px solid var(--glass-border);
-    background: var(--glass);
-    color: var(--text-dim);
+    border: 1px solid var(--line);
+    background: var(--bg-alt);
+    color: var(--ink);
   }
   .grid {
     display: grid;
@@ -178,16 +177,26 @@ const { t } = Astro.props;
     transform: translateY(-2px);
   }
   .card.glow {
-    border-color: var(--aurora-2);
-    box-shadow: var(--glow);
+    background: var(--ink);
+    border-color: var(--ink);
+    box-shadow: var(--shadow-hard);
+    color: var(--bg);
+  }
+  .card.glow h3,
+  .card.glow p {
+    color: var(--bg);
   }
   .card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.6rem;
   }
   .card p {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     font-size: 0.95rem;
+  }
+  .card.glow p {
+    color: var(--bg);
+    opacity: 0.82;
   }
   .ambitions {
     display: grid;
@@ -202,7 +211,7 @@ const { t } = Astro.props;
     margin-bottom: 0.5rem;
   }
   .ambition p {
-    color: var(--text-dim);
+    color: var(--ink-dim);
     font-size: 0.9rem;
   }
   .layers {
@@ -216,14 +225,16 @@ const { t } = Astro.props;
     align-items: baseline;
     gap: 1rem;
     padding: 0.9rem 1.1rem;
-    border-radius: var(--radius-sm);
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
+    border-radius: 0;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-hard-sm);
     font-size: 0.92rem;
   }
   .layer-level {
-    color: var(--aurora-2);
+    color: var(--ink-dim);
     font-size: 0.78rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     min-width: 7rem;
@@ -233,12 +244,12 @@ const { t } = Astro.props;
     min-width: 12rem;
   }
   .layer-role {
-    color: var(--text-dim);
+    color: var(--ink-dim);
   }
   .mvp ul {
     margin-top: 1.25rem;
     padding-left: 1.2rem;
-    color: var(--text-dim);
+    color: var(--ink-dim);
   }
   .mvp li + li {
     margin-top: 0.4rem;

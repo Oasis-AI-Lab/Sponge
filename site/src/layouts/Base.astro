@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import Aurora from "../components/Aurora.astro";
+import IsoBackground from "../components/IsoBackground.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import { base } from "../lib/link";
@@ -59,7 +59,7 @@ const ogUrl = Astro.site
     <meta name="twitter:image" content={`${base}/og.png`} />
   </head>
   <body>
-    <Aurora />
+    <IsoBackground />
     <Nav lang={lang} />
     <main>
       <slot />
