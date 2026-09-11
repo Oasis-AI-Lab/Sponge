@@ -68,14 +68,21 @@ describe('FishLogo', () => {
 })
 
 describe('BrandWordmark', () => {
-  it('can render the name artwork with or without its leading mark', () => {
-    const view = render(<primitives.BrandWordmark />)
-    const svg = view.container.querySelector('svg')!
-    expect(svg.getAttribute('width')).toBe('182')
-    expect(svg.getAttribute('viewBox')).toBe('0 0 182 24')
+  it('renders the sponge name with the diamond mark by default', () => {
+    const { container } = render(<primitives.BrandWordmark />)
+    const svg = container.querySelector('svg')!
+    expect(svg.getAttribute('width')).toBe('116')
+    expect(svg.getAttribute('viewBox')).toBe('0 0 116 24')
+    expect(container.querySelectorAll('path')).toHaveLength(1)
+    expect(container.innerHTML).toContain('SPONGE')
+  })
 
-    view.rerender(<primitives.BrandWordmark includeMark={false} />)
-    expect(svg.getAttribute('width')).toBe('156')
-    expect(svg.getAttribute('viewBox')).toBe('26 0 156 24')
+  it('drops the leading mark in name-only artwork', () => {
+    const { container } = render(<primitives.BrandWordmark includeMark={false} />)
+    const svg = container.querySelector('svg')!
+    expect(svg.getAttribute('width')).toBe('84')
+    expect(svg.getAttribute('viewBox')).toBe('0 0 84 24')
+    expect(container.querySelectorAll('path')).toHaveLength(0)
+    expect(container.innerHTML).toContain('SPONGE')
   })
 })

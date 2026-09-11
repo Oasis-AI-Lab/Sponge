@@ -1,4 +1,4 @@
-import { BrandWordmark, FishLogo } from '@oasisailab/sponge-client-ui-primitives'
+import { BrandWordmark, DiamondMark } from '@oasisailab/sponge-client-ui-primitives'
 import type { HeroBrandMarkOwnerProps } from '@oasisailab/sponge-client-ui-conversation/client'
 import type { SidebarBrandMarkOwnerProps } from '@oasisailab/sponge-client-ui-sidebar/client'
 
@@ -7,10 +7,10 @@ type OfficialBrandMarkProps = HeroBrandMarkOwnerProps & SidebarBrandMarkOwnerPro
 /**
  * Render the official mark with the presentation requested by its host surface.
  * @param props - Host-supplied mark presentation.
- * @returns the official whale mark.
+ * @returns the official diamond mark.
  */
 export function OfficialBrandMark({ size, className }: OfficialBrandMarkProps) {
-  return <FishLogo size={size} className={className} />
+  return <DiamondMark size={size} className={className} />
 }
 
 /**
