@@ -70,6 +70,7 @@
     "@oasisailab/sponge-client-ui-settings-plugin-inventory": "workspace:^",
     "@oasisailab/sponge-client-ui-permission-presets": "workspace:^",
     "@oasisailab/sponge-client-ui-plan": "workspace:^",
+    "@oasisailab/sponge-client-ui-sponge-portal": "workspace:^",
     "@oasisailab/sponge-client-ui-settings-plugins": "workspace:^",
     "@oasisailab/sponge-client-ui-user-questions": "workspace:^",
     "@oasisailab/sponge-client-ui-settings": "workspace:^",

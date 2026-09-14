@@ -43,3 +43,11 @@ worktrees/
 # tool-internal (WorkBuddy workspace / agent runtime data — not project source)
 .workbuddy/
 .agents/
+
+# local debug/experiment residue (probe scripts, smoke captures, html-share cache)
+.trae-html-share-packages/
+_probe_client_before.js
+apps/cli/_boot_probe.mjs
+apps/cli/_preload_cmd.mjs
+apps/cli/_probe_portal.mjs
+smoke-portal-1.png.jpg

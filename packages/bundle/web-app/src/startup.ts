@@ -1,8 +1,10 @@
 /**
  * The web app's command-line provider: it parses the `dsh --profile web` flag
- * family (`--host`, `--port`, `--trusted-host`, `--no-open`) and its `--help`
- * text, then provides the immutable values as {@link WEB_STARTUP_SERVICE}.
- * Ordinary rows inject that service before reading it from lazy config.
+ * family (`--host`, `--port`, `--trusted-host`, `--no-open`, plus the
+ * startup-destination flags `--portal`, `--history`, `--resume`) and its
+ * `--help` text, then provides the immutable values as
+ * {@link WEB_STARTUP_SERVICE}. Ordinary rows inject that service before reading
+ * it from lazy config.
  * @module @oasisailab/sponge-web-app/startup
  */
 
@@ -23,6 +25,12 @@ export const WEB_STARTUP_SERVICE = 'webStartup'
 export interface WebStartupValues {
   /** Whether this invocation opens the default browser after startup. */
   openBrowser: boolean
+  /** Whether the browser should open into the Portal surface instead of the conversation. */
+  portal: boolean
+  /** Whether the browser should open on the session history list. */
+  history: boolean
+  /** `--resume` session id, absent when the invocation named none. */
+  resume?: string
   /** `--host`, absent when the invocation did not name one. */
   host?: string
   /** `--port`, absent when the invocation did not name one. */
@@ -35,6 +43,9 @@ export interface WebStartupValues {
 interface WebOptions {
   host?: string
   open: boolean
+  portal: boolean
+  history: boolean
+  resume?: string
   port?: string
   trustedHost?: string[]
 }
@@ -50,6 +61,9 @@ function webCommand(): Command {
     .helpOption('-h, --help', 'show this help')
     .option('--host <host>', 'bind host')
     .option('--no-open', 'do not open the Web UI in the default browser')
+    .option('--portal', 'open the browser into the Sponge Portal surface (sponge web forwards this by default)')
+    .option('--history', 'open the browser on the session history list')
+    .option('--resume <sessionId>', 'open the browser resuming the named session')
     .option('--port <port>', 'listen port; pass 0 to let the OS pick a free one')
     .option('--trusted-host <authority...>', 'extra authority the /api browser-trust fence accepts (host or host:port; repeatable)')
     .addHelpText('after', `
@@ -57,6 +71,9 @@ Examples:
   dsh --profile web                          serve on the composed host and port
   dsh --profile web --no-open                serve without opening a browser
   dsh --profile web --port 8080              serve on another port
+  sponge web                                 open the browser into the Portal surface
+  sponge web --history                       open the Portal on the session history list
+  sponge web --resume <session>              open the Portal resuming a session
 `)
 }
 
@@ -77,8 +94,14 @@ export function apply(ctx: Context): void {
     if (options.port !== undefined && !/^\d+$/.test(options.port)) {
       program.error(`error: --port must be a number, got ${JSON.stringify(options.port)}`)
     }
+    if (options.resume !== undefined && options.resume === '') {
+      program.error('error: --resume needs a session id')
+    }
     ctx.provide(WEB_STARTUP_SERVICE, {
       openBrowser: options.open,
+      portal: options.portal,
+      history: options.history,
+      ...options.resume !== undefined && { resume: options.resume },
       ...options.host !== undefined && { host: options.host },
       ...options.port !== undefined && { port: Number(options.port) },
       trustedHosts: options.trustedHost ?? [],

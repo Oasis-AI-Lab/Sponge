@@ -20,7 +20,7 @@ import css from './AppFrame.module.css'
 /** Full composed props: runtime share + child-slot render share + store share. */
 export type AppFrameProps =
   & PropsRuntime<'root'>
-  & PropsRenderSlots<'sidebar' | 'conversation' | 'details' | 'shell.overlay'>
+  & PropsRenderSlots<'sidebar' | 'conversation' | 'details' | 'shell.overlay' | 'shell.page'>
   & PropsStore<ReturnType<typeof createLayoutStore>>
 
 /** Center column grid item (session-body building block). */
@@ -192,6 +192,11 @@ export function AppFrame({
       </>
       <div className={css.overlayLayer} data-shell-overlay>
         {renderSlot('shell.overlay', {})}
+      </div>
+      {/* A page occupant (the Portal surface) replaces the center and details
+          columns; the layer renders nothing while the seat is empty. */}
+      <div className={css.pageLayer} data-shell-page>
+        {renderSlot('shell.page', {})}
       </div>
       {/* The collapsed rail is fixed-width: no resize handle while closed. */}
       {!sidebarCollapsed && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}

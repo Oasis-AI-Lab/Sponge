@@ -42,6 +42,12 @@ export const inject = ['webServer']
 export interface Config {
   /** Permit default-browser handoff after the Loader tree settles; an SSH launch suppresses it. */
   openBrowser: boolean
+  /** Open the browser into the Portal surface instead of the conversation. */
+  portal: boolean
+  /** Open the browser on the session history list. */
+  history: boolean
+  /** `--resume` session id, absent when the invocation named none. */
+  resume?: string
   /** Print the URL line on activation; a non-interactive layer can turn it off. */
   printUrl: boolean
   /**
@@ -57,6 +63,9 @@ export interface Config {
 
 export const Config: z<Config> = z.object({
   openBrowser: z.boolean().default(true),
+  portal: z.boolean().default(false),
+  history: z.boolean().default(false),
+  resume: z.string(),
   printUrl: z.boolean().default(true),
   surfaceContext: z.boolean().default(true),
   trustedHosts: z.array(String).default([]),
@@ -159,6 +168,21 @@ function localWebUrl(ctx: Context): string {
   return `http://${LOOPBACK_HOST}:${String(port)}`
 }
 
+/**
+ * Query string routing the initial browser load, empty when the invocation
+ * names no startup destination. The bare flags match the `?fixture` precedent
+ * the browser connection already reads through URLSearchParams.
+ * @param config - the composed web-runtime config.
+ * @returns a `?`-prefixed query string, or '' when there is no destination.
+ */
+function startupQuery(config: Config): string {
+  const parts: string[] = []
+  if (config.portal) parts.push('portal')
+  if (config.history) parts.push('history')
+  if (config.resume !== undefined) parts.push(`resume=${encodeURIComponent(config.resume)}`)
+  return parts.length === 0 ? '' : `?${parts.join('&')}`
+}
+
 /** Dist location is workspace knowledge of this bundle: resolved through the frontend package exports, not configured. */
 function resolveDistIndex(): string {
   const require = createRequire(import.meta.url)
@@ -257,7 +281,7 @@ export function apply(ctx: Context, config: Config): void {
     // route owner are still mounting. Await Loader settlement first; a
     // hand-built tree without a Loader is already the complete tree.
     const announceReady = (): void => {
-      const webUrl = localWebUrl(ctx)
+      const webUrl = localWebUrl(ctx) + startupQuery(config)
       // Reuse the exact LAN snapshot provided to the /api trust fence.
       const lanCandidate = runtime.lanAddresses[0]
       const port = ctx.webServer.port

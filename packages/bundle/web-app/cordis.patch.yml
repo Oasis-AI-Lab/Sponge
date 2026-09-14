@@ -139,6 +139,9 @@
       inject: [webStartup]
       config:
         openBrowser: !!js ctx.webStartup.openBrowser
+        portal: !!js ctx.webStartup.portal
+        history: !!js ctx.webStartup.history
+        resume: !!js ctx.webStartup.resume
         printUrl: true
         surfaceContext: true
         trustedHosts: !!js ctx.webStartup.trustedHosts
@@ -236,6 +239,13 @@
 
     - id: ui-workspace
       name: '@oasisailab/sponge-client-ui-workspace'
+
+    # Sponge Portal: the shell.page full-surface page (container home +
+    # session history) and its sidebar-foot entry button. `sponge web`
+    # startup flags land here through the web-runtime URL (?portal /
+    # &history / &resume=<id>); drop this row to remove the entry cleanly.
+    - id: ui-sponge-portal
+      name: '@oasisailab/sponge-client-ui-sponge-portal'
 
     # Input triggers: the '/' | '@' pipeline (ui-input-trigger), the command surface over
     # it (ui-commands), and the reference sources (ui-skill / ui-reference).

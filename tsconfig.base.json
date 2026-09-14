@@ -222,6 +222,7 @@
       "@oasisailab/sponge-client-ui-user-questions": ["./packages/client/ui-user-questions/src"],
       "@oasisailab/sponge-client-ui-trajectory": ["./packages/client/ui-trajectory/src"],
       "@oasisailab/sponge-client-ui-workspace": ["./packages/client/ui-workspace/src"],
+      "@oasisailab/sponge-client-ui-sponge-portal": ["./packages/client/ui-sponge-portal/src"],
       "@oasisailab/sponge-client-ui-theme": ["./packages/client/ui-theme/src"],
       "@oasisailab/sponge-client-ui-settings": ["./packages/client/ui-settings/src"],
       "@oasisailab/sponge-client-ui-settings-general": ["./packages/client/ui-settings-general/src"],

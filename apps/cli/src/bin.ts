@@ -8,46 +8,10 @@
 
 /* v8 ignore file -- built-bin acceptance exercises this self-executing dispatch. */
 
-import { readFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
-import { loadLayeredEnv } from '@oasisailab/sponge-app-boot'
-import { parseDshArgs } from './args.ts'
+import path from 'node:path'
+import { runCli } from './dispatch.ts'
 
-// Both the source tree (apps/cli/src) and the bundled bin (apps/cli/lib) sit
-// one directory under apps/cli, so the checked-in manifest resolves with the
-// same relative hop from either artifact.
-/** This app's version, read from its checked-in package.json. */
-function readVersion(): string {
-  const manifest = JSON.parse(
-    readFileSync(fileURLToPath(new URL('../package.json', import.meta.url)), 'utf8'),
-  ) as { version?: unknown }
-  return typeof manifest.version === 'string' ? manifest.version : '0.0.0'
-}
-
-const invocation = parseDshArgs(process.argv.slice(2), readVersion())
-
-switch (invocation.mode) {
-  case 'profile': {
-    const { runProfile } = await import('./profile-boot.ts')
-    await runProfile({
-      environment: loadLayeredEnv('dsh'),
-      profile: invocation.profile,
-      patchFiles: invocation.patches,
-      args: invocation.args,
-    })
-    break
-  }
-  case 'plugin': {
-    const { runPlugin } = await import('./plugin.ts')
-    process.exit(runPlugin(invocation.profile, invocation.args))
-    break
-  }
-  case 'dump-config': {
-    const { runDumpConfig } = await import('./dump-config.ts')
-    runDumpConfig(invocation.profile, invocation.defaultOnly, invocation.patches)
-    break
-  }
-  default:
-    invocation satisfies never
-    throw new Error(`dsh: unhandled invocation mode ${JSON.stringify(invocation)}`)
-}
+// Node resolves argv[1] through package-manager bin links on Unix; a Windows
+// shim points at this file directly, so the legacy `dsh` name is the fallback.
+const commandName = path.basename(process.argv[1] ?? '') === 'sponge' ? 'sponge' : 'dsh'
+await runCli(process.argv.slice(2), commandName)

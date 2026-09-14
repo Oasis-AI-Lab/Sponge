@@ -1,0 +1,47 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 2px;
+  padding: 10px 14px 0;
+  border-bottom: 1px solid var(--dsw-alias-border-l2);
+  flex: none;
+}
+
+.navItem {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 8px 12px;
+  color: var(--dsw-alias-label-secondary);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  color: var(--dsw-alias-label-primary);
+  background: var(--dsw-alias-interactive-bg-hover);
+}
+
+.navItemActive,
+.navItemActive:hover {
+  color: var(--dsw-alias-label-primary);
+  border-bottom-color: var(--dsw-alias-state-business-primary);
+  background: transparent;
+}
+
+.main {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 24px 32px;
+}

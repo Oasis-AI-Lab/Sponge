@@ -117,3 +117,21 @@
 .overlayLayer > * {
   pointer-events: auto;
 }
+
+/* The page seat spans the center and details tracks, above their content but
+   below the drag handles and the frame overlay. An empty seat renders
+   nothing; the sidebar stays on top of the page's own stacking context. */
+.pageLayer {
+  grid-column: 2 / 4;
+  grid-row: 1;
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--dsw-alias-bg-base);
+}
+
+.pageLayer:empty {
+  display: none;
+}

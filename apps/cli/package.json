@@ -12,7 +12,8 @@
   },
   "type": "module",
   "bin": {
-    "dsh": "lib/bin.js"
+    "dsh": "lib/bin.js",
+    "sponge": "lib/bin-sponge.js"
   },
   "files": [
     "lib/*.js",

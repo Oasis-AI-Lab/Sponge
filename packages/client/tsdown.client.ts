@@ -9,7 +9,8 @@
  * loaders register each real stylesheet as a watch dependency.
  */
 import { readFile } from 'node:fs/promises'
-import { existsSync, globSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import type { Dirent } from 'node:fs'
 import { isBuiltin } from 'node:module'
 import { basename, dirname, isAbsolute, relative, resolve as resolvePath, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -66,7 +67,7 @@ export const INLINE_SAFE = /^@oasisailab\/sponge-(host-apiproxy|file-reference|s
  * identity to share — the framework itself is a requested module-table row
  * (external), while these are ordinary libraries a browser bundle inlines.
  */
-const VENDORED_LIBRARY = /^@oasisailab/sponge\/(cosmokit|schemastery)(\/|$)/
+const VENDORED_LIBRARY = /^@oasisailab\/sponge-(cosmokit|schemastery)(\/|$)/
 
 /** Generated descriptor/codec contribution with no shared runtime identity. */
 const GENERATED_REMOTE = /^@oasisailab\/sponge-[a-z0-9]+(?:-[a-z0-9]+)*\/remote$/
@@ -346,6 +347,40 @@ const productionExternalCache = new Map<string, readonly RegExp[]>()
 const clientExternalCache = new Map<string, ReadonlySet<string>>()
 
 /**
+ * Workspace manifests under packages/<group>/<pkg>/package.json. Scanned with a
+ * straight two-level walk instead of Node's experimental fs.globSync wildcard
+ * form: globSync silently drops the `api` subtree on some Windows layouts (the
+ * junction under packages/api/gateway breaks wildcard discovery), turning the
+ * whole workspace build into a spurious "no package declares the name X"
+ * failure.
+ */
+function workspacePackageManifests(): string[] {
+  const root = resolvePath(process.cwd(), 'packages')
+  const manifests: string[] = []
+  let groups: Dirent[]
+  try {
+    groups = readdirSync(root, { withFileTypes: true })
+  } catch {
+    return manifests
+  }
+  for (const group of groups) {
+    if (!group.isDirectory()) continue
+    let pkgs: Dirent[]
+    try {
+      pkgs = readdirSync(resolvePath(root, group.name), { withFileTypes: true })
+    } catch {
+      continue
+    }
+    for (const pkg of pkgs) {
+      if (!pkg.isDirectory()) continue
+      const manifestPath = resolvePath(root, group.name, pkg.name, 'package.json')
+      if (existsSync(manifestPath)) manifests.push(relative(process.cwd(), manifestPath))
+    }
+  }
+  return manifests
+}
+
+/**
  * Read one workspace package's manifest. Located by package name rather than by
  * cwd, because tsdown evaluates every package config with the repository root as
  * `process.cwd()` during a workspace build. Callers read it on the first
@@ -358,9 +393,9 @@ const clientExternalCache = new Map<string, ReadonlySet<string>>()
 function workspaceManifest(id: string): WorkspaceManifest {
   const cached = manifestCache.get(id)
   if (cached !== undefined) return cached
-  for (const manifestPath of globSync('packages/*/*/package.json', { cwd: REPOSITORY_ROOT })) {
+  for (const manifestPath of workspacePackageManifests()) {
     const manifest = JSON.parse(
-      readFileSync(resolvePath(REPOSITORY_ROOT, manifestPath), 'utf8'),
+      readFileSync(resolvePath(process.cwd(), manifestPath), 'utf8'),
     ) as WorkspaceManifest
     if (manifest.name !== id) continue
     manifestCache.set(id, manifest)

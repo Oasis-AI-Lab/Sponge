@@ -81,6 +81,17 @@ declare module '@oasisailab/sponge-client-ui-slots' {
      * `id` is added beside the shipped entries instead of replacing them.
      */
     'shell.overlay': { kind: 'list'; scope: 'root' }
+    /**
+     * A full-surface page replacing the center and details columns, above them
+     * but below the frame overlay and drag handles. OCCUPIED by the Portal
+     * surface (ui-sponge-portal's PortalShell); registering here swaps the
+     * working area for the page while the sidebar stays for navigation. Only
+     * one occupant may register: the page fills the area and hides what sits
+     * beneath it.
+     *
+     * The owner share is empty; the occupant decides its own routing state.
+     */
+    'shell.page': { kind: 'single'; scope: 'root'; owner: ShellPageOwnerProps }
   }
 }
 
@@ -104,6 +115,9 @@ export interface ConvOwnerProps {}
 /** Details owner share: empty — sessionId arrives as a framework-standard prop. */
 export interface DetailsOwnerProps {}
 
+/** Page owner share: empty — the occupant owns its routing and presentation. */
+export interface ShellPageOwnerProps {}
+
 /** Required services (cordis fiber inject — the loader passes all module exports as an object plugin). */
 export const inject = ['slots', 'theme']
 
@@ -124,6 +138,7 @@ export function apply(ctx: ClientContext): void {
         'conversation': { kind: 'single', scope: 'session-maybe' },
         'details': { kind: 'single', scope: 'session' },
         'shell.overlay': { kind: 'list', scope: 'root' },
+        'shell.page': { kind: 'single', scope: 'root' },
       },
       // Exclusive store: the factory itself — the framework instantiates per
       // entry and delivers useStore/actions to AppFrame as standard props.

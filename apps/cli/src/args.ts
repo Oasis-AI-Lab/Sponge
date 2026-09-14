@@ -1,5 +1,5 @@
 /**
- * Commander adapter for the `dsh` command line.
+ * Commander adapter for the `dsh` / `sponge` command line.
  *
  * The launcher parses only what it owns — which profile to boot, which extra
  * patch overlays to apply, and the config dumps — and hands **everything after
@@ -7,11 +7,16 @@
  * their own flag families and print their own `--help` (see
  * `@oasisailab/sponge-cmdline`). Launcher flags therefore come first: the first
  * token this parser does not recognize starts the inner arguments, so
- * `dsh --profile tui --resume abc` boots the tui profile with `--resume abc`,
- * and `dsh --profile web -h` prints the web app's help, not this one's.
+ * `sponge --profile tui --resume abc` boots the tui profile with `--resume abc`,
+ * and `sponge --profile web -h` prints the web app's help, not this one's.
  *
- * `web` is a hardcoded alias for `--profile web`; `plugin` manages a profile's
- * plugin dependencies by forwarding to pnpm.
+ * Both bins share this parser: `sponge` is the Sponge-brand command (the web
+ * alias forwards `--portal` so the browser boots into the Portal surface),
+ * while `dsh` keeps the legacy conversation-first web boot.
+ *
+ * `web` is a hardcoded alias for `--profile web`; `editor` is reserved for the
+ * future Editor surface and fails loud until it exists; `plugin` manages a
+ * profile's plugin dependencies by forwarding to pnpm.
  * @module @oasisailab/sponge/args
  */
 
@@ -44,7 +49,7 @@ interface PluginInvocation {
   args: string[]
 }
 
-/** The resolved `dsh` invocation. Help, version, and errors exit inside {@link parseDshArgs}. */
+/** The resolved invocation. Help, version, and errors exit inside {@link parseDshArgs}. */
 export type DshInvocation = ProfileInvocation | DumpConfigInvocation | PluginInvocation
 
 /** Launcher flags shared by the default command and the `web` alias. */
@@ -61,14 +66,17 @@ interface BootOptions {
 const collect = (value: string, previous: string[] = []): string[] => [...previous, value]
 
 /** The launcher's own help text; each app prints its own. */
-const HELP_EXAMPLES = `
+const HELP_EXAMPLES = (commandName: string) => `
 Examples:
-  dsh --profile web                          boot the web profile (same as: dsh web)
-  dsh --profile headless "run the tests"     answer one task, print the result, and exit
-  dsh --profile tui --patch ./extra.yml      boot a custom profile with one extra overlay
-  dsh --profile tui --resume <session>       arguments after the launcher flags reach the app
-  dsh --profile web --help                   the web app's own flags and help
-  dsh plugin --profile tui add <package>     install a plugin into the tui profile
+  ${commandName} --profile web                          boot the web profile (same as: ${commandName} web)
+  ${commandName} web                                    boot into the Sponge Portal surface (sponge only)
+  ${commandName} web --history                          open the web UI on the session history list
+  ${commandName} web --resume <session>                 resume a specific session
+  ${commandName} --profile headless "run the tests"     answer one task, print the result, and exit
+  ${commandName} --profile tui --patch ./extra.yml      boot a custom profile with one extra overlay
+  ${commandName} --profile tui --resume <session>       arguments after the launcher flags reach the app
+  ${commandName} --profile web --help                   the web app's own flags and help
+  ${commandName} plugin --profile tui add <package>     install a plugin into the tui profile
 `
 
 /**
@@ -107,34 +115,36 @@ function resolveBoot(program: Command, profile: string, options: BootOptions, ar
  * error.
  * @param argv - arguments after the Node binary and script.
  * @param version - version string printed by `--version`.
+ * @param commandName - the invoked command name ('dsh' or 'sponge'); drives the
+ * help text and the web alias's Portal default.
  * @returns the resolved invocation.
  */
-export function parseDshArgs(argv: readonly string[], version: string): DshInvocation {
+export function parseDshArgs(argv: readonly string[], version: string, commandName: 'dsh' | 'sponge' = 'dsh'): DshInvocation {
   let resolved: DshInvocation | undefined
   // Annotated, not inferred: the actions below call back into `program`, and an
   // inferred type would be circular through its own chain.
   const program: Command = new Command()
   program
-    .name('dsh')
+    .name(commandName)
     .version(version, '-V, --version', 'output the version number')
-    .description('dsh: boot a Sponge profile — an ordered stack of plugin-bundle patch layers under your own overrides.')
-    .addHelpText('after', HELP_EXAMPLES)
+    .description(`${commandName}: boot a Sponge profile — an ordered stack of plugin-bundle patch layers under your own overrides.`)
+    .addHelpText('after', HELP_EXAMPLES(commandName))
     .exitOverride()
     // The launcher's flags come first and end at the first token it does not
     // know; everything from there on belongs to the booted app, including
-    // its -h. `dsh -h` with no profile still prints this help, below.
+    // its -h. `sponge -h` with no profile still prints this help, below.
     .helpOption(false)
     .allowUnknownOption()
     .passThroughOptions()
     .enablePositionalOptions()
-    .argument('[args...]', 'arguments for the booted profile\'s app (see: dsh --profile <name> --help)')
+    .argument('[args...]', `arguments for the booted profile's app (see: ${commandName} --profile <name> --help)`)
     .option('--profile <name>', 'the profile under $DSH_HOME/profiles to boot')
     .option('--patch <path>', 'extra patch-list overlay applied after the profile layer (repeatable)', collect)
     .option('--dump-config', 'print the composed profile tree and exit')
     .option('--dump-default-config', 'print the profile tree without its user layer or --patch overlays and exit')
     .action((args: string[], options: BootOptions & { profile?: string }) => {
       // With the app owning -h, the launcher's own help is what a bare
-      // `dsh -h` (no profile to hand it to) must print.
+      // `${commandName} -h` (no profile to hand it to) must print.
       if (options.profile === undefined) {
         if (args.some(argument => argument === '-h' || argument === '--help')) program.help()
         program.error('error: --profile <name> is required')
@@ -145,11 +155,11 @@ export function parseDshArgs(argv: readonly string[], version: string): DshInvoc
     })
 
   /** Reject parent options supplied before a subcommand. */
-  const rejectParentOptions = (command: string): void => {
+  const rejectParentOptions = (subcommand: string): void => {
     const parent = program.opts<BootOptions & { profile?: string }>()
     if (parent.profile !== undefined || parent.patch !== undefined
       || parent.dumpConfig !== undefined || parent.dumpDefaultConfig !== undefined) {
-      program.error(`error: ${command} takes none of parent --profile, --patch, --dump-config, or --dump-default-config`)
+      program.error(`error: ${subcommand} takes none of parent --profile, --patch, --dump-config, or --dump-default-config`)
     }
   }
 
@@ -159,13 +169,34 @@ export function parseDshArgs(argv: readonly string[], version: string): DshInvoc
     .allowUnknownOption()
     .passThroughOptions()
     .enablePositionalOptions()
-    .argument('[args...]', 'arguments for the web app (see: dsh web --help)')
+    .argument('[args...]', `arguments for the web app (see: ${commandName} web --help)`)
     .option('--patch <path>', 'extra patch-list overlay applied after the profile layer (repeatable)', collect)
     .option('--dump-config', 'print the composed web-profile tree (with the user layer and any --patch) and exit')
     .option('--dump-default-config', 'print the web profile\'s bundle layers (no user layer) and exit')
     .action((args: string[], options: BootOptions) => {
       rejectParentOptions('web')
-      resolved = resolveBoot(web, 'web', options, args)
+      // The Sponge-brand command defaults the Portal surface on: the forwarded
+      // flag tells the web app to open the browser into the Portal page. The
+      // dsh alias keeps the legacy conversation-first boot untouched. Config
+      // dumps stay clean — injecting a flag would make the dump reject its own
+      // arguments.
+      const booting = options.dumpConfig !== true && options.dumpDefaultConfig !== true
+      const forwarded = commandName === 'sponge' && booting && !args.includes('--portal')
+        ? ['--portal', ...args]
+        : args
+      resolved = resolveBoot(web, 'web', options, forwarded)
+    })
+
+  const editor = program.command('editor')
+    .description('reserved: the Sponge Editor surface lands in a later release (open the Portal with: sponge web)')
+  editor
+    .helpOption('-h, --help', 'show this help')
+    .allowUnknownOption()
+    .argument('[args...]', 'arguments for the editor app (not yet available)')
+    .action((args: string[]) => {
+      rejectParentOptions('editor')
+      const extra = args.length > 0 ? ` (got: ${args.join(' ')})` : ''
+      program.error(`error: sponge editor is not yet available; the Editor surface lands in a later release — open the Portal with: sponge web${extra}`)
     })
 
   const plugin = program.command('plugin').description('manage a profile\'s plugins by forwarding the remaining arguments to pnpm in the profile directory')
@@ -186,6 +217,6 @@ export function parseDshArgs(argv: readonly string[], version: string): DshInvoc
     return process.exit(error instanceof CommanderError ? error.exitCode : 1)
   }
   /* v8 ignore next -- an action resolves or Commander throws */
-  if (resolved === undefined) throw new Error('dsh: no invocation resolved')
+  if (resolved === undefined) throw new Error(`${commandName}: no invocation resolved`)
   return resolved
 }

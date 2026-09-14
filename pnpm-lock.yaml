@@ -110,13 +110,16 @@ importers:
         version: 5.0.0
       tsdown:
         specifier: ^0.22.2
-        version: 0.22.2(oxc-resolver@11.20.0)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3)
+        version: 0.22.2(oxc-resolver@11.20.0)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3)(unrun@0.3.1)
       tsx:
         specifier: ^4.22.4
         version: 4.22.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+      unrun:
+        specifier: ^0.3.1
+        version: 0.3.1
       vite-tsconfig-paths:
         specifier: ^6.1.1
         version: 6.1.1(typescript@6.0.3)(vite@8.0.16(@types/node@22.20.0)(esbuild@0.28.1)(jiti@2.7.0)(tsx@4.22.4)(yaml@2.9.0))
@@ -1377,6 +1380,9 @@ importers:
       '@oasisailab/sponge-client-ui-skill':
         specifier: workspace:^
         version: link:../../client/ui-skill
+      '@oasisailab/sponge-client-ui-sponge-portal':
+        specifier: workspace:^
+        version: link:../../client/ui-sponge-portal
       '@oasisailab/sponge-client-ui-subagent':
         specifier: workspace:^
         version: link:../../client/ui-subagent
@@ -2852,6 +2858,46 @@ importers:
       '@types/react':
         specifier: ~18.3.1
         version: 18.3.31
+
+  packages/client/ui-sponge-portal:
+    dependencies:
+      clsx:
+        specifier: ^2.0.0
+        version: 2.1.1
+    devDependencies:
+      '@oasisailab/sponge-client-locale':
+        specifier: workspace:^
+        version: link:../locale
+      '@oasisailab/sponge-client-runtime':
+        specifier: workspace:^
+        version: link:../runtime
+      '@oasisailab/sponge-client-test-runtime':
+        specifier: workspace:^
+        version: link:../../test-support/client-runtime
+      '@oasisailab/sponge-client-ui-layout':
+        specifier: workspace:^
+        version: link:../ui-layout
+      '@oasisailab/sponge-client-ui-primitives':
+        specifier: workspace:^
+        version: link:../ui-primitives
+      '@oasisailab/sponge-client-ui-sidebar':
+        specifier: workspace:^
+        version: link:../ui-sidebar
+      '@oasisailab/sponge-client-ui-slots':
+        specifier: workspace:^
+        version: link:../ui-slots
+      '@oasisailab/sponge-cordis':
+        specifier: workspace:^
+        version: link:../../../vendor/cordis
+      '@oasisailab/sponge-invariants':
+        specifier: workspace:^
+        version: link:../../runtime-diagnostics/invariants
+      '@types/react':
+        specifier: ~18.3.1
+        version: 18.3.31
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
 
   packages/client/ui-subagent:
     devDependencies:
@@ -7452,6 +7498,9 @@ importers:
       '@oasisailab/sponge-sdk-protocol':
         specifier: workspace:^
         version: link:../../sdk/protocol
+      '@openai/codex':
+        specifier: 0.147.0
+        version: 0.147.0
     devDependencies:
       '@oasisailab/sponge-agent':
         specifier: workspace:^
@@ -10487,6 +10536,47 @@ packages:
 
   '@nodable/entities@2.2.0':
     resolution: {integrity: sha512-9uGyhaQavEUMC8AIddIjau4NsnsXhou+j5sBAGojCM1oxmQpVKTWR/9JxABD6UAv12vpIms55fPZKFQEhG6uBg==}
+
+  '@openai/codex@0.147.0':
+    resolution: {integrity: sha512-EQLEXecAG2ptxI7UpBMo2TR/ga5596/c/OsYF/0LoUDh5JANZ7IoGqlzBEWbuEVQ76JePIbtTW/ihCkp1a7Z3w==}
+    engines: {node: '>=16'}
+    hasBin: true
+
+  '@openai/codex@0.147.0-darwin-arm64':
+    resolution: {integrity: sha512-BEUVkiOW7kLcRyrMLfAr/h9wF8sRVJyZDy6OHtVn6QGDXiv3BvAZVTY1Pu9xF7KdIdkYXbp4uayN0aDQQaAUJw==}
+    engines: {node: '>=16'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@openai/codex@0.147.0-darwin-x64':
+    resolution: {integrity: sha512-Tb8McE5SvJIH0Vs5R6sq7u+quiC931yan2KOOl6km1OdZ82+Wi7eF5XrSFPs5CF7xCgoIK4Vs+byMbT5hN+ZUw==}
+    engines: {node: '>=16'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@openai/codex@0.147.0-linux-arm64':
+    resolution: {integrity: sha512-SLC1JXw2TYfr/c3HhrJubyyLelq7vTOLWVmiThFA+z0+WgzCPmaseJ/kzDD3Gge/TO7fCnnj7UcPmC0d2c8XAg==}
+    engines: {node: '>=16'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@openai/codex@0.147.0-linux-x64':
+    resolution: {integrity: sha512-0W9MBxPpWW0cSkNqrTDN2jR7rzzT7oNMhQY5446lT2Lw5cz5yhDTck4Va9rjkQEm+HlFzP/dmEMSZbXfJsINmw==}
+    engines: {node: '>=16'}
+    cpu: [x64]
+    os: [linux]
+
+  '@openai/codex@0.147.0-win32-arm64':
+    resolution: {integrity: sha512-e2ZstJ8zT8Rm1nvR7CUVO+Gr3cTChE41+VfOzGhynzDXEoW0wfbjUQbc2bWbh1arG94LMm4y3dqBtUIbSrfeGA==}
+    engines: {node: '>=16'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@openai/codex@0.147.0-win32-x64':
+    resolution: {integrity: sha512-oT7Ss5fAPf2fiWE9QNURqZcQGAAawSVxmIUdgPzckq4KFZAM+pRz9JbM4Rr498CjtbNgTOjWvDJ+DXvIBSfOPA==}
+    engines: {node: '>=16'}
+    cpu: [x64]
+    os: [win32]
 
   '@opentelemetry/api-logs@0.220.0':
     resolution: {integrity: sha512-CmVa4ImJ+ynfrPMNaAXHET6Bhb44SwzmfyVJFq9ni2jgXJR/l7C6gfVFddNmHP+ZOkP9cf4f9DBe68qVLTHc9w==}
@@ -14269,6 +14359,16 @@ packages:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
 
+  unrun@0.3.1:
+    resolution: {integrity: sha512-onIck/oNnCaytwths1ZVp1LK2Gq2hPoyFhiHebObuUXqR3S0uHuLLaBK8K6mRRgV7Ptip8AnNvaUsgzwWwBZuA==}
+    engines: {node: ^22.13.0 || >=24.0.0}
+    hasBin: true
+    peerDependencies:
+      synckit: ^0.11.11
+    peerDependenciesMeta:
+      synckit:
+        optional: true
+
   update-browserslist-db@1.2.3:
     resolution: {integrity: sha512-Js0m9cx+qOgDxo0eMiFGEueWztz+d4+M3rGlmKPT+T4IS/jP4ylw3Nwpu6cpTTP8R1MAC1kF4VbdLt3ARf209w==}
     hasBin: true
@@ -15894,6 +15994,33 @@ snapshots:
     optional: true
 
   '@nodable/entities@2.2.0': {}
+
+  '@openai/codex@0.147.0':
+    optionalDependencies:
+      '@openai/codex-darwin-arm64': '@openai/codex@0.147.0-darwin-arm64'
+      '@openai/codex-darwin-x64': '@openai/codex@0.147.0-darwin-x64'
+      '@openai/codex-linux-arm64': '@openai/codex@0.147.0-linux-arm64'
+      '@openai/codex-linux-x64': '@openai/codex@0.147.0-linux-x64'
+      '@openai/codex-win32-arm64': '@openai/codex@0.147.0-win32-arm64'
+      '@openai/codex-win32-x64': '@openai/codex@0.147.0-win32-x64'
+
+  '@openai/codex@0.147.0-darwin-arm64':
+    optional: true
+
+  '@openai/codex@0.147.0-darwin-x64':
+    optional: true
+
+  '@openai/codex@0.147.0-linux-arm64':
+    optional: true
+
+  '@openai/codex@0.147.0-linux-x64':
+    optional: true
+
+  '@openai/codex@0.147.0-win32-arm64':
+    optional: true
+
+  '@openai/codex@0.147.0-win32-x64':
+    optional: true
 
   '@opentelemetry/api-logs@0.220.0':
     dependencies:
@@ -19710,7 +19837,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  tsdown@0.22.2(oxc-resolver@11.20.0)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3):
+  tsdown@0.22.2(oxc-resolver@11.20.0)(publint@0.3.21)(tsx@4.22.4)(typescript@6.0.3)(unrun@0.3.1):
     dependencies:
       ansis: 4.3.1
       cac: 7.0.0
@@ -19731,6 +19858,7 @@ snapshots:
       publint: 0.3.21
       tsx: 4.22.4
       typescript: 6.0.3
+      unrun: 0.3.1
     transitivePeerDependencies:
       - '@ts-macro/tsc'
       - '@typescript/native-preview'
@@ -19814,6 +19942,10 @@ snapshots:
       unist-util-visit-parents: 6.0.2
 
   unpipe@1.0.0: {}
+
+  unrun@0.3.1:
+    dependencies:
+      rolldown: 1.1.1
 
   update-browserslist-db@1.2.3(browserslist@4.28.6):
     dependencies:
