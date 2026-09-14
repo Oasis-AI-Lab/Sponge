@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sponge 调研 · 技术 × 行业 × 愿景（2026-08）</title>
+<style>
+/* ==========================================================================
+   Material Design 3 — Tonal palette · Shape scale · Elevation · Motion
+   Type scale: display / headline / title / body / label
+   ========================================================================== */
+
+:root{
+  color-scheme: light;
+  /* ---- Primary (teal) ---- */
+  --primary:#006a6b;  --on-primary:#ffffff;
+  --primary-container:#6ff7f5; --on-primary-container:#002020;
+  /* ---- Secondary ---- */
+  --secondary:#4a6363; --on-secondary:#ffffff;
+  --secondary-container:#ceeae8; --on-secondary-container:#051f1f;
+  /* ---- Tertiary ---- */
+  --tertiary:#4c6079; --on-tertiary:#ffffff;
+  --tertiary-container:#d3e4ff; --on-tertiary-container:#041e33;
+  /* ---- Semantic: success / warning / error ---- */
+  --success:#006b2e; --on-success:#ffffff;
+  --success-container:#6fdb81; --on-success-container:#00210a;
+  --warning:#8a5a00; --on-warning:#ffffff;
+  --warning-container:#ffddb0; --on-warning-container:#2c1800;
+  --error:#ba1a1a; --on-error:#ffffff;
+  --error-container:#ffdad6; --on-error-container:#410002;
+  /* ---- Surface & outline ---- */
+  --surface:#f8fbfa; --on-surface:#191c1c;
+  --surface-variant:#dae5e3; --on-surface-variant:#3f4948;
+  --surface-container-lowest:#ffffff;
+  --surface-container-low:#f2f6f5;
+  --surface-container:#ecf1f0;
+  --surface-container-high:#e6ebea;
+  --surface-container-highest:#e0e5e4;
+  --outline:#6f7978; --outline-variant:#bec9c7;
+  --inverse-surface:#2d3131; --inverse-on-surface:#eff2f1;
+  --scrim:rgba(0,0,0,.5);
+  /* ---- Elevation (level 1–3) ---- */
+  --shadow-1:0 1px 2px rgba(0,0,0,.26), 0 1px 3px 1px rgba(0,0,0,.10);
+  --shadow-2:0 1px 2px rgba(0,0,0,.26), 0 2px 6px 2px rgba(0,0,0,.11);
+  --shadow-3:0 4px 8px 3px rgba(0,0,0,.11), 0 1px 3px rgba(0,0,0,.26);
+  /* ---- Shape ---- */
+  --r-xs:4px; --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:28px; --r-full:9999px;
+  /* ---- Motion ---- */
+  --e-std:cubic-bezier(0.2,0,0,1);
+  --e-emp:cubic-bezier(0.05,0.7,0.1,1);
+  --e-acc:cubic-bezier(0.3,0,0.8,0.15);
+  --d-s:120ms; --d-m:220ms; --d-l:340ms;
+
+  --font: "Google Sans Text","Google Sans",Roboto,"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono: "Roboto Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* ---- Dark scheme ---- */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+  --primary:#4cdad9; --on-primary:#003737;
+  --primary-container:#004f50; --on-primary-container:#6ff7f5;
+  --secondary:#b4ccc9; --on-secondary:#1f3534;
+  --secondary-container:#354b4a; --on-secondary-container:#d0e9e6;
+  --tertiary:#b8cbe8; --on-tertiary:#223349;
+  --tertiary-container:#384a62; --on-tertiary-container:#d4e4ff;
+  --success:#63dd84; --on-success:#003911;
+  --success-container:#005221; --on-success-container:#79f892;
+  --warning:#ffb95e; --on-warning:#452b00;
+  --warning-container:#5f3d00; --on-warning-container:#ffddb0;
+  --error:#ffb4ab; --on-error:#690005;
+  --error-container:#93000a; --on-error-container:#ffdad6;
+  --surface:#101414; --on-surface:#e0e3e2;
+  --surface-variant:#3f4948; --on-surface-variant:#bec9c7;
+  --surface-container-lowest:#0b0f0f;
+  --surface-container-low:#191e1e;
+  --surface-container:#1d2222;
+  --surface-container-high:#272d2c;
+  --surface-container-highest:#323837;
+  --outline:#889391; --outline-variant:#3f4948;
+  --inverse-surface:#e0e3e2; --inverse-on-surface:#191c1c;
+  --shadow-1:0 1px 3px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.34);
+  --shadow-2:0 2px 6px rgba(0,0,0,.52), 0 1px 2px rgba(0,0,0,.36);
+  --shadow-3:0 6px 12px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.4);
+}
+}
+:root[data-theme="dark"]{
+  --primary:#4cdad9; --on-primary:#003737;
+  --primary-container:#004f50; --on-primary-container:#6ff7f5;
+  --secondary:#b4ccc9; --on-secondary:#1f3534;
+  --secondary-container:#354b4a; --on-secondary-container:#d0e9e6;
+  --tertiary:#b8cbe8; --on-tertiary:#223349;
+  --tertiary-container:#384a62; --on-tertiary-container:#d4e4ff;
+  --success:#63dd84; --on-success:#003911;
+  --success-container:#005221; --on-success-container:#79f892;
+  --warning:#ffb95e; --on-warning:#452b00;
+  --warning-container:#5f3d00; --on-warning-container:#ffddb0;
+  --error:#ffb4ab; --on-error:#690005;
+  --error-container:#93000a; --on-error-container:#ffdad6;
+  --surface:#101414; --on-surface:#e0e3e2;
+  --surface-variant:#3f4948; --on-surface-variant:#bec9c7;
+  --surface-container-lowest:#0b0f0f;
+  --surface-container-low:#191e1e;
+  --surface-container:#1d2222;
+  --surface-container-high:#272d2c;
+  --surface-container-highest:#323837;
+  --outline:#889391; --outline-variant:#3f4948;
+  --inverse-surface:#e0e3e2; --inverse-on-surface:#191c1c;
+  --shadow-1:0 1px 3px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.34);
+  --shadow-2:0 2px 6px rgba(0,0,0,.52), 0 1px 2px rgba(0,0,0,.36);
+  --shadow-3:0 6px 12px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.4);
+}
+
+/* ============================ Base ============================ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:76px}
+body{
+  margin:0; background:var(--surface); color:var(--on-surface);
+  font-family:var(--font);
+  font-size:16px; line-height:1.5; letter-spacing:.00625em;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  transition:background var(--d-l) var(--e-std), color var(--d-l) var(--e-std);
+}
+::selection{background:var(--primary-container); color:var(--on-primary-container)}
+:focus-visible{outline:3px solid var(--secondary); outline-offset:2px; border-radius:var(--r-xs)}
+
+/* MD3 scrollbar */
+*{scrollbar-width:thin; scrollbar-color:var(--outline-variant) transparent}
+::-webkit-scrollbar{height:8px; width:8px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--outline-variant); border-radius:var(--r-full)}
+::-webkit-scrollbar-thumb:hover{background:var(--outline)}
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px 96px}
+
+/* ============================ MD3 App bar / Hero ============================ */
+header{
+  background:var(--primary-container); color:var(--on-primary-container);
+  padding:56px 0 40px; margin-bottom:0;
+  border-radius:0 0 var(--r-xl) var(--r-xl);
+  box-shadow:var(--shadow-1);
+  transition:background var(--d-l) var(--e-std), color var(--d-l) var(--e-std);
+}
+header .wrap{padding-bottom:0}
+.eyebrow{
+  font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  opacity:.72; margin:0 0 14px; line-height:16px;
+}
+h1{
+  font-size:34px; line-height:44px; font-weight:500; letter-spacing:-.2px;
+  margin:0 0 14px;
+}
+.sub{font-size:17px; line-height:26px; opacity:.86; max-width:780px; margin:0 0 24px; font-weight:400}
+.meta-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px}
+.chip{
+  display:inline-flex; align-items:center; height:32px; padding:0 14px;
+  border-radius:var(--r-s); font-size:13px; font-weight:500; line-height:1;
+  border:1px solid color-mix(in srgb, var(--on-primary-container) 26%, transparent);
+  background:color-mix(in srgb, var(--on-primary-container) 6%, transparent);
+  color:var(--on-primary-container);
+}
+
+/* ============================ MD3 Navigation bar ============================ */
+nav{
+  position:sticky; top:0; z-index:80;
+  background:color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter:saturate(180%) blur(16px);
+  border-bottom:1px solid var(--outline-variant);
+  margin-bottom:36px;
+}
+nav .wrap{
+  padding:0 20px; display:flex; align-items:center; gap:12px;
+  min-height:60px;
+}
+.nav-tabs{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; flex:1 1 auto}
+.nav-tabs::-webkit-scrollbar{display:none}
+nav a{
+  display:inline-flex; align-items:center; height:40px; padding:0 16px;
+  border-radius:var(--r-full); white-space:nowrap; text-decoration:none;
+  font-size:14px; font-weight:500; line-height:20px;
+  color:var(--on-surface-variant);
+  transition:background var(--d-s) var(--e-std), color var(--d-s) var(--e-std);
+}
+nav a:hover{background:color-mix(in srgb, var(--on-surface) 8%, transparent); color:var(--on-surface)}
+nav a.active{background:var(--secondary-container); color:var(--on-secondary-container)}
+
+/* ---- theme switch (MD3 segmented button, icon-only) ---- */
+.theme-switch{
+  display:flex; align-items:center; gap:2px; flex:0 0 auto;
+  background:var(--surface-container-high); border-radius:var(--r-full); padding:3px;
+}
+.ts-btn{
+  width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center;
+  border:0; background:transparent; color:var(--on-surface-variant); cursor:pointer;
+  border-radius:var(--r-full); padding:0;
+  transition:background var(--d-s) var(--e-std), color var(--d-s) var(--e-std);
+}
+.ts-btn svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.ts-btn:hover{background:color-mix(in srgb, var(--on-surface) 8%, transparent); color:var(--on-surface)}
+.ts-btn[aria-pressed="true"]{background:var(--primary); color:var(--on-primary)}
+
+/* ============================ Sections ============================ */
+section{margin-bottom:56px; scroll-margin-top:80px}
+h2{
+  font-size:28px; line-height:36px; font-weight:400; letter-spacing:0;
+  margin:0 0 6px; padding-bottom:14px;
+  border-bottom:1px solid var(--outline-variant);
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+}
+h2 .num{
+  display:inline-flex; align-items:center; height:30px; padding:0 12px;
+  border-radius:var(--r-s); background:var(--primary-container);
+  color:var(--on-primary-container); font-size:15px; font-weight:600; line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+h3{font-size:22px; line-height:30px; font-weight:400; margin:36px 0 12px; letter-spacing:0}
+h4{font-size:16px; line-height:24px; font-weight:500; margin:22px 0 8px; color:var(--on-surface)}
+h4.mt0{margin-top:0}
+p{margin:0 0 12px}
+.lead{color:var(--on-surface-variant); font-size:16px; line-height:24px; margin-bottom:24px}
+strong,b{font-weight:600; color:var(--on-surface)}
+
+/* ============================ MD3 Cards ============================ */
+.card{
+  background:var(--surface-container-low); border:1px solid var(--outline-variant);
+  border-radius:var(--r-m); padding:20px 22px; margin-bottom:14px;
+  transition:box-shadow var(--d-m) var(--e-std), transform var(--d-m) var(--e-std);
+}
+.card:hover{box-shadow:var(--shadow-1)}
+.card.acc-ok{border-left:4px solid var(--success)}
+.card.acc-danger{border-left:4px solid var(--error)}
+.grid{display:grid; gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.g3,.g2{grid-template-columns:1fr}}
+
+/* ============================ Executive summary ============================ */
+.exec{
+  background:var(--surface-container-lowest); border:1px solid var(--outline-variant);
+  border-radius:var(--r-l); overflow:hidden; box-shadow:var(--shadow-1);
+}
+.exec-item{padding:24px 26px; border-bottom:1px solid var(--outline-variant)}
+.exec-item:last-child{border-bottom:none}
+.exec-item .tag{
+  display:inline-flex; align-items:center; height:26px; padding:0 12px;
+  border-radius:var(--r-xs); margin-bottom:14px;
+  font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; line-height:1;
+}
+.t-tech{background:var(--tertiary-container); color:var(--on-tertiary-container)}
+.t-ind{background:var(--warning-container); color:var(--on-warning-container)}
+.t-vis{background:var(--secondary-container); color:var(--on-secondary-container)}
+.exec-item h3{margin:0 0 10px; font-size:20px; line-height:28px; font-weight:500}
+.exec-item p{margin:0 0 10px; font-size:15px; line-height:24px}
+.exec-item p:last-child{margin-bottom:0}
+.hl{
+  background:linear-gradient(transparent 62%, color-mix(in srgb, var(--primary) 24%, transparent) 62%);
+  font-weight:600; color:var(--on-surface);
+}
+
+.kpi-row{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:22px 0 10px;
+}
+.kpi{
+  background:var(--surface-container-low); border-radius:var(--r-m);
+  padding:18px 20px; border:1px solid var(--outline-variant);
+  transition:box-shadow var(--d-m) var(--e-std), transform var(--d-m) var(--e-std);
+}
+.kpi:hover{box-shadow:var(--shadow-1); transform:translateY(-2px)}
+.kpi .v{
+  font-size:32px; line-height:40px; font-weight:500; letter-spacing:-.5px;
+  color:var(--primary); font-variant-numeric:tabular-nums;
+}
+.kpi .l{font-size:12px; line-height:17px; color:var(--on-surface-variant); margin-top:6px}
+@media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+
+/* ============================ MD3 Chips (evidence grade) ============================ */
+.b{
+  display:inline-flex; align-items:center; height:20px; padding:0 7px;
+  border-radius:var(--r-xs); vertical-align:middle; white-space:nowrap;
+  font-family:var(--mono); font-size:11px; font-weight:700; line-height:1; letter-spacing:.02em;
+}
+.bs{background:var(--primary-container); color:var(--on-primary-container)}
+.ba{background:var(--tertiary-container); color:var(--on-tertiary-container)}
+.bb{background:var(--warning-container); color:var(--on-warning-container)}
+.bu{background:var(--surface-container-highest); color:var(--on-surface-variant)}
+.bx{background:var(--error-container); color:var(--on-error-container)}
+
+/* ============================ MD3 Data table ============================ */
+.tw{
+  overflow-x:auto; border:1px solid var(--outline-variant);
+  border-radius:var(--r-m); background:var(--surface); margin-bottom:18px;
+  transition:box-shadow var(--d-m) var(--e-std);
+}
+.tw:hover{box-shadow:var(--shadow-1)}
+table{width:100%; border-collapse:collapse; font-size:14px; min-width:720px}
+th{
+  background:var(--surface-container-high); text-align:left;
+  padding:12px 14px; font-weight:600; font-size:13px; line-height:18px;
+  color:var(--on-surface-variant); border-bottom:1px solid var(--outline);
+  white-space:nowrap; letter-spacing:.02em;
+}
+td{
+  padding:14px; border-bottom:1px solid var(--outline-variant);
+  vertical-align:top; line-height:22px; color:var(--on-surface);
+}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:color-mix(in srgb, var(--on-surface) 4%, transparent)}
+td.dim{
+  font-weight:600; color:var(--on-surface); background:var(--surface-container-low);
+  white-space:nowrap;
+}
+td.acc-danger-cell{background:var(--error-container); color:var(--on-error-container)}
+td small{color:var(--on-surface-variant); font-size:12.5px; line-height:18px; display:block; margin-top:4px}
+.cap{font-size:13px; color:var(--on-surface-variant); margin:-10px 0 18px; padding-left:2px}
+
+/* ============================ Verdict blocks (MD3 filled cards) ============================ */
+.vb{border-radius:var(--r-m); padding:18px 20px; margin:16px 0; border:none; font-size:14.5px; line-height:23px}
+.vb .h{font-weight:600; font-size:15.5px; line-height:22px; margin-bottom:8px; display:flex; align-items:center; gap:8px}
+.vb p{margin:0 0 9px}
+.vb p:last-child{margin:0}
+.v-ok{background:var(--success-container); color:var(--on-success-container)}
+.v-ok .h{color:var(--on-success-container)}
+.v-no{background:var(--error-container); color:var(--on-error-container)}
+.v-no .h{color:var(--on-error-container)}
+.v-uni{background:var(--primary-container); color:var(--on-primary-container)}
+.v-uni .h{color:var(--on-primary-container)}
+.v-risk{background:var(--warning-container); color:var(--on-warning-container)}
+.v-risk .h{color:var(--on-warning-container)}
+.v-info{background:var(--surface-container-high); color:var(--on-surface)}
+
+/* ============================ Timeline ============================ */
+.tl{position:relative; padding-left:28px; margin-top:20px}
+.tl::before{
+  content:""; position:absolute; left:8px; top:8px; bottom:8px; width:2px;
+  background:var(--outline-variant); border-radius:1px;
+}
+.tl-i{position:relative; margin-bottom:18px}
+.tl-i::before{
+  content:""; position:absolute; left:-25px; top:5px; width:12px; height:12px;
+  border-radius:50%; background:var(--surface); border:3px solid var(--outline);
+  box-sizing:border-box;
+}
+.tl-i.major::before{background:var(--primary); border-color:var(--primary)}
+.tl-d{font-size:12px; font-weight:600; color:var(--primary); font-variant-numeric:tabular-nums; letter-spacing:.03em; line-height:18px}
+.tl-t{font-weight:500; margin:2px 0 3px; font-size:15px; line-height:22px}
+.tl-x{font-size:14px; line-height:21px; color:var(--on-surface-variant)}
+
+/* ============================ Recommendation cards ============================ */
+.rec{
+  background:var(--surface-container-low); border:1px solid var(--outline-variant);
+  border-left:4px solid var(--primary); border-radius:var(--r-m);
+  padding:22px 24px; margin-bottom:16px;
+  transition:box-shadow var(--d-m) var(--e-std), transform var(--d-m) var(--e-std);
+}
+.rec:hover{box-shadow:var(--shadow-2); transform:translateY(-2px)}
+.rec-n{
+  font-size:11px; font-weight:700; letter-spacing:.12em; color:var(--primary);
+  text-transform:uppercase; line-height:16px;
+}
+.rec h3{margin:8px 0 12px; font-size:19px; line-height:27px; font-weight:500}
+.rec .why{
+  background:var(--surface-container-high); border-radius:var(--r-s);
+  padding:14px 16px; margin:14px 0; font-size:14px; line-height:23px;
+}
+.rec .why b{color:var(--on-surface)}
+.rec ul{margin:10px 0 0; padding-left:22px}
+.rec li{margin-bottom:8px; line-height:23px}
+.rec .maps{
+  margin-top:16px; padding-top:14px; border-top:1px solid var(--outline-variant);
+  font-size:13px; line-height:20px; color:var(--on-surface-variant);
+}
+.rec .maps b{color:var(--primary); font-weight:600}
+
+/* ============================ Sources ============================ */
+.src{
+  background:var(--surface-container-lowest); border:1px solid var(--outline-variant);
+  border-radius:var(--r-m); padding:8px 0; margin-bottom:14px;
+}
+.src table{min-width:560px}
+.src td{padding:9px 14px; font-size:13.5px; line-height:21px}
+.src a{color:var(--primary); text-decoration:none; word-break:break-all; border-bottom:1px solid color-mix(in srgb, var(--primary) 30%, transparent)}
+.src a:hover{border-bottom-color:var(--primary)}
+.src .u{color:var(--on-surface-variant)}
+
+/* ============================ Misc ============================ */
+.note{
+  background:var(--surface-container-high); border:none; border-radius:var(--r-s);
+  padding:14px 18px; font-size:14px; line-height:22px; color:var(--on-surface);
+  border-left:3px solid var(--outline); margin:16px 0;
+}
+.note b{color:var(--on-surface)}
+ul,ol{margin:10px 0 14px; padding-left:22px}
+li{margin-bottom:8px; line-height:23px}
+code{
+  font-family:var(--mono); font-size:13px;
+  background:var(--surface-container-highest); color:var(--on-surface);
+  padding:2px 6px; border-radius:var(--r-xs);
+}
+footer{
+  border-top:1px solid var(--outline-variant); padding-top:24px;
+  color:var(--on-surface-variant); font-size:13.5px; line-height:22px;
+}
+.legend{
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px;
+  font-size:13px; color:var(--on-surface-variant); margin:10px 0 22px;
+  padding:14px 18px; background:var(--surface-container-low);
+  border:1px solid var(--outline-variant); border-radius:var(--r-m);
+}
+.legend > span:first-child{font-weight:600; color:var(--on-surface)}
+
+@media (max-width:640px){
+  .wrap{padding:0 16px 72px}
+  header{padding:40px 0 30px; border-radius:0 0 var(--r-l) var(--r-l)}
+  h1{font-size:26px; line-height:34px}
+  .sub{font-size:15px; line-height:24px}
+  h2{font-size:22px; line-height:30px}
+  h3{font-size:19px; line-height:27px}
+  .exec-item,.rec{padding:18px}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  nav,.theme-switch{display:none}
+  body{background:#fff}
+  section{page-break-inside:avoid}
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Oasis AI Lab · 范式研究 · 内部调研报告</p>
+    <h1>Sponge：技术 × 行业 × 愿景<br>全景调研与范式主张压力测试</h1>
+    <p class="sub">以 2026 年 8 月为最新时点，对 C1–C5 五项可证伪主张逐条寻找证据、反例与空白；不做设计决策，只交付判断与可执行建议。</p>
+    <div class="meta-row">
+      <span class="chip">调研日期：2026-08-30</span>
+      <span class="chip">证据分级：S / A / B / U</span>
+      <span class="chip">方法：五层研究协议</span>
+      <span class="chip">校准：研发/00–07 + 契约/</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-tabs">
+    <a href="#s1">① 执行摘要</a>
+    <a href="#s2">② 技术全景</a>
+    <a href="#s3">③ 行业全景</a>
+    <a href="#s4">④ 愿景定位</a>
+    <a href="#s5">⑤ 破局建议</a>
+      <a href="#s6">⑥ 参考来源</a>
+    </div>
+    <div class="theme-switch" role="group" aria-label="主题切换">
+      <button class="ts-btn" type="button" data-mode="system" aria-pressed="false" title="跟随系统" aria-label="跟随系统">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M12 4v13" opacity=".55"/></svg>
+      </button>
+      <button class="ts-btn" type="button" data-mode="light" aria-pressed="false" title="浅色" aria-label="浅色">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+      </button>
+      <button class="ts-btn" type="button" data-mode="dark" aria-pressed="true" title="深色" aria-label="深色">
+        <svg viewBox="0 0 24 24"><path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="legend">
+  <span><b>证据分级</b></span>
+  <span><span class="b bs">S</span> 一手（官方文档 / 论文 / 厂商公告）</span>
+  <span><span class="b ba">A</span> 高质量二手 / 复现报道</span>
+  <span><span class="b bb">B</span> 观点 / 行业博客 / 厂商自述</span>
+  <span><span class="b bu">U</span> 未验证 / 缺乏可核验依据</span>
+  <span><span class="b bx">冲突</span> 多源数字互相矛盾</span>
+</div>
+
+<!-- ================= ① 执行摘要 ================= -->
+<section id="s1">
+<h2><span class="num">①</span>执行摘要</h2>
+<p class="lead">一页读完：三条结论 + 四个关键数字 + 最推荐的破局动作。</p>
+
+<div class="exec">
+
+  <div class="exec-item">
+    <span class="tag t-tech">技术结论</span>
+    <h3>C3「调度驱动」是唯一真正的护城河，但护城河的形状必须改写</h3>
+    <p>先说被打脸的部分：<b>编排、主动释放、演化三件事在 2026 年都已有成熟的业界对应物</b>。LangGraph 的 <code>ServerRuntime</code> 支持每次运行重建图、<code>Command</code> 类型实现无边缘动态跳转 <span class="b bs">S</span>；主动释放已有 ProAct（idle-time compute + 投递策略）<span class="b bs">S</span>、企业 Context Graph（Precision@5 = 0.83，关键信息浮现时间 47 分钟 → &lt;30 秒）<span class="b ba">A</span>；演化已经是一个有完整分类学的学术领域（五类演化对象 / 四类图重写）<span class="b bs">S</span>。<b>Sponge 打不赢「机制独占」。</b></p>
+    <p>能赢的是<span class="hl">三者的单一调度闭环 + 调度器自身可替换</span>：业界把这三者放在三个不同层（框架层 / 产品层 / 模型层），没有任何系统让它们共用同一份结构化状态、由同一个可替换内核驱动。护城河从「机制」降级为「<b>组合与耦合</b>」——这不是坏事，它是更诚实、也更可检验的护城河。</p>
+    <p style="color:var(--on-surface-variant);font-size:13.8px">补充：<b>C4 已彻底沦为行业共识</b>（MCP / Agent Skills / Agent Plugins 1.0 / DeepSeek Harness「一切即插件」），不再是差异点；<b>C5 已被 DeepSeek Harness 的 4-preset 体系产品化实现</b>，成立但同样不是差异点。真正空白的是 C2 的「自由容器」抽象与 C3 的组合。</p>
+  </div>
+
+  <div class="exec-item">
+    <span class="tag t-ind">行业结论</span>
+    <h3>市场在爆炸，种子轮在死：钱从「模型层」转向「编排与打包层」，但只对已成型者开放</h3>
+    <p>2026 Q1 全球 VC 3,000 亿美元（同比 +150%），AI 占 81%；但 OpenAI/Anthropic/xAI/Waymo 四家就拿走 1,880 亿（62%）。剔除 10 笔以上 10 亿美元级轮次后，消费与企业 AI 全季仅剩 <b>175 亿</b> <span class="b ba">A</span>。最刺眼的数字：<b>2026 Q1 全季度新成立的 agentic AI 创业公司只有 1 家</b>（2023 全年 245 家）<span class="b ba">A</span>。</p>
+    <p>资本正从模型层转向编排基础设施（MCP 服务器 Q2 2026 突破 9,400 个，环比 +58%<span class="b ba">A</span>），但转向的是「<b>打包与分发标准</b>」这一已经有人占位的地方：2026-08-06 六家巨头（OpenAI/Microsoft/GitHub/AWS/Vercel/Anysphere）发布 Agent Plugins 1.0，Google 当天加入核心维护者 <span class="b bs">S</span>。</p>
+    <p style="color:var(--on-surface-variant);font-size:13.8px">采用侧同样分裂：80% 企业至少一个生产应用含 agent（2024 年仅 33%）<span class="b ba">A</span>，但只有 21% 组织有成熟的自治 agent 治理模型 <span class="b ba">A</span>，且 Gartner 预测 <b>&gt;40% 的 agentic 项目将在 2027 年底前被取消</b> <span class="b ba">A</span>。这是「部署狂热 + 治理真空 + 标准真空」同时存在的窗口——对范式级项目是机会，对融资是坏时机。</p>
+  </div>
+
+  <div class="exec-item">
+    <span class="tag t-vis">愿景结论</span>
+    <h3>C1 与 C2 被 2026 年的量化证据强力验证；C3 部分被削弱；「容器」定位是真实独占空白</h3>
+    <p><b>C1 是本次调研中证据最硬的一条。</b>长周期失败已被精确量化：Long-Horizon-Terminal-Bench 上 15 个前沿模型最佳 pass@1 仅 <b>15.2%</b>、均值 <b>4.3%</b>（单任务平均 990 万 token / 231 episode / 85.3 分钟）<span class="b bs">S+A</span>；OSWorld 2.0 上顶级 agent 二元完成率 <b>20.6%</b>，超过 163 分钟的任务<b>全线 0%</b> <span class="b ba">A</span>；SciAgentArena 发现 agent 在需要「真正新颖洞察」与「自主探索」的任务上系统性乏力，且方法选择高度保守 <span class="b bs">S</span>。「agent 不知道自己不知道什么」从哲学论断变成了可测量的悬崖。</p>
+    <p><b>C2 的方向已被行业验证，抽象未被验证。</b>「RAG → context engineering → context layer」的迁移已发生（纯长上下文路线企业采用率 30 天内从 15.5% 崩到 3.5%<span class="b ba">A</span>；Gartner 预测 2028 年 &gt;50% agent 系统将用 context graph <span class="b ba">A</span>）。但没有人在做「切片」这种<b>无 schema、可子类化的自由容器</b>——Letta 的 memory block 是 typed，LangGraph state 是 TypedDict，Zep 是固定图 schema。<b>这是真实的独占空白，也是真实的工程负债。</b></p>
+    <p><b>「agent 是居民、不是使用者」的容器定位，在整个业界找不到对应物。</b>现有的多 agent 平台（A3 / HiClaw / Multica / Fastio）都是「任务队列 + 协作层」，没有一个是「有内部构造、可嵌套、agent 栖息其中」的容器 <span class="b ba">A+B</span>。</p>
+  </div>
+
+</div>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="v">15.2%</div><div class="l">长周期终端任务最佳模型 pass@1（Long-Horizon-Terminal-Bench，46 任务 / 15 模型）</div></div>
+  <div class="kpi"><div class="v">0%</div><div class="l">OSWorld 2.0 中时长 &gt;163 分钟任务的全部模型完成率</div></div>
+  <div class="kpi"><div class="v">13.2%</div><div class="l">145 步长轨迹中定位「首个决定性错误步」的最佳基线准确率（LongRCA）</div></div>
+  <div class="kpi"><div class="v">1 家</div><div class="l">2026 Q1 全季度新成立的 agentic AI 创业公司（2023 全年 245 家）</div></div>
+</div>
+
+<div class="note">
+  <b>关于本报告的数字纪律：</b>市场规模数字在不同机构之间差异极大（同一家 Gartner 在不同报告中给出 2030 年 471 亿与 526.2 亿两个数字），本报告一律标注冲突、不取单一值用于决策。所有基准分数标注来源与是否「作者自报」。<b>找不到的一律写「未检索到」，不猜。</b>
+</div>
+</section>
+
+<!-- ================= ② 技术全景 ================= -->
+<section id="s2">
+<h2><span class="num">②</span>技术全景：框架、机制与先例</h2>
+<p class="lead">第一层（事实）给清单，第二层（机制）用 Sponge 的维度词典解剖。判断维度优先于产品名。</p>
+
+<h3>2.1 事实层：2026-08 的主要存在物清单</h3>
+
+<div class="tw">
+<table>
+<thead><tr><th style="width:130px">类别</th><th>主要存在物</th><th style="width:300px">对 Sponge 的意义</th></tr></thead>
+<tbody>
+<tr><td class="dim">编排框架</td><td>LangGraph（v1.0，2025 末）、CrewAI（1.14 起脱离 LangChain）、Microsoft Agent Framework 1.0（2026-04-03，吸收 AutoGen + Semantic Kernel）、AutoGen/AG2（转维护模式）、OpenAI Agents SDK、Google ADK</td><td>编排已是红海。C3 的「编排」必须有超越图执行的语义，否则无差异 <span class="b ba">A</span></td></tr>
+<tr><td class="dim">自演化研究</td><td>Self-Evolving Agents Survey（arXiv 2507.21046）、Self-Evolving Coding Agents 五类分类（arXiv 2608.03392）、<b>Self-Evolving Agents as Dynamic Graph Transformation（arXiv 2608.18104）</b>、SICA / SIFT / Darwin-Mendel-Huxley Gödel Machine、ADAS</td><td><b>2608.18104 是「切片 + 通道」的学术镜像，必读</b> <span class="b bs">S</span></td></tr>
+<tr><td class="dim">自修改产品</td><td><b>Ouroboros</b>（2026-02-16 起，经评审 Git 提交自改 harness）、<b>EXO / exoharness</b>（executor / harness / sandbox 三分）、DeepSeek Harness <code>extensions/</code>（运行时插件自挂载）、Codex CLI v0.147.0（portable Agent Plugins + <code>--approve-for-me</code>）</td><td>先例充分，治理模式已收敛为「不可自编辑的底线 + 变更契约 + 影子验证」<span class="b ba">A</span></td></tr>
+<tr><td class="dim">记忆 / 状态层</td><td>Mem0（~59k stars）、Zep/Graphiti（~28.2k stars，双时序 KG）、Letta/MemGPT（core / archival / recall）、Supermemory API、Cognee、LangMem、PLUR（开放 engram 格式）、Cloudflare Durable Objects、MemOS / MemU（中文生态）</td><td>C2 的「原生表征」必须回答：与这些层的差别是<b>抽象层级</b>还是<b>检索范式</b>？<span class="b ba">A</span></td></tr>
+<tr><td class="dim">编辑器 / 构建器</td><td>Dify（133k stars）、Langflow（146k，DataStax 收购）、n8n（176k）、Flowise（被 Workday 收购）、Make、CrewAI AMP Studio、Microsoft Copilot Studio、Vertex AI Agent Builder、Contextual AI Agent Composer</td><td>画布层是红海中的红海。Sponge Editor 的价值不在画布，在<b>编辑的是结构（脚手架）本身</b><span class="b ba">A</span></td></tr>
+<tr><td class="dim">Preset / 插件体系</td><td><b>DeepSeek Harness</b>：Profile / Bundle / Preset 三层 + 4 内置 preset（standard / PTC / minimal / creator）；Anthropic Agent Skills（2025-10-16 发布，2025-12-18 开放标准）；Claude Code Plugins；<b>Agent Plugins 1.0.0</b>（2026-08-06，六巨头）</td><td>C5「形态是配置」已被实现；C4「可替换零部件」已是行业共识 <span class="b bs">S</span></td></tr>
+<tr><td class="dim">多 agent 共存</td><td>A3（agent fleet 的 Kubernetes：持久 workspace + 持久任务队列 + 10 个协调原语）、HiClaw/AgentScope（Matrix 房间，人类可实时介入）、Multica（人与 agent 同 workspace）、Fastio（共享 workspace + MCP 工具）</td><td>均为「协作层」而非「容器」。<b>容器定位是空白</b> <span class="b ba">A+B</span></td></tr>
+<tr><td class="dim">科研代理 / AI4S</td><td><b>SciAgentArena</b>（~200 任务 / 18 agent / 5 领域 / 分步验证）、<b>SciAgentGym + SciAgentBench</b>（1,780 工具 / 259 任务）、SciAgent-8B</td><td>AI4S 是 C1 失效域的最佳天然实验场 <span class="b bs">S</span></td></tr>
+<tr><td class="dim">长周期评测</td><td>Long-Horizon-Terminal-Bench、OSWorld 2.0、LongRCA Bench、BEAM、horizon residual 方法论（arXiv 2607.27283）</td><td><b>C1 的证伪实验不必自建，现成基准就在那里</b> <span class="b bs">S</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2.2 机制层：按 Sponge 维度词典解剖（不是按产品名）</h3>
+
+<h4>维度 A · 编排机制：谁决定「下一步做什么」</h4>
+<div class="tw">
+<table>
+<thead><tr><th style="width:150px">机制范式</th><th style="width:200px">代表</th><th>运行时可变性</th><th style="width:150px">对 C3「编排」的判定</th></tr></thead>
+<tbody>
+<tr><td class="dim">静态图 + 条件边</td><td>LangGraph 基础形态、n8n、Dify、Langflow</td><td>低。图在 <code>compile()</code> 后锁定；变更需重新编译</td><td>Sponge 的差异在此成立</td></tr>
+<tr><td class="dim"><b>运行时重建图</b></td><td>LangGraph <code>ServerRuntime</code> graph factory（每次 run 可返回不同图，可按用户凭证加载不同工具）<span class="b bs">S</span></td><td><b>中高</b>。但重建者是<b>开发者写的 factory 函数</b>，不是 agent</td><td><b>部分打脸</b>：图在运行时可变，但「谁改」仍是开发者</td></tr>
+<tr><td class="dim"><b>动态图构建</b></td><td>LangGraph 0.2+ 在 <code>invoke()</code> 中条件性 add_node / add_edge；<code>Command</code> 类型实现无边缘图（节点自行决定 goto）<span class="b bs">S</span></td><td>中。节点可动态决定下一步，但节点集合仍是开发者预设的枚举</td><td><b>打脸</b>：「图执行 = 静态」的对立不成立</td></tr>
+<tr><td class="dim">事件驱动 / 消息</td><td>AutoGen Core v0.4、Microsoft Agent Framework</td><td>中。拓扑由注册关系决定</td><td>与 Sponge 非竞争路径</td></tr>
+<tr><td class="dim">角色 / 层级委派</td><td>CrewAI（sequential / hierarchical / consensual）、AutoGen Group Chat Manager</td><td>低。编排策略是预设枚举</td><td>Sponge 的差异成立</td></tr>
+<tr><td class="dim">协作原语组合</td><td>A3 的 10 个原语（<code>send_task</code> / <code>wait_for_task</code> / <code>broadcast</code> / <code>ask_question</code>…），supervisor 只是「有委派能力的 workspace」<span class="b bb">B</span></td><td>高。作者称「系统开始组合出我们没有编程的行为」</td><td><b>接近 Sponge 通道的直觉</b>，但是命令式原语，无 schema 约束、无回滚</td></tr>
+<tr><td class="dim">编排策略自身演化</td><td>Workflow self-evolution：SEMAG / EvoMAC 依测试结果改多 agent 工作流；AgentConductor 生成任务自适应通信模式 <span class="b bs">S</span></td><td>高。拓扑随任务变</td><td><b>「演化」已被研究覆盖</b></td></tr>
+</tbody>
+</table>
+</div>
+<div class="vb v-no">
+  <div class="h">✗ 证伪优先 · C3「编排」被削弱的部分</div>
+  <p>04 文档把候选机制定为「切片作为执行单元的有向依赖图 + 调度事件协议」，并警示「必须说清与 LangGraph 等现有编排框架的差异」。调研结果：<b>LangGraph 早就不是静态图</b>——<code>ServerRuntime</code> 工厂函数每次运行重建图、<code>Command</code> 让节点自行决定跳转、动态 <code>add_node</code> 是官方支持的模式（官方文档明确列举「实现递归或自修改 agent」为用例）。</p>
+  <p><b>剩下的真实差异只有一条：可变性的主体。</b>LangGraph 的运行时变化由<b>开发者代码</b>参数化；Sponge 主张由 <b>agent</b> 改写。这是「谁有写权限」的差异，不是「图能不能变」的差异。C3 必须按这条重写，否则一碰就碎。</p>
+</div>
+
+<h4>维度 B · 主动释放：谁决定「现在该让 agent 看到什么」</h4>
+<p>Sponge 的候选机制是「委托 Statuz 注意力层（decay / confidence / budget）」。业界对应物比预想的多：</p>
+<div class="tw">
+<table>
+<thead><tr><th style="width:170px">机制</th><th>怎么工作</th><th style="width:250px">实测效果 / 来源</th></tr></thead>
+<tbody>
+<tr><td class="dim">Idle-time 预测 + 投递策略</td><td><b>ProAct</b>：Future-State Prediction + Idle-Time Acquisition，用持久记忆预测下一步需求、在空闲时间预先取证，投递策略权衡「主动内容收益 vs 打断成本」</td><td>轮次 −14.8%、用户努力 −11.7%、幻觉率 −28.1%（ProActEval，200 场景 / 40 领域）<span class="b bs">S</span></td></tr>
+<tr><td class="dim">unknown-unknown 显式建模</td><td><b>ProPer</b>（ACL 2026）：Dimension Generating Agent 生成「用户可能未意识到的隐式维度」→ 带 budget <code>k</code> 的校准重排 → 补充进回答而不改写意图</td><td>在医疗 / 编码 / 购物推荐上提升回答质量与胜率；明确批判「只处理 known unknowns」的既有系统 <span class="b bs">S</span></td></tr>
+<tr><td class="dim">企业 Context Graph 主动浮现</td><td>Delta Detection Engine（监视状态变化）+ Proactivity Scorer（按紧急度 / 相关性 / persona 排序）+ Surfacing Layer；底层是实体关系与变化的实时图</td><td>Precision@5 = 0.83，FPR = 0.11；关键信息浮现时间 <b>47 分钟 → &lt;30 秒</b> <span class="b ba">A</span></td></tr>
+<tr><td class="dim">三态决策 + 注意力预算</td><td>Navan 生产实践：proactive 不是「发不发」而是 <b>act now / wait / stay silent</b> 三态；确定性策略先于 LLM（资格、去重、cadence、注意力预算），LLM 只处理模糊中段</td><td>工程模式参考；无公开基准 <span class="b bb">B</span></td></tr>
+<tr><td class="dim">注意力衰减设计</td><td>社区工程立场：把 decay 内建进一切；「注意力技术栈几乎不存在，这是最高杠杆的工作区」</td><td>观点性，无基准 <span class="b bb">B</span>，但与 Sponge 的 decay 语义同构</td></tr>
+</tbody>
+</table>
+</div>
+<div class="vb v-no">
+  <div class="h">✗ 证伪优先 · C3「主动释放」不是独占</div>
+  <p><b>「主动释放」在 2026 是一个活跃的研究与工程方向，不是空白。</b>更值得注意的是：ProAct 与 ProPer 都把「<b>未被请求的信息</b>」作为一等公民建模，ProPer 甚至明确点名 <b>unknown unknowns</b>——这正是 C1 的核心术语。</p>
+  <p>结论：C1 的<b>诊断</b>已被学界独立复现（好事：说明诊断是对的）；但也意味着「主动释放」这一<b>机制</b>不归 Sponge 独有。Sponge 能主张的，是主动释放与编排、演化共用同一份状态时产生的<b>耦合效应</b>，而非主动释放本身。</p>
+</div>
+
+<h4>维度 C · 自修改能力：运行时可变 pipeline 的先例与治理</h4>
+<div class="tw">
+<table>
+<thead><tr><th style="width:160px">系统</th><th>可改什么</th><th>不可改什么（底线）</th><th style="width:230px">治理机制</th></tr></thead>
+<tbody>
+<tr><td class="dim"><b>Ouroboros</b><br><small>2026-02-16 起，MIT</small></td><td>代码、架构、提示词、工具、依赖；两种演化回路：递归自由演化 / 经验驱动演化（从实际工作摩擦中产生改进积压）</td><td>启动器与监督器（不可变外壳）；<code>BIBLE.md</code> 13 条宪法原则；受保护路径 + 重启检查</td><td>经评审的 Git 提交流水线（Light / Advanced / Pro 三模式）；独立模型（含跨模型 o3 / Gemini / Claude）评审；差异仲裁；指纹识别防规避；Skill 需安全审查</td></tr>
+<tr><td class="dim"><b>EXO / exoharness</b></td><td>executor（策略层：提示词、模型调用、工具、上下文压缩、审批逻辑）——设计为<b>可丢弃、可重写</b></td><td><b>exoharness</b>：事件日志、密钥、制品、快照，agent 代码<b>在架构上不可达</b>；sandbox 持有副作用</td><td>架构级隔离（非文档级）；stop / resume / fork / rewind；safe rollout；身份存在于日志而非代码中</td></tr>
+<tr><td class="dim"><b>DeepSeek Harness</b><br><small><code>extensions/</code> 包</small></td><td>「agent runtime self-modification：运行时插件/服务检查 + <b>模型编写的插件挂载/卸载</b>」<span class="b bs">S</span>（本地仓库 README 实证）；creator preset 提供运行时检查与插件实验</td><td>Bundle / Profile 分层；沙箱（Linux Landlock / macOS Seatbelt / Windows ACL restricted-token）；<b>四级权限层</b>（只读 → 工作区限制 → 完全无限制）</td><td>append-only session log（任何进入模型请求的内容必须可从日志重建）；<code>trust</code>（system / user）区分 preset 来源；<code>authorable</code> 位控制能否创建 preset；id 强制 <code>[a-z0-9-]</code> 防路径逃逸；编辑 preset 文件即触发生成切换</td></tr>
+<tr><td class="dim"><b>Codex CLI</b><br><small>v0.147.0, 2026-08-07</small></td><td>Portable Agent Plugins（本地 / 个人 / workspace / 远程目录可搜索）；Memories（v0.128 起会话末整合）</td><td>不修改自身运行时——<b>明确的设计选择</b></td><td><code>--approve-for-me</code> 经评审的审批工作流；<code>AGENTS.md</code> 作为宪法文件（与 Ouroboros 的 <code>BIBLE.md</code> 结构同构）</td></tr>
+<tr><td class="dim"><b>学术谱系</b></td><td>五类演化对象：framework / memory / skill / model / workflow <span class="b bs">S</span>；四种图重写：node/feature、edge/topology、subgraph activation、cross-component co-evolution <span class="b bs">S</span></td><td>—</td><td>时间模式区分：task-time（用即时反馈）/ post-task（蒸馏轨迹）/ stage-wise（跨批累积驱动模型更新）</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="vb v-uni">
+  <div class="h">◆ 治理的收敛答案：隔离优先于智能</div>
+  <p>所有可靠方案给出的答案是同一个：<b>把「可变的策略」与「不可变的记录」在架构上分开</b>，而不是让 agent 更聪明。EXO 的类比最精确——<b>executor 是应用程序，exoharness 是 append-only 事务日志；agent 的身份住在日志里，不住在代码里</b>。</p>
+  <p>治理清单（可直接抄进 Sponge 的契约）：<b>①</b> 枚举可编辑面，面外即不可变；<b>②</b> 每次自编辑携带<b>变更契约</b>（目标组件 / 预测效果+置信区间 / 证伪测试 / 回滚计划 / 到期自动回滚）；<b>③</b> 三轨晋升（auto / human-gated / hard-blocked），hard-blocked 在 agent 之外强制；<b>④</b> 影子验证（真实流量上对比分布，固定基底以确保测得的是变更而非漂移）；<b>⑤</b> 不变量与成功指标放在 agent 无法触及的签名存储；<b>⑥</b> <b>递归底线</b>——优化器永不能编辑自己的治理、不变量、变更契约检查器、指标存储，且必须用 <b>capability-based security</b> 在架构层强制，而非由被编辑的 harness 自我约束 <span class="b ba">A</span>。</p>
+  <p><b>对 Sponge 的直接含义：</b>04 三节把「固定层 vs 演化层」表述为「契约文档明确什么不可变」。按业界证据，<b>文档级保护（Ouroboros 的 <code>BIBLE.md</code>）弱于架构级保护（EXO 的 exoharness）</b>。Sponge 的固定层必须是 agent 代码<b>不可达的 capability 边界</b>，不能只是「文档说不能改」。</p>
+</div>
+
+<div class="vb v-risk">
+  <div class="h">⚠ 自演化的已知失败模式（坟场证据）</div>
+  <p><b>① 执行偏置（execution bias）</b>：Zhao et al.（Findings of ACL 2026）证明，<b>从完全良性任务中积累的经验，会在 agent 遭遇高风险场景时损害安全性</b>——经验强化了「行动」倾向，削弱了拒绝能力 <span class="b ba">A</span>。这直接威胁 AgentPark 的「经验驱动演化」。</p>
+  <p><b>② 分布崩塌</b>：Evo-Bench 测得自改进脚手架最高 +16.6 分，<b>但在 prescribed-workflow 任务上崩塌</b> <span class="b ba">A</span>。演化不是普适增益。</p>
+  <p><b>③ 回滚不回滚世界</b>：EXO 的 fork/rewind 能反转状态，但反转不了已发出的邮件、已开的 PR、已扣的款。「每一次持久状态设计都有这条接缝，真实风险就集中在这里」<span class="b ba">A</span>。</p>
+  <p><b>④ 环境重写攻击</b>：OpenART 发现，<b>重写 agent 的环境而非其提示词，能让已上线的 agent 85% 失效</b>，且运行时本身解释了攻击是否奏效的方差 <span class="b ba">A</span>。对「结构即数据」的 Sponge，这是最高相关的安全发现。</p>
+  <p><b>⑤ 归因天花板</b>：LongRCA Bench（1,140 条真实失败轨迹，中位 145 步）上最强基线的精确根因步准确率仅 <b>13.2%</b>，作者方法 RCTA 也只到 24.1% <span class="b bs">S</span>。<b>演化依赖正确归因，而归因能力目前有硬天花板。</b></p>
+</div>
+
+<h4>维度 D · 记忆与状态层：C2「原生表征」的位置</h4>
+<div class="tw">
+<table>
+<thead><tr><th style="width:130px">方案</th><th style="width:150px">检索 / 状态范式</th><th style="width:130px">写入控制权</th><th style="width:110px">作用域</th><th>治理与可移植性</th></tr></thead>
+<tbody>
+<tr><td class="dim">Mem0</td><td>向量 + 可选图 + KV；抽取 → 去重 → 融合检索（语义 + 关键词 + 实体）</td><td>系统自动抽取</td><td>user / agent / run</td><td>托管 + OSS（Apache-2.0）；GDPR 删除、审计、SSO（企业版）<span class="b ba">A</span></td></tr>
+<tr><td class="dim">Zep / Graphiti</td><td><b>双时序知识图谱</b>：每条事实同时带 valid time 与 transaction time，被取代的事实标记而非删除，可回答「某时刻什么是真的」</td><td>系统抽取，带 provenance episode</td><td>企业 / 会话</td><td>ABAC + 保留策略 + 审计；自托管需自跑图数据库 <span class="b ba">A</span></td></tr>
+<tr><td class="dim">Letta / MemGPT</td><td>core（常驻上下文，agent 可编辑）/ archival（按需查询）/ recall（会话历史）；2026 起 memory blocks <b>git-backed</b></td><td><b>agent 自己决定</b>——这是它的核心差异</td><td>agent</td><td>OSS 自托管（Postgres + pgvector）；采用通常影响整体架构 <span class="b ba">A</span></td></tr>
+<tr><td class="dim">LangMem</td><td>与 LangGraph 状态机紧耦合</td><td>按需抽取（查询时延迟高：p50 17.99s / p95 59.82s，对比 Mem0 的 0.148s / 0.200s）<span class="b ba">A</span></td><td>LangGraph 原生</td><td>生态绑定</td></tr>
+<tr><td class="dim">PLUR</td><td>开放 <b>engram 格式</b>：带置信度 / 领域标签 / 衰减曲线的结构化断言，纯文本 YAML 存于 <code>~/.plur/</code></td><td>任何 MCP 工具可读写</td><td>跨工具</td><td><b>可移植 + 可检查（grep / git diff）+ 可证明删除</b>——与 Sponge「结构即数据」哲学最接近 <span class="b bb">B</span></td></tr>
+<tr><td class="dim">Cloudflare<br>Durable Objects</td><td>不是记忆产品，是<b>构建记忆的基底</b>（状态原语）</td><td>开发者</td><td>—</td><td>平台绑定 <span class="b ba">A</span></td></tr>
+<tr><td class="dim">MemOS / MemU<br><small>中文生态</small></td><td>MemCube / 记忆 OS（带治理）；Memory-as-FS + proactive</td><td>系统</td><td>企业 / 陪伴场景</td><td>MemOS 主打可审计记忆 <span class="b ba">A</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="note">
+  <b>基准数字不可比——这本身就是发现。</b>Mem0 的 LongMemEval 分数，一个来源报 <b>49.0%</b>（GPT-4o，dev.to）<span class="b bb">B</span>，另一个来源报厂商自测 <b>94.4</b>（不同测量口径）<span class="b ba">A</span>；同一批报道里 Zep 是 63.8%。<b>这些数字不能相互比较，也不应用于选型决策。</b>对 Sponge 的启示：C1 的证伪实验必须自建可复现的 golden set，不能引用厂商基准。
+</div>
+
+<div class="vb v-uni">
+  <div class="h">◆ 维度对照：Sponge「原生表征 = 脚手架」vs 现有记忆层</div>
+  <p><b>相同的：</b>「上下文窗口是 RAM 不是数据库」「状态必须外部化、持久化、结构化」「记忆是架构问题不是组件问题」——这些 2026 年已是行业共识 <span class="b ba">A</span>。</p>
+  <p><b>不同的（Sponge 独占）：</b>现有方案一律是 <b>typed</b> 的（Letta 的 memory block 有标签、LangGraph state 是 TypedDict、Zep 是固定图 schema、Mem0 是 SQL + 向量 + 实体三层固定结构）。Sponge 的切片是<b>自由容器 + 可子类化</b>——没有固定类型。这是抽象层级的差异，不是检索范式的差异。</p>
+  <p><b>代价（必须承认）：</b>无 schema 意味着<b>无法校验、无法索引、无法迁移、无法做冲突消解</b>。Letta 用 typed block 换来的是 agent 可以可靠地读写它；Zep 用 schema 换来的是时序矛盾可解。<b>C2 的通用性优势与工程负债是同一件事的两面。</b></p>
+</div>
+
+<h4>维度 E · 编辑器形态：把 agent 当 IDE 搭建</h4>
+<div class="tw">
+<table>
+<thead><tr><th style="width:150px">形态</th><th>产物是什么</th><th style="width:270px">与 Sponge Editor 的关键差别</th></tr></thead>
+<tbody>
+<tr><td class="dim">画布 / 流程编排</td><td>Dify / Langflow / n8n / Flowise / Make：节点 + 边的可视化流程，产物是平台私有 JSON</td><td><b>编辑的是流程（执行顺序），不是结构（本体）</b>；产物锁死在平台内；agent 不是编辑主体</td></tr>
+<tr><td class="dim">企业级构建器</td><td>Copilot Studio 2026 Agent Builder（自然语言描述 → 生成提示词/工具/步骤 + HITL）；Vertex AI Agent Builder + ADK；watsonx Orchestrate（80 应用集成）；Contextual AI Agent Composer</td><td>强在治理与集成，弱在结构表达力；面向「搭一个应用」，不是「搭一个世界」</td></tr>
+<tr><td class="dim">Preset 体系</td><td>DeepSeek Harness：Profile（进程启动成什么产品）/ Bundle（分发哪组插件行）/ Preset（这类 agent 看见什么）三层分离；4 个内置 preset；authoring 是 copy-only <span class="b bs">S</span></td><td><b>与 Sponge 的 Editor ↔ creator mode / Portal ↔ standard mode 完全同构</b>。差别只在于 preset 组合的是插件，Sponge 场景组合的是切片</td></tr>
+<tr><td class="dim">打包标准</td><td>Agent Plugins 1.0.0：<code>plugin.json</code> + <code>skills/</code> + <code>mcp.json</code> 的供应商中立目录格式；明确只管打包，不管语义、安全、认证、分发、沙箱、UX <span class="b bs">S</span></td><td><b>这是 Sponge 最该借的一层</b>：信封标准化、内容私有</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>2.3 子问题逐条回答</h3>
+
+<div class="tw">
+<table>
+<thead><tr><th style="width:40px">#</th><th style="width:230px">子问题</th><th>回答</th></tr></thead>
+<tbody>
+<tr><td class="dim">a</td><td>主流框架的编排机制？有没有中央调度式（编排 + 主动释放 + 演化）的产品或研究？</td><td>三种机制并存：<b>图执行</b>（LangGraph）、<b>事件/消息驱动</b>（AutoGen Core v0.4、Microsoft Agent Framework）、<b>角色-层级委派</b>（CrewAI、Group Chat Manager）。<b>三者合一的中央调度器：未检索到。</b>最接近的是 A3（协调原语 + supervisor workspace）与 workflow self-evolution 研究（SEMAG / EvoMAC / AgentConductor）——但前者是命令式原语无 schema/回滚，后者只覆盖「演化」一翼。<b>结论：中央调度三合一 = 独占（组合层面），不是机制层面。</b> <span class="b bs">S</span> <span class="b ba">A</span></td></tr>
+<tr><td class="dim">b</td><td>运行时可变 pipeline / agent 改自身结构的先例？安全与治理做法？</td><td><b>先例充分</b>。产品：Ouroboros（经评审 Git 提交自改 harness，161 天长期运行）、EXO（executor 可丢弃 / exoharness 不可达）、DeepSeek Harness <code>extensions/</code>（模型编写插件挂载/卸载，本地仓库实证）、Codex CLI Agent Plugins。研究：五类演化对象 + 四种图重写分类学。<b>治理答案已收敛为一条：递归底线用 capability-based security 在架构层强制，而非让被编辑的 harness 自我约束。</b>配套：变更契约、三轨晋升、影子验证、签名指标存储。已知风险：执行偏置（良性经验损害安全性）、prescribed-workflow 崩塌、环境重写 85% 攻破率、回滚不回滚世界。 <span class="b bs">S</span> <span class="b ba">A</span></td></tr>
+<tr><td class="dim">c</td><td>记忆 / 状态层产品化现状？</td><td><b>已是成熟市场</b>。四范式竞争：抽取-检索（Mem0）、双时序知识图谱（Zep/Graphiti）、分层 agent 自管理（Letta）、开放格式（PLUR / Durable Objects 基底）。中文生态有 MemOS（可审计）、MemU。编码 agent 侧有 claude-mem、agentmemory（BM25 + FTS5 混合）。<b>行业共识已从「RAG 解决一切」转向「context architecture」</b>（Gartner：2028 年 &gt;50% agent 系统将用 context graph）。<b>关键缺口：所有基准数字不可比</b>（LongMemEval 上 Mem0 一个报 49.0%、一个报 94.4）。 <span class="b ba">A</span></td></tr>
+<tr><td class="dim">d</td><td>「把 agent 当 IDE 搭建」的产品先例？preset 体系？</td><td><b>画布层红海</b>：Dify 133k / Langflow 146k / n8n 176k stars，加 Flowise、Make、Copilot Studio、Vertex AI、watsonx Orchestrate、Agent Composer。<b>preset 体系已被 DeepSeek Harness 完整实现</b>：Profile / Bundle / Preset 三层分离 + standard / PTC / minimal / creator 四模式，其中 creator 模式「具备标准模式全部能力，并提供运行时检查、插件实验和 preset 创作指导」——<b>这正是 Sponge Editor ↔ 创造模式的对应物</b>。<b>结论：画布与 preset 都不是差异点；差异必须在「编辑的是结构（脚手架）本身」。</b> <span class="b bs">S</span> <span class="b ba">A</span></td></tr>
+<tr><td class="dim">e</td><td>多 agent 共存平台 / 容器化 agent 产品？</td><td>有四家值得看：A3（持久 workspace + 持久任务队列 + 10 协调原语，按 workspace 分配能力边界——research 有网络无代码执行、dev 能写代码但网络受限）、HiClaw/AgentScope（Matrix 房间，人类可随时进入观察介入）、Multica（人与 agent 同 workspace，agent 有 profile / avatar / issue 队列）、Fastio（共享 workspace + MCP 工具 + 内置 RAG + 所有权转移 + 文件锁）。<b>但全是「任务队列 + 协作层」，没有一个是「agent 是居民、容器有内部构造、可嵌套」的抽象。Sponge 的容器定位是真实空白。</b> <span class="b ba">A</span> <span class="b bb">B</span></td></tr>
+<tr><td class="dim">f</td><td>AI4S 科研代理现状？</td><td><b>SciAgentArena</b>（~200 任务 / 18 个 agent / 5 领域，分步验证 + 交互式 agent 无关环境）：agent 在<b>结构与评价标准明确的数据分析任务上有效</b>，但在「产生真正新颖洞察」「维持自主探索」「开放式问题的稳健解」上乏力；<b>方法选择高度保守</b>（收敛到 Leiden / Harmony / scVI / Wilcoxon / Moran's I / OLS）；<b>被动调用工具、相同运行间结果不稳定</b>。<b>SciAgentGym/SciAgentBench</b>（1,780 工具 / 4 学科 / 259 任务）：GPT-5 随交互跨度延长成功率从 60.6% 掉到 30.9%，总体仅 41.3%。<b>注：SciAgents（MIT, Ghafarollahi & Buehler）2026 年最新进展 —— 未检索到。</b> <span class="b bs">S</span></td></tr>
+<tr><td class="dim">g</td><td>长周期 / 零到一 / 研究型任务（C1 失效域）现状？</td><td><b>C1 的失效域已被精确量化：</b>Long-Horizon-Terminal-Bench（46 任务 / 15 前沿模型）：最佳 pass@1 15.2%、均值 4.3%、单任务均值 990 万 token / 231 episode / 85.3 分钟；<b>部分给分与满分之间的落差（15.2% vs 10.9%）说明顶级 agent 常走到最后一步才失败</b>。OSWorld 2.0（108 个长周期桌面工作流，中位 1.6 小时）：顶级 agent 二元完成率 20.6%，<b>&gt;163 分钟任务全线 0%</b>。BEAM：所有模型（含最大窗口）在<b>矛盾消解</b>上仍挣扎。工程界给出的缓解处方已与 C2 同构：把状态当受管数据（结构化字段而非散文）、按时间轴设检查点并在每点复核初始约束、提交前强制验证。<b>horizon residual</b>（arXiv 2607.27283）正在把「任务大」与「轨迹诱导退化 / context rot」区分开——<b>这是 C1 证伪实验最合适的方法论。</b> <span class="b bs">S</span> <span class="b ba">A</span></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ================= ③ 行业全景 ================= -->
+<section id="s3">
+<h2><span class="num">③</span>行业全景：玩家、格局、趋势与时间线</h2>
+<p class="lead">含融资与采用信号。所有市场规模数字标注冲突，不用于决策。</p>
+
+<h3>3.1 市场规模：口径混乱，只做参照不做依据</h3>
+<div class="tw">
+<table>
+<thead><tr><th style="width:200px">来源</th><th>数字</th><th style="width:130px">备注</th></tr></thead>
+<tbody>
+<tr><td class="dim">Gartner（引用于多处）</td><td>agentic AI 市场：2024 = 52.5 亿 → 2025 = 78.4 亿美元</td><td>口径较窄</td></tr>
+<tr><td class="dim">Gartner（2026-03）</td><td>2030 年 <b>471 亿美元</b></td><td rowspan="2" class="dim"><b>同一机构两个数字冲突</b> <span class="b bx">冲突</span></td></tr>
+<tr><td class="dim">Gartner（另一报告）</td><td>2030 年 <b>526.2 亿美元</b></td></tr>
+<tr><td class="dim">Grand View Research</td><td>2025 = 76.3 亿 → 2026 = 109.1 亿 → 2030 = 503.1 亿美元，CAGR 46.3%</td><td>与 Gartner 差近一个数量级</td></tr>
+<tr><td class="dim">中文产业报道（腾讯新闻，2026-04）</td><td>2025 约 76 亿美元 → 2026 破 100 亿美元，CAGR 44–50%，2030 年代初 500–1800 亿美元</td><td>区间跨度 3.6 倍</td></tr>
+<tr><td class="dim">ValueAdd VC（2026-05）</td><td>2026 企业 agent 支出 470 亿+；含基础设施与服务的广义生态 1000 亿+</td><td>与上述口径完全不同（支出 vs 市场规模）</td></tr>
+</tbody>
+</table>
+</div>
+<div class="note"><b>判断：</b>市场规模数字在当前阶段<b>不可用于决策</b>。不同机构连「什么是 agent 市场」都没有共识（Gartner 自己就指出数千家自称 agentic 的厂商中仅约 130 家是真的）。本报告后续只用<b>可核验的资金流与采用率</b>做判断。</div>
+
+<h3>3.2 融资信号：爆炸式总量 + 极端集中 + 种子挤压</h3>
+<div class="tw">
+<table>
+<thead><tr><th style="width:150px">信号</th><th>数字</th><th style="width:290px">对 Sponge 的解读</th></tr></thead>
+<tbody>
+<tr><td class="dim">2026 Q1 全球 VC</td><td>3,000 亿美元，同比 +150%；AI 占 2,390–2,420 亿（81%）；美国 2,500 亿（83%）<span class="b ba">A</span></td><td>总量不是问题</td></tr>
+<tr><td class="dim">头部四家</td><td>OpenAI 1,220 亿 + Anthropic 300 亿 + xAI 200 亿 + Waymo 160 亿 = <b>1,880 亿 = 全球 VC 的 62%</b> <span class="b ba">A</span></td><td>钱在算力与前沿模型，不在框架</td></tr>
+<tr><td class="dim">剔除头部后</td><td>剔除 10 笔以上 10 亿美元轮次后，消费与企业 AI 全季仅 <b>175 亿</b> <span class="b ba">A</span></td><td>真实可竞争资金池比头条小一个数量级</td></tr>
+<tr><td class="dim">2026 Q2</td><td>3,120 轮 / 426 亿美元；其中 agentic 相关（agent 平台 / MCP 基础设施 / agent 评测 / agent 运维）<b>200 亿 = 47%</b> <span class="b ba">A</span></td><td><b>钱确实在转向编排与基础设施层</b>——Sponge 所处位置是对的</td></tr>
+<tr><td class="dim acc-danger-cell">种子挤压</td><td><b>2026 Q1 全季度新成立的 agentic AI 创业公司：1 家</b>；2023 全年 245 家 <span class="b ba">A</span></td><td><b>最高风险信号。</b>若 Sponge 依赖外部早期融资，窗口极窄；作为 Oasis AI Lab 内部研究则可控</td></tr>
+<tr><td class="dim">垂直 vs 水平</td><td>行业专用 AI 工具增速是通用生产力工具的 2–3 倍；垂直 SaaS AI CAGR 23.9% <span class="b ba">A</span></td><td>Sponge 是水平范式，需靠 WAM / Lemma 这类垂直衍生物兑现价值</td></tr>
+<tr><td class="dim">编码赛道</td><td>Cognition / Cursor / Replit / Augment 等合计融资 30 亿+；AI 编码工具市场 2026 年营收 128 亿美元（2024 年 51 亿）<span class="b ba">A</span></td><td>Sponge Editor 的宿主赛道，竞争最激烈</td></tr>
+<tr><td class="dim">主权资本入场</td><td>GIC（新加坡）、卡塔尔投资局等成为 agentic 轮次常客，偏好 2 亿美元以上支票 <span class="b ba">A</span></td><td>进一步偏向后期</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3.3 采用信号：部署狂热 + 治理真空同时存在</h3>
+<div class="tw">
+<table>
+<thead><tr><th style="width:230px">指标</th><th style="width:130px">数值</th><th>含义</th></tr></thead>
+<tbody>
+<tr><td class="dim">企业应用内嵌任务型 agent 比例</td><td>2025 &lt;5% → <b>2026 年底 40%</b>（Gartner）<span class="b ba">A</span></td><td>但指出这可能反映「定义扩张」——许多 AI 助手被重新贴标签为 agent</td></tr>
+<tr><td class="dim">至少一个生产应用含 agent 的企业</td><td>2024 = 33% → <b>2026 Q1 = 80%</b> <span class="b ba">A</span></td><td>真实部署在加速</td></tr>
+<tr><td class="dim">具备成熟自治 agent 治理模型的组织</td><td><b>仅 21%</b>（Deloitte）<span class="b ba">A</span></td><td><b>治理真空 —— Sponge 的「域 / authority」若做对，这是入口</b></td></tr>
+<tr><td class="dim">将被取消的 agentic 项目</td><td><b>&gt;40%，2027 年底前</b>（Gartner，2025-06 预测）<span class="b ba">A</span></td><td>原因：成本失控、商业价值不清、风险控制不足</td></tr>
+<tr><td class="dim">Agent washing</td><td>数千家自称 agentic 的厂商中<b>约 130 家为真</b>（Gartner）<span class="b ba">A</span></td><td>市场噪音极高，也意味着真做的人少</td></tr>
+<tr><td class="dim">试点 → 生产死亡谷</td><td>Q1 2025：65% 有试点 vs <b>11% 进入生产</b>（27 个百分点落差）<span class="b ba">A</span></td><td>可靠性是瓶颈，与 C1 诊断一致</td></tr>
+<tr><td class="dim">MCP 服务器数量</td><td>Q2 2026 注册表 &gt;<b>9,400 个</b>，环比 +58%<span class="b ba">A</span>；另有报道称 21,000 个「裸露服务器」<span class="b bb">B</span></td><td>连接层已赢；安全与治理层未定</td></tr>
+<tr><td class="dim">LangChain 生态规模</td><td>126,000 stars / 20,000 forks <span class="b bb">B</span></td><td>开发者选编排框架胜过选模型工具</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3.4 时间线：2024 → 2026 演化轨迹</h3>
+<p class="cap">先发 ≠ 有效，放弃 ≠ 错误。只记录可核验的公开节点。</p>
+<div class="tl">
+  <div class="tl-i"><div class="tl-d">2023-10 / 2023-11</div><div class="tl-t">AutoGen 首个版本（Microsoft Research）；CrewAI 发布</div><div class="tl-x">对话驱动 / 角色驱动两条路线同时起步</div></div>
+  <div class="tl-i"><div class="tl-d">2024</div><div class="tl-t">LangGraph 发布；Anthropic 发布 <b>MCP</b>（连接层）</div><div class="tl-x">MCP 是后来一切互操作叙事的地基</div></div>
+  <div class="tl-i"><div class="tl-d">2025</div><div class="tl-t">AutoGen v0.4 事件驱动重写；LangGraph v1.0（2025 末）；Letta（MemGPT）重架构，引入 git-backed memory blocks</div><div class="tl-x">编排框架进入「生产就绪」叙事</div></div>
+  <div class="tl-i"><div class="tl-d">2025-06</div><div class="tl-t">Gartner 预测 &gt;40% agentic 项目将在 2027 年底前取消；提出 <b>agent washing</b></div><div class="tl-x">降温信号出现，但未减缓投入</div></div>
+  <div class="tl-i"><div class="tl-d">2025-10-16 / 2025-12-18</div><div class="tl-t">Anthropic 发布 <b>Agent Skills</b>；12 月作为开放标准发布以支持跨平台可移植</div><div class="tl-x">「能力」开始脱离单一客户端</div></div>
+  <div class="tl-i"><div class="tl-d">2026-02-16</div><div class="tl-t"><b>Ouroboros</b> 项目启动 —— agent 经评审 Git 提交修改自身 harness</div><div class="tl-x">自修改从论文进入长期运行的开源项目</div></div>
+  <div class="tl-i major"><div class="tl-d">2026-04-03</div><div class="tl-t"><b>Microsoft Agent Framework 1.0</b> 发布，吸收 AutoGen 与 Semantic Kernel</div><div class="tl-x"><b>AutoGen 转维护模式</b>（仅修 bug 与安全补丁）——<b>先发 ≠ 有效</b>的标志性事件</div></div>
+  <div class="tl-i"><div class="tl-d">2026-05</div><div class="tl-t">Redis 发布 <b>Iris</b>（context retriever + agent memory + data integration 三层）；ProAct 论文（arXiv 2605.25971）</div><div class="tl-x">「context 层」产品化；主动式 agent 有了正式架构与基准</div></div>
+  <div class="tl-i"><div class="tl-d">2026-06</div><div class="tl-t">Self-Evolving Agents as Dynamic Graph Transformation（arXiv 2608.18104 初稿）</div><div class="tl-x"><b>与 Sponge「切片 + 通道」最相关的学术工作</b></div></div>
+  <div class="tl-i major"><div class="tl-d">2026-07-28</div><div class="tl-t"><b>MCP v1.0 RC</b>：去会话化（删除 initialize 握手与 session ID，新增 server/discover），认证收敛到 OAuth 2.1 / OIDC，建立 12 个月正式弃用周期</div><div class="tl-x">协议层仍在剧烈变动——押注单一协议版本有风险</div></div>
+  <div class="tl-i major"><div class="tl-d">2026-08-02</div><div class="tl-t"><b>EU AI Act 高风险条款生效</b>（Art. 6 / 15）；全面执法不晚于 2027-12-02</div><div class="tl-x">日志、人类监督、身份与授权从最佳实践变成法律要求</div></div>
+  <div class="tl-i major"><div class="tl-d">2026-08-06</div><div class="tl-t"><b>Agent Plugins 1.0.0</b>：OpenAI / Microsoft / GitHub / AWS / Vercel / Anysphere 发布，Google 当天加入核心维护者</div><div class="tl-x">打包与分发层标准化。<b>Anthropic / Claude Code 不在 TSC 内，也未在规范中被提及</b> —— 标准分裂风险</div></div>
+  <div class="tl-i"><div class="tl-d">2026-08-07 / 08-12</div><div class="tl-t">Codex CLI v0.147.0（portable Agent Plugins + <code>--approve-for-me</code>）；GitHub Copilot 全平台支持 Agent Plugins 1.0</div><div class="tl-x">标准发布后一周内落地——生态速度极快</div></div>
+  <div class="tl-i major"><div class="tl-d">2026-08-13</div><div class="tl-t"><b>DeepSeek Harness 开源</b>（MIT，v0.1 开发者预览，数小时内 33,000+ stars）；同日 DeepSeek V4 Pro GA</div><div class="tl-x"><b>Sponge Editor / Portal 的宿主。</b>「一切即插件」+ Cordis + 4 preset（standard / PTC / minimal / creator）+ append-only session log + 四级权限层</div></div>
+</div>
+
+<h3>3.5 格局判断</h3>
+<div class="grid g3">
+  <div class="card"><h4 class="mt0">① 协议层已定，信任层未定</h4><p style="margin:0;font-size:14px">MCP 赢了连接层，但「谁能安装、信任并运行」仍是空白。规范能快速标准化（协议与格式），信任慢得多（是组织问题也是技术问题）。<b>这是治理型项目（Sponge 的域 / authority）的窗口。</b> <span class="b ba">A</span></p></div>
+  <div class="card"><h4 class="mt0">② 打包层成为新战场</h4><p style="margin:0;font-size:14px">Agent Plugins 1.0 明确排除安全、认证、分发、沙箱、UX —— 只做信封。<b>「接口税」将从注册表 + 网关 + 托管框架中产生</b>。Sponge 若自建分发即自建孤岛。 <span class="b ba">A</span></p></div>
+  <div class="card"><h4 class="mt0">③ 垂直 &gt; 水平，但水平未死</h4><p style="margin:0;font-size:14px">垂直专用工具增速是通用的 2–3 倍。Sponge 是水平范式，其价值只能通过 WAM / Lemma 这类垂直衍生物兑现 —— 这与 03 文档「Lemma 是 Sponge 范式的商业级压力测试」的判断一致。<span class="b ba">A</span></p></div>
+</div>
+</section>
+
+<!-- ================= ④ 愿景定位 ================= -->
+<section id="s4">
+<h2><span class="num">④</span>愿景定位：Sponge vs 全景</h2>
+<p class="lead">第三层（主张检验）+ 第四层（定位图）。逐条给证据，先承认被打脸的部分。</p>
+
+<h3>4.1 主张 × 证据矩阵</h3>
+<div class="tw">
+<table>
+<thead><tr><th style="width:60px">主张</th><th style="width:100px">判定</th><th>已被谁验证</th><th>已被谁削弱 / 证伪</th><th style="width:200px">还剩什么</th></tr></thead>
+<tbody>
+<tr>
+  <td class="dim">C1<br>缺陷论</td>
+  <td><span class="b bs">强验证</span></td>
+  <td>Long-Horizon-Terminal-Bench 15.2% / 4.3% <span class="b bs">S</span>；OSWorld 2.0 20.6%、&gt;163min 全 0% <span class="b ba">A</span>；SciAgentArena「新颖洞察与自主探索乏力、方法选择保守、被动调用工具」<span class="b bs">S</span>；SciAgentBench 60.6%→30.9% <span class="b bs">S</span>；Chroma context rot <span class="b bs">S</span>；纯长上下文路线企业采用 15.5%→3.5% <span class="b ba">A</span></td>
+  <td>短任务上 agent 已很强（Terminal-Bench 77.3% <span class="b bb">B</span>）；且 <b>「记忆模块化」这一项的批判在 2026 年有稻草人风险</b>——Letta / Zep / Mem0 做的是结构化状态，不是「加个记忆模块就行」</td>
+  <td><b>诊断成立且是最硬的一条。</b>但需把批判对象精确化为「2024 年的 vector-memory 营销叙事」，并承认 2026 年的状态层已在认真做事</td>
+</tr>
+<tr>
+  <td class="dim">C2<br>切片化</td>
+  <td><span class="b ba">方向验证<br>抽象未验证</span></td>
+  <td>RAG → context engineering → context layer 的迁移已发生 <span class="b ba">A</span>；Gartner 2028 &gt;50% agent 系统用 context graph <span class="b ba">A</span>；Atlan：69% 输入 token 是 system prompt（prompt-as-config 崩塌）<span class="b ba">A</span>；horizon residual 把状态污染形式化 <span class="b bs">S</span></td>
+  <td><b>「外部化 + 持久化 + 结构化」已是共识，不是 Sponge 独创</b>；且结构化状态自身会腐化（冲突 / 陈旧 / 冗余）——C2 隐含假设「外部化即解决」，这个假设<b>未被验证</b></td>
+  <td><b>自由容器（无 schema + 可子类化）是真实独占</b>，也是真实负债：无 schema = 无法校验 / 索引 / 迁移 / 冲突消解</td>
+</tr>
+<tr>
+  <td class="dim">C3<br>调度驱动</td>
+  <td><span class="b bx">机制被削弱<br>组合仍独占</span></td>
+  <td>三者合一的中央调度器<b>未检索到</b>；A3 的协调原语 + supervisor workspace 是最接近的工程直觉 <span class="b bb">B</span></td>
+  <td><b>三个动词分别都有对应物：</b>编排 = LangGraph ServerRuntime 运行时重建图 + Command 无边缘跳转 <span class="b bs">S</span>；主动释放 = ProAct / ProPer / 企业 Context Graph（47min→&lt;30s）<span class="b bs">S+A</span>；演化 = 五类演化对象 + 四种图重写分类学 + Ouroboros / EXO <span class="b bs">S</span></td>
+  <td><b>护城河改写为：三者共用同一份结构化状态、由同一个可替换内核驱动。</b>从「机制独占」降级为「组合与耦合独占」——更诚实，也更可检验</td>
+</tr>
+<tr>
+  <td class="dim">C4<br>可替换零部件</td>
+  <td><span class="b bx">已成共识<br>非差异点</span></td>
+  <td>MCP（连接层事实标准）+ Agent Skills（开放标准）+ <b>Agent Plugins 1.0.0（六巨头）</b> + DeepSeek Harness「一切即插件，无可修补的特权内核」<span class="b bs">S</span></td>
+  <td><b>已被行业彻底占住。</b>Sponge 的信息源接口语义（traverse/impact/path + release + decay/confidence/budget）比 MCP 的 tools/resources/prompts 更深，但生态位已被占</td>
+  <td>接口抽象强度仍是 Sponge 的内部纪律（04 五节「接口文档不得出现 Statuz 专属概念」）——是工程标准，不是市场差异点</td>
+</tr>
+<tr>
+  <td class="dim">C5<br>双形态</td>
+  <td><span class="b bs">成立<br>但已实现</span></td>
+  <td><b>DeepSeek Harness 的 Profile / Bundle / Preset 三层 + 4 preset</b>（standard / PTC / minimal / creator）就是「形态是配置」的完整产品化 <span class="b bs">S</span>；Agent Plugins 同一插件在不同客户端有不同 trust 策略 <span class="b ba">A</span></td>
+  <td>不是差异点——宿主已经做到了</td>
+  <td>价值在于 Sponge 的「形态」是<b>域配置</b>（确定 / 待进化 / 主体），比 preset 多了权限与能动性轴。这是增量，不是发明</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>4.2 定位图：空白 / 盲区 / 坟场</h3>
+
+<div class="vb v-uni">
+  <div class="h">◆ Sponge 独占的空白（业界真的没人做）</div>
+  <p><b>① 容器本体论。</b>「agent 是居民、不是使用者；抽象类是内部构造、不是分类学；容器可嵌套」——所有多 agent 平台（A3 / HiClaw / Multica / Fastio）都是任务队列与协作层，没有一个把「空间」当本体。<b>这是最强的独占空白。</b></p>
+  <p><b>② 中央调度三合一。</b>编排 + 主动释放 + 演化放进同一个闭环、共用同一份结构化状态、且调度器自身可替换。<b>组合独占，非机制独占。</b></p>
+  <p><b>③ 自由容器抽象。</b>无 schema、可子类化的状态容器。所有记忆层都 typed，Sponge 是唯一的 untyped 提案。</p>
+  <p><b>④ 域作为独立的权限/能动性轴。</b>业界有权限分层（DeepSeek Harness 四级权限、Copilot Studio 治理、EU AI Act 风险分级），但都是<b>静态的、按资源划分的</b>。Sponge 的「确定 / 待进化 / 主体」是<b>按实体存在模式划分、且可迁移</b>的——迁移即演化的「封版」动作。这个设计未检索到对应物。</p>
+</div>
+
+<div class="vb v-risk">
+  <div class="h">⚠ Sponge 的盲区（大家在做，Sponge 文档里没提）</div>
+  <p><b>① 协议与互操作 —— 入场券问题。</b>00–07 与契约文档里没有 MCP / A2A / Agent Plugins 的位置。2026-08 的现实是：连接层（MCP）、能力层（Agent Skills）、打包层（Agent Plugins）都已标准化。<b>不兼容即自建孤岛。</b></p>
+  <p><b>② 评测基础设施。</b>Sponge 有 context-recovery cost 北极星指标与证伪条件，但没提接入现成的长周期基准（Long-Horizon-Terminal-Bench / OSWorld 2.0 / SciAgentArena / LongRCA）。这些基准已经把 C1 的失效域量化好了，<b>自建基准是重复投资</b>。</p>
+  <p><b>③ 身份、委派链与中途撤销。</b>D-J 把主体定案为域形式并先落 <code>owner + role</code> 字段。但 2026 的 agent 治理主线是 <b>identity + delegation chain + revocation</b>：EU AI Act Art.12 要求「技术上允许自动记录事件」，Art.14 要求停止按钮，Okta/Descope 的落点是「每个 agent 独立 OAuth Client ID + 委派链 + 可即时撤销的短时效凭证」。<b>递归委派会在每一跳放大权限而不收窄</b>——Sponge 的 authority 字段目前覆盖不到这一点。</p>
+  <p><b>④ 成本模型。</b>长周期任务的真实约束是钱：单任务 990 万 token。Sponge 的注意力语义有 <code>budget</code>，但缺系统级的成本模型与预算治理。</p>
+  <p><b>⑤ 失败归因。</b>演化需要归因作为输入，而 LongRCA 证明 145 步轨迹的精确根因定位只有 13.2%。<b>Sponge 谈「演化」却没谈「演化依据什么信号」</b>——这是演化机制能否落地的硬前提。</p>
+  <p><b>⑥ 状态卫生。</b>C2 假设外部化 + 结构化就解决了上下文问题。但结构化状态自身会腐化：冲突、陈旧、冗余。Sponge 的切片契约里没有遗忘、冲突消解、陈旧检测的设计（信息源接口只有 traverse / impact / path）。</p>
+</div>
+
+<div class="vb v-no">
+  <div class="h">✗ 坟场：试过且失败的（先发 ≠ 有效，放弃 ≠ 错误）</div>
+  <p><b>框架层：</b>AutoGen（2023-10 首发，50k+ stars，2026-04 被 Microsoft Agent Framework 吸收，转维护模式）；Flowise（被 Workday 收购，退出独立赛道）；Langflow（被 DataStax 收购，&lt;1.7.1 有严重 CVE 含 .env 处理漏洞）。</p>
+  <p><b>技术路线层：</b>纯长上下文路线（企业采用率 30 天内 15.5% → 3.5%）；RAG 作为完整策略（被 context architecture 取代，RAG 降级为其中一层检索原语）；prompt-as-config（system prompt 占 69% 输入 token 后崩塌）。</p>
+  <p><b>项目层：</b>Gartner 预测 &gt;40% agentic 项目 2027 年底前取消；试点 65% vs 生产 11% 的死亡谷；agent washing（数千家自称，约 130 家为真）。</p>
+  <p><b>自演化层：</b>execution bias（良性经验损害安全性）；Evo-Bench 在 prescribed-workflow 任务上崩塌；OpenART 环境重写让已上线 agent 85% 失效；回滚不回滚世界。</p>
+</div>
+
+<h3>4.3 时机与风险</h3>
+<div class="grid g2">
+  <div class="card acc-ok">
+    <h4 class="mt0" style="color:var(--success)">时机窗口：开着</h4>
+    <ul style="margin-bottom:0;font-size:14px">
+      <li><b>治理真空。</b>80% 企业已部署、仅 21% 有成熟治理模型。Sponge 的域 / authority 若做对，正对一个真空。</li>
+      <li><b>信任层未标准化。</b>协议与格式已定，信任与分发未定——空白仍在。</li>
+      <li><b>长周期失败已被量化。</b>C1 不需要再论证，只需要被解决。</li>
+      <li><b>宿主刚出现。</b>DeepSeek Harness（2026-08-13）刚开源，Editor/Portal 的搭车窗口在最初 6–12 个月。</li>
+      <li><b>资本正在转向编排层。</b>Q2 agentic 相关占 AI 融资 47%。</li>
+    </ul>
+  </div>
+  <div class="card acc-danger">
+    <h4 class="mt0" style="color:var(--error)">风险清单</h4>
+    <ul style="margin-bottom:0;font-size:14px">
+      <li><b>融资窗口极窄（最高）。</b>2026 Q1 全球新成立 agentic 创业公司仅 1 家。若依赖外部早期融资，几乎不可能；内部研究可控。</li>
+      <li><b>归因天花板。</b>13.2% 的根因定位准确率意味着演化缺乏可靠输入信号。</li>
+      <li><b>标准分裂。</b>Anthropic 缺席 Agent Plugins TSC；MCP v1.0 RC 去会话化大改。押错版本代价高。</li>
+      <li><b>自由容器的可验证性。</b>无 schema = 无法校验/索引/迁移。通用性优势即工程负债。</li>
+      <li><b>自演化安全性已被部分证伪。</b>execution bias 与 85% 环境重写攻破率直接威胁 AgentPark。</li>
+      <li><b>画布层红海化。</b>Dify/Langflow/n8n 合计 45 万+ stars，Editor 若以画布为卖点必败。</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ================= ⑤ 破局建议 ================= -->
+<section id="s5">
+<h2><span class="num">⑤</span>瓶颈破局建议</h2>
+<p class="lead">五条可执行结论，直接服务 Sponge 的真实开放问题（通道 P0、调度三问、域粒度与迁移、Editor MVP 形态、调度器开发位置）。</p>
+
+<div class="rec">
+  <div class="rec-n">建议 01 · 最高优先级 · 服务 P0-2 与 04 第四节</div>
+  <h3>把 C3 从「三个动词」改写为「一个可替换的调度闭环 + 一条架构级递归底线」</h3>
+  <div class="why"><b>为什么：</b>调研证明三者的机制对应物在业界全都存在（LangGraph ServerRuntime / ProAct / self-evolving taxonomy）。<b>Sponge 打不赢机制独占；组合与耦合是唯一能守的阵地。</b>同时，04 三节把固定层表述为「契约文档明确什么不可变」——按业界证据，<b>文档级保护（Ouroboros 的 <code>BIBLE.md</code>）弱于架构级保护（EXO 的 exoharness）</b>。</div>
+  <ul>
+    <li><b>改写 C3：</b>「护城河 = 编排 / 主动释放 / 演化共用同一份结构化状态，由同一个可替换内核驱动，且内核自身是 C4 意义上的可替换零部件。」这让 C3 与 C4 咬合，而不是两个孤立主张。</li>
+    <li><b>硬线的实现方式：</b>固定层 = agent 代码<b>在架构上不可达</b>的 capability 边界（事件日志、密钥、快照、不变量、变更契约检查器、指标存储），而非「文档说不能改」。直接采用 EXO 的三分：executor（可丢弃） / exoharness（不可达） / sandbox（副作用）。</li>
+    <li><b>演化的触发器与规则：</b>照抄变更契约六件套——目标组件 / 预测效果 + 置信区间 / 证伪测试（什么不能回退、回退多少）/ 回滚计划 / 到期自动回滚 / 三轨晋升（auto、human-gated、hard-blocked，hard-blocked 在 agent 之外强制）。这条直接回答 04 四节第 3 问「演化必须落到具体触发器与规则」。</li>
+    <li><b>影子验证</b>：任何结构变更在真实流量上影子运行、对比行为分布，且跑在固定基底上，确保测得的是变更而非漂移。</li>
+  </ul>
+  <div class="maps">映射：<b>P0-2</b>（调度三问）· <b>P0-3</b>（固定层 vs 演化层）· <b>D-E</b>（调度与 Statuz 注意力层关系）· 04 三节 / 四节</div>
+</div>
+
+<div class="rec">
+  <div class="rec-n">建议 02 · 服务 P0-1 通道形式化</div>
+  <h3>把通道定义为「受 schema 约束的图重写原语」，直接对齐 arXiv:2608.18104</h3>
+  <div class="why"><b>为什么：</b>通道是 P0 阻塞项，04 六节给了三个候选定义无法抉择。而 2026-06 的 <i>Self-Evolving Agents as Dynamic Graph Transformation</i>（UNSW / UTS / CUHK-Shenzhen / 浙工商）几乎就是「切片 + 通道」的学术镜像：把 agent 状态建模为<b>带类型节点、边、子图的动态图，通过受 schema 约束的重写（schema-constrained rewrites）更新</b>，并给出四分类——node/feature 演化、edge/topology 演化、subgraph activation、跨组件共演化。</div>
+  <ul>
+    <li><b>通道 = 一组 rewrite rule</b>（add/remove/retype node、add/remove edge、activate/deactivate subgraph），每条 rule 带 precondition + postcondition + rollback。</li>
+    <li><b>这个定义直接解掉 04 六节的二选一</b>：通道 = 切片间连接（静态面）= <b>edge/topology rewrite</b>；通道 = 系统改造机制（动态面）= <b>schema 变更 rewrite</b>。<b>两者是同一组原语的两种应用，不是两个候选定义。</b></li>
+    <li><b>规则本身属于固定层</b>（agent 不能发明新 rule）；<b>规则的内容</b>（哪个切片在何种条件下可触发哪条 rule）属于演化层。这同时把「域」落到了实处：<b>待进化域 = 该切片可自由触发 rule；确定域 = 触发需审批；主体域 = 可主动发起 rule</b>。</li>
+    <li><b>白拿的收益</b>：该 survey 还给出 5 类 graph-aware 评估与治理协议（补端到端任务指标的不足），可直接作为 Sponge 演化的验收标准。</li>
+  </ul>
+  <div class="maps">映射：<b>P0-1</b>（通道是什么）· <b>P1-10</b>（域的粒度与迁移规则）· 04 六节 · 02 §3.8</div>
+</div>
+
+<div class="rec">
+  <div class="rec-n">建议 03 · 服务 01 六节可证伪性</div>
+  <h3>C1 的证伪实验不要自建基准，直接挂到 Long-Horizon-Terminal-Bench / OSWorld 2.0 / SciAgentArena 上</h3>
+  <div class="why"><b>为什么：</b>C1 的失效域已经被这三个基准精确量化（15.2% / 20.6% / 0%&gt;163min）。<b>对比基线是现成的、公开的、可复现的。</b>自建基准是重复投资，且拿不到社区可比性。更关键的是 arXiv:2607.27283 的 <b>horizon residual</b> 方法论已经把「任务大」与「轨迹诱导退化（context rot）」区分开——<b>这正是 C1 需要的分离变量工具</b>。</div>
+  <ul>
+    <li><b>北极星指标重新定义：</b>把 context-recovery cost 具体化为「<b>在任务进行到 X% 时强制销毁全部上下文，测量恢复到同等进度所需的 token 数与步数</b>」。对照组是同一任务不间断运行的基线。</li>
+    <li><b>这个指标不需要 Sponge 完整实现</b>：只要「切片 + 信息源」的最小闭环就能跑。这是收敛设计里最值钱的一点——<b>C1 和 C3 的检验可以提前到 MVP 之前</b>。</li>
+    <li><b>C3 的对照实验</b>（01 六节：纯脚手架 + 好 prompt vs Sponge 调度系统）挂在同一批任务上，用 horizon residual 作分离指标。若 residual 无显著差异，C3 被削弱——<b>这个判据现在有公开的测量方法了</b>。</li>
+    <li><b>不要引用厂商基准</b>（Mem0 的 LongMemEval 一个来源报 49.0%、一个报 94.4）。自建 golden set。</li>
+  </ul>
+  <div class="maps">映射：<b>P2-13</b>（与 LangChain/CrewAI/AutoGen 的系统性对比，服务论文 04 相关工作）· 01 六节 · 04 七节判据 2</div>
+</div>
+
+<div class="rec">
+  <div class="rec-n">建议 04 · 服务 07 九节待裁决项 2 与 3</div>
+  <h3>Editor MVP 跳过画布：顺序改为 S1′（兼容信封的文件级）→ S3（agent 工具面）→ S2（画布）</h3>
+  <div class="why"><b>为什么：</b>07 规划是 S1 文件级 → S2 画布 → S3 agent 工具面 → S4 集成，并自陈「10k 行预算的压力主要在编辑器」「画布是目的地，文件级只是它的脚手架」。但调研显示两件事：<b>① 画布层是绝对红海</b>（Dify 133k + Langflow 146k + n8n 176k stars，加 Copilot Studio / Vertex AI / watsonx 三家巨头）；<b>② 权力转移（野心一）的验收点是 S3，不是 S2</b>——画布只是人机界面，agent 工具面才是「agent 改自己的结构」。</div>
+  <ul>
+    <li><b>S1′：把 pipeline 落成 Agent Plugins 1.0 兼容的目录格式</b>——<code>plugin.json</code> 信封（标准化）+ Sponge 私有的 <code>slices/</code> 目录（内容私有）。该规范明确只管打包、不管语义，<b>这恰好是 Sponge 需要的分工</b>。收益：借分发与客户端生态、不自建孤岛、满足「结构即数据、可 diff、可版本化」。</li>
+    <li><b>S3 提前：</b>先用最小代价验证「agent 能否用工具面改造自己的结构」——这才是野心一的验收。07 七节的「双面同构」（人类 UI 与 agent 工具面共用同一结构、能力对称）本身就是最难的工程，早做早暴露。</li>
+    <li><b>S2 后移：</b>画布是「操作简单」的兑现（07 八节：画布是目的地），但它不是范式验收点，且竞争最激烈。放到 S3 闭环跑通之后。</li>
+    <li><b>调度器开发位置（待裁决项 3）：建议独立模块、独立仓。</b>理由：C3 已改写为「调度器自身可替换」，那么它在物理上就该是可替换的——做成 Harness 内的包会与「护城河独立性优先」自相矛盾。</li>
+  </ul>
+  <div class="maps">映射：<b>07 九节待裁决 2</b>（S1 vs S2）<b>/ 3</b>（调度器位置）· 07 五节 S0–S4 · 07 八节</div>
+</div>
+
+<div class="rec">
+  <div class="rec-n">建议 05 · 补盲区 · 服务 D-J 与 C2</div>
+  <h3>补上三块缺失设计：identity/委派链、失败归因、状态卫生</h3>
+  <div class="why"><b>为什么：</b>这三块是「大家在做、Sponge 没提」的盲区，且都直接威胁 Sponge 的核心主张。缺了它们，演化没有输入信号、多主体不可部署、结构化状态会自己腐化。</div>
+  <ul>
+    <li><b>identity 与委派链（威胁 C5 与多主体）。</b>D-J 定案「MVP 先落 <code>owner + role</code> 字段」，但 2026 的治理主线是「每个 agent 独立身份 + 委派链 + 可即时撤销」：递归委派会在每一跳放大权限而不收窄；EU AI Act Art.12 要求技术上可自动记录、Art.14 要求停止按钮；Okta 指出「长时效不可撤销的 token 不是停止按钮，只是一个请求」。<b>最小落点：<code>authority</code> 字段扩为 (subject, delegate_of, scopes, issued_at, expires_at, revocable)</b>。</li>
+    <li><b>失败归因（威胁演化）。</b>LongRCA 证明 145 步轨迹的精确根因定位仅 13.2%，责任角色定位 51.1%——<b>二者相差 2 倍以上，说明「谁错了」和「哪一步错了」是难度不同的两个问题。</b>演化依赖后者。<b>最小落点：切片的每次状态迁移记录 (trigger, before, after, actor)，粒度对齐 LongRCA 的「earliest decisive root-cause step」</b>。这也顺带回答 04 四节第 3 问的「什么事件触发」。</li>
+    <li><b>状态卫生（威胁 C2）。</b>C2 隐含假设「外部化 + 结构化即解决」，但结构化状态自身会腐化。工程界已给出的三条处方（把状态当受管数据、按时间轴设检查点、提交前强制验证）都是补丁而非机制。<b>最小落点：信息源接口在 traverse / impact / path 之外，把 <code>conflict</code> 与 <code>decay</code> 提到接口层（而非留在 Statuz 实现层）</b>——同时满足 04 五节「接口不得出现 Statuz 专属概念」的验收标准，并让「遗忘」成为 C2 的一等公民（01 三节呼吁的「状态、经验、演化、遗忘」四件套，目前只覆盖了前三个）。</li>
+  </ul>
+  <div class="maps">映射：<b>D-J</b>（主体域形式）· <b>P1-6</b>（切片跨进程/跨设备共享）· 04 五节（接口抽象强度）· 01 三节（遗忘）</div>
+</div>
+
+<h3>5.1 决策映射总表</h3>
+<div class="tw">
+<table>
+<thead><tr><th style="width:150px">Sponge 开放问题</th><th style="width:110px">状态</th><th style="width:70px">建议</th><th>本调研给出的具体输入</th></tr></thead>
+<tbody>
+<tr><td class="dim">P0-1 通道是什么</td><td>阻塞收敛</td><td><b>02</b></td><td>定义为受 schema 约束的图重写原语（对齐 arXiv:2608.18104 四分类），解掉「连接 vs 改造」的二选一：两者是同一组原语的静态面与动态面</td></tr>
+<tr><td class="dim">P0-2 调度三问机制化</td><td>阻塞收敛</td><td><b>01</b></td><td>三者的业界对应物清单（LangGraph ServerRuntime / ProAct / 五类演化 taxonomy）；改写成「组合独占 + 可替换内核」；递归底线用 capability-based security 架构强制</td></tr>
+<tr><td class="dim">P0-3 固定层 vs 演化层</td><td>阻塞收敛</td><td><b>01</b></td><td>采用 EXO 三分（executor / exoharness / sandbox）；固定层 = 架构上不可达，非文档级；变更契约六件套作为演化层的准入条件</td></tr>
+<tr><td class="dim">P1-10 域粒度与迁移</td><td>P1</td><td><b>02</b></td><td>域落到 rewrite rule 的权限上：待进化 = 可自由触发；确定 = 触发需审批；主体 = 可主动发起。迁移规则 = rule 集合的变更</td></tr>
+<tr><td class="dim">D-E 调度 vs Statuz 注意力层</td><td>未决</td><td><b>01 / 05</b></td><td>主动释放已有业界实现（ProAct / ProPer / 企业 Context Graph），可外挂；把 decay / conflict 提到信息源接口层，则 Statuz 只是实现之一，D-E 自动化解</td></tr>
+<tr><td class="dim">D-J 主体的存在形式</td><td>已定案（域形式）</td><td><b>05</b></td><td>authority 字段需扩到 delegation chain + 即时撤销，否则在 EU AI Act Art.12/14 与 SOX 语境下不可部署</td></tr>
+<tr><td class="dim">Editor MVP：S1 还是 S2</td><td>待裁决</td><td><b>04</b></td><td>改序为 S1′ → S3 → S2。理由：画布红海（45 万+ stars 竞品），且权力转移的验收点在 S3 不在 S2</td></tr>
+<tr><td class="dim">调度器开发位置</td><td>待裁决</td><td><b>04</b></td><td>独立模块 / 独立仓。C3 既已改写为「调度器可替换」，做成 Harness 内包与独立性自相矛盾</td></tr>
+<tr><td class="dim">P2-13 与主流框架系统性对比</td><td>P2</td><td><b>03</b></td><td>对比介质从「文档论述」换成「公开基准上的 horizon residual」——可复现、可与社区比较</td></tr>
+<tr><td class="dim">01 六节 可证伪性落地</td><td>已定条件</td><td><b>03</b></td><td>三个现成基准 + horizon residual 方法论；context-recovery cost 具体化为「中断后恢复成本」</td></tr>
+<tr><td class="dim">（新增）互操作策略</td><td>盲区</td><td><b>04</b></td><td>Agent Plugins 1.0 只管信封不管语义 —— 借信封、内容私有，是 Sponge 最优的入场姿势</td></tr>
+<tr><td class="dim">（新增）状态卫生 / 遗忘</td><td>盲区</td><td><b>05</b></td><td>conflict / decay 提到信息源接口层，补齐 01 三节「状态 / 经验 / 演化 / 遗忘」的第四项</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ================= ⑥ 参考来源 ================= -->
+<section id="s6">
+<h2><span class="num">⑥</span>参考来源</h2>
+<p class="lead">按证据分级排列。S = 一手（官方文档 / 论文 / 厂商公告）；A = 高质量二手或复现报道；B = 观点 / 行业博客 / 厂商自述；U = 未验证。</p>
+
+<h3>S 级 · 一手来源</h3>
+<div class="src">
+<table>
+<tbody>
+<tr><td style="width:70px"><span class="b bs">S</span></td><td><a href="https://arxiv.org/abs/2608.18104v1" target="_blank">Self-Evolving Agents as Dynamic Graph Transformation: A Survey and New Perspective</a> — Xu, Zhang, Chen, Lin, Zhang（UNSW / UTS / CUHK-Shenzhen / 浙工商），arXiv:2608.18104<br><small>核心参考：agent 状态建模为带类型动态图 + schema-constrained rewrites；四分类（node/feature、edge/topology、subgraph activation、cross-component co-evolution）+ 5 类 graph-aware 评估与治理协议</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://sciagentarena.github.io/" target="_blank">SciAgentArena</a> — ~200 分步验证任务 / 18 个 agent / 5 科学领域；Yale（Zitnik / Zou 等）团队<br><small>关键发现：agent 擅长结构明确的数据分析，弱于新颖洞察与自主探索；方法选择保守；被动调用工具；跨相同运行不稳定</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://ar5iv.labs.arxiv.org/html/2602.12984" target="_blank">SciAgentGym / SciAgentBench</a> — 复旦 NLP 组，arXiv:2602.12984<br><small>1,780 领域工具 / 259 任务 / 1,134 子问题；GPT-5 随跨度延长 60.6% → 30.9%，总体 41.3%</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://arxivlens.com/paperview/viewpdf/anticipate-and-learn-unleashing-idle-time-compute-in-proactive-agents-9201-70f488d5" target="_blank">ProAct: Anticipate and Learn — Unleashing Idle-Time Compute in Proactive Agents</a>，arXiv:2605.25971<br><small>主动释放的正式架构：Future-State Prediction + Idle-Time Acquisition + 投递策略；轮次 −14.8%、用户努力 −11.7%、幻觉 −28.1%</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://en.papernotes.org/ACL2026/llm_agent/proper_agents_proactivity_driven_personalized_agents_for_advancing_knowledge_gap" target="_blank">ProPer Agents（ACL 2026）</a><br><small>显式建模 unknown unknowns：Dimension Generating Agent + budget 校准重排 + Response Generating Agent</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://docs.langchain.com/langgraph-platform/graph-rebuild" target="_blank">LangChain 官方文档 · Rebuild graph at runtime（ServerRuntime）</a><br><small><b>C3 证伪关键证据</b>：图工厂函数每次运行可返回不同图，可按用户凭证加载不同工具</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://blog.langchain.com/command-a-new-tool-for-multi-agent-architectures-in-langgraph" target="_blank">LangChain Blog · Command: Edgeless graphs</a><br><small>节点自行决定 goto，无需预定义边；官方定位为「更动态的多 agent 架构」</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://arxiv.org/abs/2608.15242" target="_blank">LongRCA Bench</a>（arXiv:2608.15242，2026-08-15）<br><small>1,140 条真实失败轨迹，中位 145 步；最强基线精确根因步 13.2%，RCTA 责任角色 51.1% / 根因步 24.1%</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="http://bittide.aicompass.dev/article/dd83220b-c145-4f22-bc6e-0b0407e454c4" target="_blank">Benchmarking the Residual（horizon residual）</a>，arXiv:2607.27283<br><small>区分「任务大」与「轨迹诱导退化 / context rot」——C1 证伪实验的方法论基础</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://arxiv.org/html/2507.21046" target="_blank">A Survey of Self-Evolving Agents: On Path to Artificial Super Intelligence</a>（Princeton / Tsinghua / CMU / UIUC 等），arXiv:2507.21046<br><small>三维框架：what / when / how to evolve</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://thenewstack.io/deepseek-harness-open-source-plugins/" target="_blank">DeepSeek Harness 开源报道（The New Stack）</a> · <a href="https://www.i-scoop.eu/deepseek-harness-turns-every-part-of-an-agent-runtime-into-a-swappable-plugin/" target="_blank">i-SCOOP 同源报道</a> · <a href="https://pandaily.com/deepseek-harness-hands-on-four-modes-model-plus-harness-equals-agent-aug2026" target="_blank">Pandaily 首夜实测</a><br><small>2026-08-13 开源（MIT, v0.1）；「一切即插件，无可修补的特权内核」；Cordis 底座；4 preset（standard / PTC / minimal / creator）；append-only session log；Landlock / Seatbelt / Windows ACL 沙箱；四级权限层；数小时 33,000+ stars</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><b>本地仓库实证</b>：<code>D:\github projects\Sponge\packages\README.md</code> — <code>extensions/</code> 包：<i>「Agent runtime self-modification: live plugin/service inspection and model-written plugin mount/unmount」</i>；<code>packages/preset/agent-presets/README.md</code> — Profile / Bundle / Preset 三层、<code>trust</code>（system/user）、<code>authorable</code> 位、copy-only authoring、id 强制 <code>[a-z0-9-]</code> 防路径逃逸</td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://www.getclaudeskills.com/blog/agent-plugins-explained" target="_blank">Agent Plugins 1.0.0 规范解读</a> · <a href="https://blog.traversaal.ai/agent-plugins-1-0-0-cross-vendor-standard-portable-ai-skills-mcp-servers" target="_blank">Traversaal 分析</a><br><small>2026-08-06 发布；TSC 五席（Amazon / Cursor / Microsoft / OpenAI / Vercel）；Google 当天加入核心维护者；<b>Anthropic 不在 TSC 且规范全文未提及 Claude</b>；MCP 配置 MUST NOT 内联于 plugin.json</small></td></tr>
+<tr><td><span class="b bs">S</span></td><td><a href="https://nerdleveltech.com/agent-skills-portable-unmeasured" target="_blank">Agent Skills in 2026: Portable, Popular, Unmeasured</a><br><small>Anthropic 2025-10-16 发布 Agent Skills、2025-12-18 作为开放标准；官方 showcase 列 44 款支持产品（自报，非普查）</small></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>A 级 · 高质量二手 / 复现报道</h3>
+<div class="src">
+<table>
+<tbody>
+<tr><td style="width:70px"><span class="b ba">A</span></td><td><a href="https://agentmarketcap.ai/blog/2026/08/05/long-horizon-terminal-bench-task-duration-frontier" target="_blank">Long-Horizon-Terminal-Bench（arXiv:2607.08964）解读</a><br><small>46 任务 / 15 前沿模型；最佳 pass@1 15.2%（部分给分）、10.9%（满分）；均值 4.3% / 1.7%；单任务均值 990 万 token / 231 episode / 85.3 分钟</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://blog.pebblous.ai/blog/long-horizon-agent-state-data-quality/en" target="_blank">AI Agents Collapse on Tasks Longer Than an Hour</a><br><small>含 OSWorld 2.0（arXiv:2606.29537）：108 长周期桌面工作流，中位 1.6 小时，顶级 agent 二元完成率 20.6%，<b>&gt;163 分钟任务全模型 0%</b>；Chroma context rot（18 模型实验）</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://dev.to/breachprotocol/exo-keeps-an-agents-memory-outside-the-code-the-agent-rewrites-1k4j" target="_blank">EXO：把 agent 的记忆放在它重写的代码之外</a><br><small>executor（可丢弃）/ exoharness（不可达：事件日志、密钥、制品、快照）/ sandbox（副作用）三分；stop/resume/fork/rewind + safe rollout；<b>单机 50,000 agent 声明无 benchmark 表支撑（该数字按 U 级对待）</b>；「回滚反转状态，不反转世界」</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://codex.danielvaughan.com/2026/08/11/ouroboros-self-developing-coding-agent-reviewed-evolution-codex-cli-agents-md-constitutional-governance-plugin-safety" target="_blank">Ouroboros 与 Codex CLI 治理层对比</a> · <a href="https://blog.sandbase.ai/ouroboros-self-developing-coding-agent-2026" target="_blank">Sandbase 独立分析</a><br><small>2026-02-16 起；经评审 Git 提交；BIBLE.md 13 条宪法原则 + 受保护路径 + 重启检查；Light/Advanced/Pro 三模式提交流水线；差异仲裁；指纹识别防规避；161 天长期实验；Terminal-Bench 2.1 86.74% / OSWorld-Verified 90.69%（<b>作者自报，需谨慎</b>）</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://ai-infrastructure.net/agent-governance-self-modifying" target="_blank">Governing Self-Modifying Agents</a><br><small>治理清单：可编辑面枚举、变更契约六件套、三轨晋升 + 外部强制 hard-block、影子验证、签名外部指标存储、<b>递归底线（capability-based security）</b></small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://codex.danielvaughan.com/2026/08/16/self-evolving-coding-agents-taxonomy-codex-cli-memories-skills-hooks-agent-plugins-evolution-patterns" target="_blank">Self-Evolving Coding Agents 五类分类（arXiv:2608.03392）解读</a><br><small>framework / memory / skill / model / workflow 五类演化对象；task-time / post-task / stage-wise 三种时间模式；含 execution bias（Zhao et al., Findings of ACL 2026）、Evo-Bench（+16.6 但 prescribed-workflow 崩塌）、OpenART（环境重写 85% 攻破率）等失败证据</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://www.braintrust.dev/articles/best-ai-agent-memory-tools-2026" target="_blank">Best AI agent memory tools in 2026（Braintrust）</a> · <a href="https://www.developersdigest.tech/blog/best-ai-agent-memory-providers-2026" target="_blank">Mem0 vs Zep vs Letta vs Cloudflare（Developers Digest）</a><br><small>四范式对比、架构与定价；<b>基准数字冲突的出处</b>（Mem0 LongMemEval：一处 49.0%、一处厂商自报 94.4；Zep 63.8% / DMR 94.8%）</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://blog.luby.co/why-enterprises-are-replacing-rag-with-context-architecture-in-2026" target="_blank">Why Enterprises Are Replacing RAG With Context Architecture in 2026</a><br><small>VentureBeat VB Pulse：纯长上下文路线企业采用 2026-01 的 15.5% → 02 的 3.5%（30 天 −77%）；混合检索购买意向 10.3% → 33.3%；Redis Iris（2026-05）；Lovelace AI 1000x token 缩减（<b>厂商声称，按 B 级对待</b>）</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://atlan.com/know/why-ai-agents-need-an-enterprise-context-layer" target="_blank">Why AI Agents Need an Enterprise Context Layer in 2026（Atlan）</a> · <a href="https://www.synapt.ai/context-is-the-new-rag-hyped-misunderstood-and-mostly-unbuilt" target="_blank">Context Is the New RAG（Synapt）</a><br><small>Datadog 数据：69% 输入 token 是 system prompt；Gartner 预测 2028 年 &gt;50% agent 系统用 context graph；Google / Palantir / Microsoft / Atlan 四方同季度收敛</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://thenewstack.io/rag-isnt-dead-but-context-engineering-is-the-new-hotness/" target="_blank">RAG isn't dead, but context engineering is the new hotness（The New Stack）</a><br><small>RAG 共同作者 Douwe Kiela 亲述术语迁移；Anthropic 的 context engineering 定义；Contextual AI Agent Composer</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://ai2.work/blog/agentic-ai-funding-concentrates-as-round-sizes-double-in-q1" target="_blank">Agentic AI Funding Concentrates as Round Sizes Double in Q1</a><br><small>Q1 2026：3,000 亿总量 / AI 占 81%；头部四家 1,880 亿 = 62%；剔除 top10 后仅 175 亿；Q2：3,120 轮 / 426 亿，agentic 相关 200 亿 = 47%；<b>Q1 新成立 agentic 创业公司仅 1 家</b>；MCP 服务器 Q2 &gt;9,400（+58% QoQ）；AI 编码市场 128 亿美元</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://agentmarketcap.ai/blog/2026/04/08/ai-agent-market-sizing-2026-52b-projected-2030" target="_blank">AI Agent Market Sizing 2026</a><br><small>Q1 2026 VC 明细、采用率（80% 至少一个生产应用含 agent；40% 企业应用将内嵌 agent）、垂直 vs 水平增速对比、市场规模多源数字（含 Gartner 自身冲突）</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://www.itpro.com/technology/artificial-intelligence/agentic-ai-tools-gartner-agent-washing" target="_blank">Gartner agent washing 原始报道（ITPro）</a><br><small>2025-06-25 预测 &gt;40% agentic 项目 2027 年底前取消；数千家自称厂商中约 130 家为真</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://www.okta.com/en-se/blog/ai/the-attribution-gap-ai-regulation" target="_blank">The Attribution Gap（Okta）</a> · <a href="https://www.descope.com/blog/post/eu-ai-act-identity" target="_blank">EU AI Act: Map Agentic Identity Controls（Descope）</a><br><small>EU AI Act Art.9 / 12 / 14 条文与罚则（3,500 万欧元或全球营收 7%）；递归委派导致权限不收窄；「不可撤销的长时效 token 不是停止按钮」；agentic identity hub 的落地形态</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://adaptivesecurity.com/blog/ai-access-governance-the-complete-guide-to-governing-ai-agents-non-human-identities-and-shadow-a" target="_blank">AI Access Governance 完整指南</a><br><small>EU AI Act（Reg. (EU) 2024/1689）2026-08-02 高风险条款生效、全面执法不晚于 2027-12-02；ISO/IEC 42001:2023 条款映射</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://tokenfeed.ai/ai-agents-stop-waiting-to-be-asked" target="_blank">AI Agents Stop Waiting to Be Asked（Context Graph 研究报道）</a><br><small>Delta Detection + Proactivity Scorer + Surfacing Layer；Precision@5 = 0.83，FPR = 0.11；关键信息浮现 47 分钟 → &lt;30 秒</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://openagents.org/blog/posts/2026-02-23-open-source-ai-agent-frameworks-compared" target="_blank">CrewAI vs LangGraph vs AutoGen vs OpenAgents（2026-02）</a> · <a href="https://www.bestaiweb.ai/what-is-an-agent-framework-and-how-langgraph-crewai-and-autogen-orchestrate-llm-agents" target="_blank">六组件分解对照</a><br><small>框架现状与维护状态：AutoGen 转维护模式，新项目应转向 Microsoft Agent Framework 1.0（2026-04-03）；LangGraph v1.0 后 <code>langgraph.prebuilt</code> 弃用；CrewAI 1.14 移除 CodeInterpreterTool</small></td></tr>
+<tr><td><span class="b ba">A</span></td><td><a href="https://alignify.co/zh/blog/agent-memory" target="_blank">最佳 AI Agent 记忆层 2026（中文）</a><br><small>含 MemOS（MemCube / 记忆 OS / 治理）与 MemU（Memory-as-FS）等中文生态条目</small></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>B 级 · 观点 / 行业博客 / 厂商自述</h3>
+<div class="src">
+<table>
+<tbody>
+<tr><td style="width:70px"><span class="b bb">B</span></td><td><a href="https://www.leonidasr.com/posts/a3-kubernetes-for-autonomous-ai-agent-fleets" target="_blank">A3: Kubernetes for autonomous, multiplayer AI agent fleets</a><br><small>10 个协调原语、按 workspace 分配能力边界、supervisor 只是「有委派能力的 workspace」。<b>厂商自建博客，无第三方验证</b></small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://sourceforge.net/software/agentic-orchestration/integrates-with-docker/" target="_blank">Agentic Orchestration Platforms（SourceForge，2026-07）</a><br><small>HiClaw/AgentScope（Matrix 房间，人类实时介入）、Multica（人与 agent 同 workspace）</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://navan.com/blog/build-proactive-ai-agents" target="_blank">How to build proactive AI agents that only act when it matters（Navan）</a><br><small>act now / wait / stay silent 三态；策略先于概率；证据质量先于上下文判断；注意力预算</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://moltbook.com/post/de22c026-576e-435c-ac41-59057b05333d" target="_blank">The Attention Economy of Agents</a><br><small>注意力衰减工程立场；「注意力技术栈几乎不存在」——观点性，无基准</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://alok-mishra.com/2026/01/06/from-prompting-and-context-engineering-to-memory-architecture/" target="_blank">From Prompting and Context Engineering to Memory Architecture</a><br><small>波次演化叙事（autocomplete → prompt → context → spec-driven → memory architecture）；四类记忆约束（容量 / 延迟 / 关系结构）</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://fast.io/resources/best-no-code-ai-agent-builders" target="_blank">Best No-Code AI Agent Builders in 2026</a> · <a href="https://www.morphllm.com/no-code-ai-agent" target="_blank">No-Code AI Agents: 14 Platforms Compared</a> · <a href="https://www.knowlee.ai/blog/dify-alternatives-2026" target="_blank">Dify Alternatives 2026</a><br><small>star 数与收购状态：Dify 133k、Langflow 146k、n8n 176k、CrewAI 46.5k；Flowise 被 Workday 收购；Langflow 归 DataStax 且 &lt;1.7.1 有严重 CVE</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://agentscout.live/tech/ai-agents/insight/20260419-ai-agent-ecosystem-weekly-intelligence" target="_blank">AI Agent Ecosystem Weekly Intelligence</a><br><small>Stanford HAI AI Index 2026 基准对比（Terminal-Bench 77.3%、OSWorld 66%、ReplicationBench &lt;20% vs 研究者 ~70%）；<b>二次转述，原始 AI Index 未直接核验</b></small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://the-agent-report.com/2026/06/ai-agent-startups-replacing-saas-2026" target="_blank">AI Agent Startups Are Replacing SaaS（含 Sky9 Capital 分析）</a><br><small>六大赛道动能评级：科研代理 ★★★☆☆（反馈周期长）</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://oday-bakkour.com/blog/ai-coding-news-august-13-2026-agent-plugins-1-0" target="_blank">AI Coding News: August 13, 2026</a><br><small>Agent Plugins 1.0 时间线细节；Claude Code 2.1.229；GitHub Copilot 08-12 全平台支持</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://mcp.csdn.net/6a848ac3662f9a54cb9e4e0f.html" target="_blank">MCP 赢下连接层、输在安全层（CSDN）</a><br><small>MCP v1.0 RC（2026-07-28）去会话化细节；21,000 个「裸露服务器」说法（<b>该数字按 U 级对待</b>）</small></td></tr>
+<tr><td><span class="b bb">B</span></td><td><a href="https://theneuralbase.com/langgraph/learn/advanced/building-graphs-dynamically-at-runtime" target="_blank">Building graphs dynamically at runtime（LangGraph）</a><br><small>官方列举动态图用例包括「实现递归或自修改 agent」——与 C3 直接相关</small></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>U 级 · 未验证 / 未检索到</h3>
+<div class="src">
+<table>
+<tbody>
+<tr><td style="width:70px"><span class="b bu">U</span></td><td>EXO 声称「单机可支撑 50,000+ agent」——官方页面未发布 benchmark 表支撑该数字</td></tr>
+<tr><td><span class="b bu">U</span></td><td>Ouroboros 的 Terminal-Bench 2.1 86.74% / OSWorld-Verified 90.69% —— 作者自报，来自冻结快照，不能证明每一次实时演化都带来提升</td></tr>
+<tr><td><span class="b bu">U</span></td><td>Lovelace AI 的「1,000 万 token → 1 万 token，99.5% 准确率」——厂商声称，无第三方复现</td></tr>
+<tr><td><span class="b bu">U</span></td><td>MCP 服务器「21,000 个裸露服务器」——单一来源，与另一来源的「Q2 2026 注册表 &gt;9,400」口径不一致</td></tr>
+<tr><td><span class="b bu">U</span></td><td>Stanford HAI AI Index 2026 的 Terminal-Bench 77.3% 等数字——经二手转述获得，原始报告未直接核验</td></tr>
+<tr><td><span class="b bu">U</span></td><td><b>未检索到：</b>SciAgents（MIT, Ghafarollahi & Buehler）在 2026 年的最新进展与产品化状态</td></tr>
+<tr><td><span class="b bu">U</span></td><td><b>未检索到：</b>任何将「编排 + 主动释放 + 演化」三者合一的中央调度器产品（此即判断「组合独占」的依据——缺证据本身是证据，但属阴性结果）</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<footer>
+  <p><b>方法说明：</b>本报告按五层研究协议推进（事实层 → 机制层 → 主张检验层 → 定位层 → 决策层），横切遵循「证伪优先、证据分级、时间线、禁止编造」四条规则。所有数字标注来源与级别；多源冲突处并列呈现不取单一值；找不到的一律写「未检索到」。</p>
+  <p style="margin-top:10px"><b>边界声明：</b>本报告只做研究与输出，不做设计决策。建议部分给出的均为「可执行的下一步动作 + 依据」，最终取舍归 Sponge 团队。</p>
+  <p style="margin-top:10px">Oasis AI Lab · 范式研究 · 生成于 2026-08-30 · 校准源：<code>研发/00–07</code>、<code>研发/契约/</code>、<code>packages/README.md</code>、<code>packages/preset/agent-presets/README.md</code></p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement, KEY = 'sponge-md3-theme';
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.ts-btn'));
+
+  function current(){ return localStorage.getItem(KEY) || 'system'; }
+  function paint(mode){
+    if (mode === 'system') root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', mode);
+    btns.forEach(function(b){
+      b.setAttribute('aria-pressed', String(b.dataset.mode === mode));
+    });
+  }
+  function set(mode){
+    try { localStorage.setItem(KEY, mode); } catch (e) {}
+    paint(mode);
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ set(b.dataset.mode); }); });
+  try { paint(current()); } catch (e) { paint('system'); }
+
+  // 跟随系统：仅在用户未显式选择时响应
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){
+      if (current() === 'system') paint('system');
+    });
+  }
+
+  // 导航 pill 指示器：滚动高亮当前章节
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav-tabs a[href^="#"]'));
+  var map = {};
+  links.forEach(function(a){
+    var el = document.querySelector(a.getAttribute('href'));
+    if (el) map[el.id] = a;
+  });
+  var targets = Object.keys(map).map(function(id){ return document.getElementById(id); });
+  if ('IntersectionObserver' in window && targets.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var a = map[en.target.id];
+        if (a && en.isIntersecting) {
+          links.forEach(function(x){ x.classList.remove('active'); });
+          a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-72px 0px -68% 0px', threshold: 0 });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+})();
+</script>
+
+</body>
+</html>
