@@ -17,6 +17,7 @@ Planning artifacts for Sponge.
 |---|---|---|---|
 | `portal` | [2026-08-30-plan-portal-m1-m5](exec/portal/2026-08-30-plan-portal-m1-m5.md) | approved — M0 decided (D-P1…D-P4) | M1–M5 |
 | `editor` | [2026-08-30-plan-mode-switch](exec/editor/2026-08-30-plan-mode-switch.md) | **draft** — mode switch first; canvas gated on the content model | E0–E2 |
+| `desktop` | [2026-08-30-plan-desktop-runnable](exec/desktop/2026-08-30-plan-desktop-runnable.md) | **draft** — P1 install our UI into Desktop, then P2 host replacement | D0–D4 |
 | `core` | not written — blocked on **D-N** | — | — |
 | `experiment` | not written | — | — |
 

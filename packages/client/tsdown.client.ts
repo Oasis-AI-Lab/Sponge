@@ -31,6 +31,9 @@ const INLINE_CSS_VIRTUAL_PREFIX = '\0dsh-inline-css:'
 const CSS_VIRTUAL_SUFFIX = '.mjs'
 const INLINE_CSS_QUERY = '?inline'
 
+/** Variant artifact directory: the upstream-identity bundle lands here, never in lib/. */
+const UPSTREAM_OUT_DIR = 'lib-upstream'
+
 /** Emit one plugin-owned style injector and an optional CSS Modules export. */
 function styleInjectionModule(
   id: string,
@@ -60,6 +63,20 @@ function styleInjectionModule(
  * (external) or a leak the purity gate rejects.
  */
 export const INLINE_SAFE = /^@oasisailab\/sponge-(host-apiproxy|file-reference|session|llm|tools|brand)(\/|$)/
+
+/**
+ * Upstream-identity variant mapping. A plugin bundle built with
+ * DSH_BUILD_VARIANT=upstream rewrites these Sponge specifiers to the upstream
+ * (@deepseek-ai/*) module-table rows the Desktop shell preloads, so the same
+ * source runs as a third-party plugin inside dsh-desktop without a fork. Only
+ * value imports reach this table; type-only specifiers erase at build time.
+ */
+export const UPSTREAM_ALIAS: ReadonlyMap<string, string> = new Map([
+  ['@oasisailab/sponge-cordis', '@deepseek-ai/cordis'],
+  ['@oasisailab/sponge-client-runtime/client', '@deepseek-ai/dsh-client-store'],
+  ['@oasisailab/sponge-client-ui-primitives', '@deepseek-ai/dsh-client-ui-primitives'],
+  ['@oasisailab/sponge-client-ui-slots', '@deepseek-ai/dsh-client-ui-slots'],
+])
 
 /**
  * Vendored framework libraries: rescoped into @oasisailab/sponge, so the gate below
@@ -109,11 +126,19 @@ export function clientBundle(
   libEntry: readonly string[],
   options: ClientBundleOptions = {},
 ): BuildFaceConfig {
-  const lib = clientLibraryConfig(id, libEntry, options.lib)
   return ({ env }) => {
     const face = buildFace(env?.DSH_BUILD_FACE)
+    const variant = buildVariant(env?.DSH_BUILD_VARIANT)
     const clientEntry = face === undefined ? 'src/client/index.ts' : 'lib/types/client/index.js'
-    const client = clientConfig(id, clientEntry)
+    // The upstream variant writes every artifact into its own directory so a
+    // variant build never touches the product lib/ (which a later product
+    // build reads). tsc emits lib/types first; both faces consume it.
+    const lib = variant === undefined
+      ? clientLibraryConfig(id, libEntry, options.lib)
+      : clientLibraryConfig(id, libEntry, { ...options.lib, outDir: UPSTREAM_OUT_DIR })
+    const client = variant === undefined
+      ? clientConfig(id, clientEntry)
+      : { ...clientConfig(id, clientEntry, variant), outDir: UPSTREAM_OUT_DIR }
     const node = [lib, ...(options.companions ?? [])]
     if (face === 'host') return options.hostPhase === true ? node : [SKIP_WORKSPACE_BUILD]
     if (face === 'client') {
@@ -211,6 +236,11 @@ type BuildFaceConfig = (inlineConfig: Pick<UserConfig, 'env'>) => UserConfig[]
 function buildFace(value: unknown): BuildFace {
   if (value === undefined || value === 'host' || value === 'client') return value
   throw new Error(`tsdown: --env.DSH_BUILD_FACE must be host or client, received ${String(value)}`)
+}
+
+function buildVariant(value: unknown): 'upstream' | undefined {
+  if (value === undefined || value === 'upstream') return value
+  throw new Error(`tsdown: --env.DSH_BUILD_VARIANT must be upstream, received ${String(value)}`)
 }
 
 function clientLibraryConfig(
@@ -469,8 +499,26 @@ function matchesSpecifier(patterns: readonly RegExp[], specifier: string): boole
   return patterns.some(pattern => pattern.test(specifier))
 }
 
-function clientConfig(id: string, entry: string): UserConfig {
-  const isRequested = (specifier: string): boolean => clientExternals(id).has(specifier)
+function clientConfig(id: string, entry: string, variant?: 'upstream'): UserConfig {
+  // neverBundle feeds rolldown's external callback, which runs before resolveId
+  // hooks; in the variant those rows must fall through to the alias plugin
+  // instead, so it can rewrite the specifier before externalizing it.
+  const isRequested = (specifier: string): boolean =>
+    (variant !== undefined && UPSTREAM_ALIAS.has(specifier)) ? false : clientExternals(id).has(specifier)
+  const aliasPlugin = variant === undefined ? [] : [{
+    // Upstream-identity variant: rewrite Sponge module-table specifiers to the
+    // upstream rows dsh-desktop preloads. 'pre' runs this ahead of tsdown's own
+    // deps resolver, which would otherwise externalize the original specifier
+    // (the requested row is already in the externals set) and never reach here.
+    name: 'dsh-upstream-identity',
+    resolveId: {
+      order: 'pre' as const,
+      handler(source: string) {
+        const target = UPSTREAM_ALIAS.get(source)
+        return target === undefined ? null : { id: target, external: true }
+      },
+    },
+  }]
   return {
     name: `${id}/client`,
     entry: { client: entry },
@@ -511,7 +559,7 @@ function clientConfig(id: string, entry: string): UserConfig {
       'import.meta.env.MODE': JSON.stringify(process.env.NODE_ENV ?? 'production'),
       'import.meta.env': JSON.stringify({ MODE: process.env.NODE_ENV ?? 'production' }),
     },
-    plugins: [{
+    plugins: [...aliasPlugin, {
       // Bundle purity gate (build-time mirror of the module-edge rules): the
       // baseline and package-specific requests stay external, inline-safe wire layers
       // inline, and every other @oasisailab/sponge value import is a build error — a
@@ -521,6 +569,7 @@ function clientConfig(id: string, entry: string): UserConfig {
       name: 'dsh-client-bundle-purity',
       resolveId(source: string) {
         if (!source.startsWith('@oasisailab/sponge-')) return null
+        if (variant !== undefined && UPSTREAM_ALIAS.has(source)) return null // variant alias row: rewritten upstream
         if (isRequested(source)) return null // requested module-table row: external wins
         if (VENDORED_LIBRARY.test(source)) return null // vendored library: inline, no shared identity
         if (INLINE_SAFE.test(source) || GENERATED_REMOTE.test(source)) return null // wire contribution: inline is the point
