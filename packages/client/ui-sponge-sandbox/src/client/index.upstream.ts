@@ -52,9 +52,12 @@ declare module '@oasisailab/sponge-client-ui-slots' {
 const NS = 'sponge-sandbox'
 
 /**
- * Required services (cordis fiber inject) — identical to the product entry.
+ * Required services (cordis fiber inject). The product entry needs `slots` and
+ * `locale`; this variant additionally reads `ctx.layout` at apply time to
+ * capture the panel-selection face, so `layout` is declared here (undeclared
+ * property access throws "cannot get property ... without inject").
  */
-export const inject = ['slots', 'locale']
+export const inject = ['slots', 'locale', 'layout']
 
 /**
  * Register the entry button, the Desktop main panel, the panel bridge, and the

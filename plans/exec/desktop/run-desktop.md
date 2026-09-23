@@ -4,9 +4,9 @@
 
 ## 效果
 
-一条命令启动 Desktop 窗口，侧栏底部出现 Sponge 的「沙盒」「容器」两个入口；两个插件的 client bundle 在 renderer 模块表内被加载并服务，渲染进程零 JS 错误。
+一条命令启动 Desktop 窗口，侧栏底部出现 Sponge 的「沙盒」「容器」两个入口；两插件以**上游身份构建变体**注册为 keyed `main` 面板（`sponge.portal` / `sponge.sandbox`），渲染进程零 JS 错误。
 
-已知限制：入口按钮当前只完成挂载与渲染，**页面位未挂载**——点击不翻转、画布不出现。原因：上游布局只渲染 `sidebar` / `main` / `rightbar` / `shell.overlay` 四个槽，Sponge 扩展的 `shell.page` / `shell.sandbox` 需要小改 `ui-layout`（见文末适配清单）。
+已支持（P1 完成）：点击「容器」→ Portal 主页出现在主区可操作；点击「沙盒」→ 沙盒画布（SVG pan/zoom viewport）出现可拖拽/缩放；再点回到对话。整条链路经 `verify-p1-gui.mjs` CDP 实测通过（conversation → Portal → 沙盒 → conversation），截图存 `artifacts/p1-*.png`。
 
 ## 前置条件
 
@@ -50,6 +50,16 @@ $env:DSH_HOME = "D:\github projects\Sponge\plans\exec\desktop\artifacts\gui-home
 
 ## 验证（CDP 探测）
 
+一键 CDP 断言（推荐）——启动后运行：
+
+```powershell
+node "D:\github projects\Sponge\plans\exec\desktop\scripts\verify-p1-gui.mjs"
+```
+
+自动点击侧栏「容器」「沙盒」，断言 Portal / 沙盒面板开合与互斥，零渲染器异常，截图存 `artifacts/p1-*.png`；期望输出 `P1 GUI PASS`。
+
+手工探测（可选）：
+
 ```powershell
 $targets = (Invoke-WebRequest -Uri "http://127.0.0.1:9333/json/list" -UseBasicParsing).Content
 # 取 webSocketDebuggerUrl，然后：
@@ -71,7 +81,7 @@ node "D:\github projects\Sponge\plans\exec\desktop\scripts\cdp-probe.mjs" "ws://
 
 ## Desktop 侧适配清单（若对方要 pin Sponge / 支持页面位）
 
-1. **`shell.page` / `shell.sandbox` 页面位**：上游 `dsh-client-ui-layout` 只渲染 `sidebar` / `main` / `rightbar` / `shell.overlay`。让 Sponge 页面可操作需要小改布局插件：为 `shell.page` / `shell.sandbox` 增加主区渲染分支，并把侧栏 foot 的点击事件接到路由切换（当前按钮 `aria-pressed` 不翻转即缺这一步）。
+1. **Sponge 页面位（P1 已由 keyed `main` 解决，无需改布局）**：Desktop 的上游 `dsh-client-ui-layout` 只渲染 `sidebar` / `main` / `rightbar` / `shell.overlay` 槽，且 `main` 是 keyed 的（`selectPanel` 切换）。Sponge Portal / 沙盒插件以上游身份变体注册为 `main` 的 keyed 面板 `sponge.portal` / `sponge.sandbox`，侧栏 foot 按钮点击走 route→`selectPanel` 桥接，无需侵入上游。仅当后续要支持 Sponge 原生的 `shell.page` / `shell.sandbox` 槽语义时才需要改布局插件。
 2. **受支持契约（勿越界）**：只有 `desktopProfiles`、`desktopPnpm`（Host）、`desktopWindow`（Client）三个。不要依赖 `desktopRuntime`、`desktopPnpmBootstrap`、Electron 窗口/托盘、私有 Node helper。
 3. **宿主替换（P2）**：Desktop 固定 pinned upstream commit + vendored runtime tgz + launcher 校验，替换宿主必须 fork/symlink 替换工作树并改构建期 client 模块表别名（`@deepseek-ai/*` → `@oasisailab/sponge-*`）。可行性成立但属 Desktop 侧 3–5 人日改造，P1 路径即为当前可交付路径。
 4. **局域网无鉴权**：Desktop README 明示开放局域网 = 同网任何人可操作你的电脑，文档需照抄该警告。

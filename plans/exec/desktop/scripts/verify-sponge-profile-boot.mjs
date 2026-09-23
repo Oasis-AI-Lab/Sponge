@@ -253,6 +253,29 @@ try {
   for (const id of ['dsh-plugin-desktop', '@deepseek-ai/dsh-client-ui-sidebar', '@deepseek-ai/dsh-client-ui-conversation']) {
     if (!entries.has(id)) throw new Error(`renderer graph is missing base entry ${id}`)
   }
+
+  // P1-C: the variant client bundles must register the keyed `main` seat with
+  // the Sponge panel keys. The runtime registration happens inside the
+  // Electron renderer (covered by the GUI pass); here the served bytes are
+  // asserted statically over the module table's own URLs.
+  const mainRegistration = /name:\s*"main"/u
+  for (const plugin of SPONGE_PLUGINS) {
+    const entry = entries.get(plugin.name)
+    const bundle = await (await fetch(new URL(entry.url, expectedUrl), {
+      headers: {
+        [BROWSER_ACCESS.rendererHeader.name]: BROWSER_ACCESS.rendererHeader.value,
+        Cookie: cookie,
+      },
+    })).text()
+    const panelKey = plugin.id === 'ui-sponge-portal' ? 'sponge.portal' : 'sponge.sandbox'
+    if (!mainRegistration.test(bundle)) {
+      throw new Error(`${plugin.name} client bundle does not register the upstream main slot (no name: "main")`)
+    }
+    if (!new RegExp(`key:\\s*"${panelKey}"`, 'u').test(bundle)) {
+      throw new Error(`${plugin.name} client bundle is missing the keyed panel key "${panelKey}"`)
+    }
+    console.log(`variant bundle registers keyed main seat: ${plugin.name} -> ${panelKey}`)
+  }
   console.log(`SPONGE DESKTOP SMOKE PASS: both plugins loaded; renderer URL ${expectedUrl}`)
 } finally {
   await ctx?.fiber.dispose()
