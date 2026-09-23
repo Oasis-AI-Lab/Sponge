@@ -1383,6 +1383,9 @@ importers:
       '@oasisailab/sponge-client-ui-sponge-portal':
         specifier: workspace:^
         version: link:../../client/ui-sponge-portal
+      '@oasisailab/sponge-client-ui-sponge-sandbox':
+        specifier: workspace:^
+        version: link:../../client/ui-sponge-sandbox
       '@oasisailab/sponge-client-ui-subagent':
         specifier: workspace:^
         version: link:../../client/ui-subagent
@@ -2860,6 +2863,46 @@ importers:
         version: 18.3.31
 
   packages/client/ui-sponge-portal:
+    dependencies:
+      clsx:
+        specifier: ^2.0.0
+        version: 2.1.1
+    devDependencies:
+      '@oasisailab/sponge-client-locale':
+        specifier: workspace:^
+        version: link:../locale
+      '@oasisailab/sponge-client-runtime':
+        specifier: workspace:^
+        version: link:../runtime
+      '@oasisailab/sponge-client-test-runtime':
+        specifier: workspace:^
+        version: link:../../test-support/client-runtime
+      '@oasisailab/sponge-client-ui-layout':
+        specifier: workspace:^
+        version: link:../ui-layout
+      '@oasisailab/sponge-client-ui-primitives':
+        specifier: workspace:^
+        version: link:../ui-primitives
+      '@oasisailab/sponge-client-ui-sidebar':
+        specifier: workspace:^
+        version: link:../ui-sidebar
+      '@oasisailab/sponge-client-ui-slots':
+        specifier: workspace:^
+        version: link:../ui-slots
+      '@oasisailab/sponge-cordis':
+        specifier: workspace:^
+        version: link:../../../vendor/cordis
+      '@oasisailab/sponge-invariants':
+        specifier: workspace:^
+        version: link:../../runtime-diagnostics/invariants
+      '@types/react':
+        specifier: ~18.3.1
+        version: 18.3.31
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+
+  packages/client/ui-sponge-sandbox:
     dependencies:
       clsx:
         specifier: ^2.0.0

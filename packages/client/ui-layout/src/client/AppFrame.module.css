@@ -118,10 +118,12 @@
   pointer-events: auto;
 }
 
-/* The page seat spans the center and details tracks, above their content but
-   below the drag handles and the frame overlay. An empty seat renders
-   nothing; the sidebar stays on top of the page's own stacking context. */
-.pageLayer {
+/* The page and sandbox seats span the center and details tracks, above their
+   content but below the drag handles and the frame overlay. An empty seat
+   renders nothing; the sidebar stays on top of the layer's own stacking
+   context. */
+.pageLayer,
+.sandboxLayer {
   grid-column: 2 / 4;
   grid-row: 1;
   position: relative;
@@ -132,6 +134,7 @@
   background: var(--dsw-alias-bg-base);
 }
 
-.pageLayer:empty {
+.pageLayer:empty,
+.sandboxLayer:empty {
   display: none;
 }

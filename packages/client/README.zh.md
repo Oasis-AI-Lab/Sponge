@@ -43,6 +43,7 @@ dsh web GUI 的浏览器侧：shell 启动、浏览器与宿主通信、共享 U
 | [`ui-settings-general/`](ui-settings-general/README.md) | 提供常规设置分区。 |
 | [`ui-settings-models/`](ui-settings-models/README.md) | 提供模型提供方配置与 DeepSeek 配置引导。 |
 | [`ui-settings-plugin-inventory/`](ui-settings-plugin-inventory/README.md) | 向“插件”设置贡献只读的 Host Loader 清单标签页。 |
+| [`ui-sponge-sandbox/`](ui-sponge-sandbox/README.md) | 开发试验台，填入 frame 的 `shell.sandbox` 页面位（无产品语义——在落地 Editor 画布前试验 UI 效果的地方）。 |
 
 每个子文档负责自身的约定和详细行为。[slot 系统标准](../../.agents/notes/implemented/architecture/2026-07-22-slot-type-chain-implementation.md)与 [Web 客户端架构 Agent Note](../../.agents/notes/implemented/architecture/2026-07-19-gui-web-client-architecture.md)负责跨包组合与加载决策。
 

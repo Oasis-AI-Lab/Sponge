@@ -247,6 +247,13 @@
     - id: ui-sponge-portal
       name: '@oasisailab/sponge-client-ui-sponge-portal'
 
+    # Sponge Sandbox: the shell.sandbox development testbed (no product
+    # semantics — a place to trial UI effects before they land in the Editor
+    # canvas) and its sidebar-foot entry button. Drop this row to remove the
+    # entry cleanly; the empty seat costs nothing and Portal remains intact.
+    - id: ui-sponge-sandbox
+      name: '@oasisailab/sponge-client-ui-sponge-sandbox'
+
     # Input triggers: the '/' | '@' pipeline (ui-input-trigger), the command surface over
     # it (ui-commands), and the reference sources (ui-skill / ui-reference).
     - id: ui-input-trigger

@@ -1,0 +1,61 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  min-height: 0;
+}
+
+.status {
+  flex: none;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.viewport {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  touch-action: none;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-layer-1);
+  cursor: grab;
+  overflow: hidden;
+}
+
+.background {
+  fill: transparent;
+  cursor: grab;
+}
+
+.edge {
+  stroke: var(--dsw-alias-border-l4);
+  stroke-width: 2;
+}
+
+.box {
+  fill: var(--dsw-alias-bg-layer-3);
+  stroke: var(--dsw-alias-border-l4);
+  stroke-width: 1.5;
+  cursor: pointer;
+}
+
+/* The elected box reads against the layer backgrounds above; the primary
+   stroke marks the live selection under the Swiss black/white palette. */
+.boxSelected {
+  fill: var(--dsw-alias-state-business-tertiary);
+  stroke: var(--dsw-alias-state-business-primary);
+  stroke-width: 2;
+}
+
+.label {
+  fill: var(--dsw-alias-label-primary);
+  font-size: 14px;
+  font-weight: 500;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}

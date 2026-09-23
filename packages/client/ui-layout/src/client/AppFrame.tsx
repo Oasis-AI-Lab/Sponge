@@ -20,7 +20,7 @@ import css from './AppFrame.module.css'
 /** Full composed props: runtime share + child-slot render share + store share. */
 export type AppFrameProps =
   & PropsRuntime<'root'>
-  & PropsRenderSlots<'sidebar' | 'conversation' | 'details' | 'shell.overlay' | 'shell.page'>
+  & PropsRenderSlots<'sidebar' | 'conversation' | 'details' | 'shell.overlay' | 'shell.page' | 'shell.sandbox'>
   & PropsStore<ReturnType<typeof createLayoutStore>>
 
 /** Center column grid item (session-body building block). */
@@ -197,6 +197,11 @@ export function AppFrame({
           columns; the layer renders nothing while the seat is empty. */}
       <div className={css.pageLayer} data-shell-page>
         {renderSlot('shell.page', {})}
+      </div>
+      {/* The sandbox seat fills the area the same way; it carries no product
+          semantics — the dev testbed collapses to nothing while empty. */}
+      <div className={css.sandboxLayer} data-shell-sandbox>
+        {renderSlot('shell.sandbox', {})}
       </div>
       {/* The collapsed rail is fixed-width: no resize handle while closed. */}
       {!sidebarCollapsed && <DragHandle side="sidebar" left={cols.sidebar} onStart={onSidebarStart} onDrag={onSidebarDrag} onEnd={onDragEnd} />}

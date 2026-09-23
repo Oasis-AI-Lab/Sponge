@@ -92,6 +92,18 @@ declare module '@oasisailab/sponge-client-ui-slots' {
      * The owner share is empty; the occupant decides its own routing state.
      */
     'shell.page': { kind: 'single'; scope: 'root'; owner: ShellPageOwnerProps }
+    /**
+     * A second full-surface page seat, semantically identical to `shell.page`
+     * but deliberately named for the development testbed. OCCUPIED by the
+     * Sponge Sandbox surface (ui-sponge-sandbox's SandboxShell), which
+     * experiments on UI effects that later land in the Editor canvas; the
+     * seat exists to prove a mechanism pointer, it carries NO product
+     * semantics of its own. Like `shell.page` it collapses to nothing while
+     * its occupant renders empty. Only one occupant may register.
+     *
+     * The owner share is empty; the occupant decides its own routing state.
+     */
+    'shell.sandbox': { kind: 'single'; scope: 'root'; owner: ShellSandboxOwnerProps }
   }
 }
 
@@ -118,6 +130,9 @@ export interface DetailsOwnerProps {}
 /** Page owner share: empty — the occupant owns its routing and presentation. */
 export interface ShellPageOwnerProps {}
 
+/** Sandbox page owner share: empty — the occupant owns its routing and presentation. */
+export interface ShellSandboxOwnerProps {}
+
 /** Required services (cordis fiber inject — the loader passes all module exports as an object plugin). */
 export const inject = ['slots', 'theme']
 
@@ -139,6 +154,7 @@ export function apply(ctx: ClientContext): void {
         'details': { kind: 'single', scope: 'session' },
         'shell.overlay': { kind: 'list', scope: 'root' },
         'shell.page': { kind: 'single', scope: 'root' },
+        'shell.sandbox': { kind: 'single', scope: 'root' },
       },
       // Exclusive store: the factory itself — the framework instantiates per
       // entry and delivers useStore/actions to AppFrame as standard props.
