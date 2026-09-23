@@ -129,7 +129,14 @@ export function clientBundle(
   return ({ env }) => {
     const face = buildFace(env?.DSH_BUILD_FACE)
     const variant = buildVariant(env?.DSH_BUILD_VARIANT)
-    const clientEntry = face === undefined ? 'src/client/index.ts' : 'lib/types/client/index.js'
+    const productClientEntry = face === undefined ? 'src/client/index.ts' : 'lib/types/client/index.js'
+    // The upstream variant may route the client entry to an identity variant
+    // (options.variantEntry); packages without one keep the product entry, so
+    // a workspace-wide variant build still emits their upstream-identity
+    // artifacts.
+    const clientEntry = variant === undefined
+      ? productClientEntry
+      : options.variantEntry ?? productClientEntry
     // The upstream variant writes every artifact into its own directory so a
     // variant build never touches the product lib/ (which a later product
     // build reads). tsc emits lib/types first; both faces consume it.
@@ -227,6 +234,12 @@ interface ClientBundleOptions {
   readonly companions?: readonly UserConfig[]
   /** Overrides for the package's primary Node-side library config. */
   readonly lib?: UserConfig
+  /**
+   * Client entry for the DSH_BUILD_VARIANT=upstream build (the
+   * upstream-identity variant entry; product builds keep the default entry).
+   * Defaults to the product entry when a package has no variant.
+   */
+  readonly variantEntry?: string
 }
 
 type BuildFace = 'host' | 'client' | undefined
