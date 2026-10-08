@@ -596,6 +596,11 @@ export const TYPE_LINK_EXEMPTIONS: Readonly<Record<string, string>> = {
   WorkflowAgentEndInfo: 'event-local snapshot is owned by packages/workflow/workflow/src/index.ts',
   WorkflowAgentInfo: 'event-local snapshot is owned by packages/workflow/workflow/src/index.ts',
   WorkflowResultInfo: 'event-local snapshot is owned by packages/workflow/workflow/src/index.ts',
+  MoveUpDetector: 'experimental detector seam is owned by packages/experimental/move-up-detector/README.md',
+  MoveUpDetectorContext: 'experimental judgment context is owned by packages/experimental/move-up-detector/README.md',
+  MoveUpDetectorId: 'experimental detector registry key is owned by packages/experimental/move-up-detector/src/brand.ts',
+  MoveUpObservation: 'experimental observation record is owned by packages/experimental/move-up-detector/README.md',
+  SemanticChunk: 'experimental candidate unit is owned by packages/experimental/move-up-detector/README.md',
 }
 
 /** Repository data policy consumed by the Cordis catalog projector. */

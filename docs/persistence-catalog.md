@@ -498,6 +498,26 @@ Source: [`packages/llm/llm-retry/src/types.ts:9`](../packages/llm/llm-retry/src/
 
 Source: [`packages/llm/llm-retry/src/types.ts:11`](../packages/llm/llm-retry/src/types.ts)
 
+### `move-up/*`
+
+<a id="move-uppromoted--log-only"></a>
+
+#### `move-up/promoted` — log-only
+
+```ts persistence-catalog
+/**
+ * One conversation chunk was promoted into a Space object by this plugin,
+ * without a model request. Log-only: `deriveMessages()` ignores it, and it
+ * carries no object content — the object store is authoritative for the
+ * object's fields. It records that a promotion happened, the promoted
+ * object's id and kind, and the detector decision that caused it, which is
+ * the session log's answer to "why did that sentence become an object".
+ */
+'move-up/promoted': { objectId: string; kind: string; decision: MoveUpDecision }
+```
+
+Source: [`packages/experimental/move-up-space/src/types.ts:78`](../packages/experimental/move-up-space/src/types.ts)
+
 ### `permission/*`
 
 <a id="permissionpreset--log-only"></a>

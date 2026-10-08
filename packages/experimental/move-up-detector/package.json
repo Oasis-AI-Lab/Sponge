@@ -1,0 +1,51 @@
+{
+  "name": "@oasisailab/sponge-experimental-move-up-detector",
+  "description": "Shadow-mode Move Up detector: observes the conversation log and records candidate-chunk judgments through replaceable detectors",
+  "version": "0.1.0-rc.8",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/experimental/move-up-detector"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/types/**/*.d.ts"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@oasisailab/sponge-schemastery": "workspace:^"
+  },
+  "peerDependencies": {
+    "@oasisailab/sponge-brand": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  },
+  "devDependencies": {
+    "@oasisailab/sponge-brand": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-include": "workspace:^",
+    "@oasisailab/sponge-cordis-plugin-loader": "workspace:^",
+    "@oasisailab/sponge-invariants": "workspace:^",
+    "@oasisailab/sponge-llm": "workspace:^",
+    "@oasisailab/sponge-session": "workspace:^",
+    "@oasisailab/sponge-cordis": "workspace:^"
+  }
+}

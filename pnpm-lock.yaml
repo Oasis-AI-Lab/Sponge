@@ -490,6 +490,12 @@ importers:
       '@oasisailab/sponge-experimental-agent-team':
         specifier: workspace:*
         version: link:../packages/experimental/agent-team
+      '@oasisailab/sponge-experimental-move-up-detector':
+        specifier: workspace:*
+        version: link:../packages/experimental/move-up-detector
+      '@oasisailab/sponge-experimental-move-up-space':
+        specifier: workspace:*
+        version: link:../packages/experimental/move-up-space
       '@oasisailab/sponge-experimental-tool-agent-team':
         specifier: workspace:*
         version: link:../packages/experimental/tool-agent-team
@@ -4221,6 +4227,95 @@ importers:
       '@oasisailab/sponge-subagent-spawn-in-process':
         specifier: workspace:^
         version: link:../../subagent/subagent-spawn-in-process
+
+  packages/experimental/move-up-detector:
+    dependencies:
+      '@oasisailab/sponge-schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
+    devDependencies:
+      '@oasisailab/sponge-brand':
+        specifier: workspace:^
+        version: link:../../util/brand
+      '@oasisailab/sponge-cordis':
+        specifier: workspace:^
+        version: link:../../../vendor/cordis
+      '@oasisailab/sponge-cordis-plugin-include':
+        specifier: workspace:^
+        version: link:../../../vendor/include
+      '@oasisailab/sponge-cordis-plugin-loader':
+        specifier: workspace:^
+        version: link:../../../vendor/loader
+      '@oasisailab/sponge-invariants':
+        specifier: workspace:^
+        version: link:../../runtime-diagnostics/invariants
+      '@oasisailab/sponge-llm':
+        specifier: workspace:^
+        version: link:../../llm/llm
+      '@oasisailab/sponge-session':
+        specifier: workspace:^
+        version: link:../../core/session
+
+  packages/experimental/move-up-space:
+    dependencies:
+      '@oasisailab/sponge-schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+    devDependencies:
+      '@oasisailab/sponge-agent':
+        specifier: workspace:^
+        version: link:../../core/agent
+      '@oasisailab/sponge-agent-loop':
+        specifier: workspace:^
+        version: link:../../core/agent-loop
+      '@oasisailab/sponge-agent-loop-testkit':
+        specifier: workspace:^
+        version: link:../../test-support/agent-loop-testkit
+      '@oasisailab/sponge-brand':
+        specifier: workspace:^
+        version: link:../../util/brand
+      '@oasisailab/sponge-cordis':
+        specifier: workspace:^
+        version: link:../../../vendor/cordis
+      '@oasisailab/sponge-cordis-plugin-include':
+        specifier: workspace:^
+        version: link:../../../vendor/include
+      '@oasisailab/sponge-cordis-plugin-loader':
+        specifier: workspace:^
+        version: link:../../../vendor/loader
+      '@oasisailab/sponge-experimental-move-up-detector':
+        specifier: workspace:^
+        version: link:../move-up-detector
+      '@oasisailab/sponge-invariants':
+        specifier: workspace:^
+        version: link:../../runtime-diagnostics/invariants
+      '@oasisailab/sponge-llm':
+        specifier: workspace:^
+        version: link:../../llm/llm
+      '@oasisailab/sponge-session':
+        specifier: workspace:^
+        version: link:../../core/session
+      '@oasisailab/sponge-session-persistence-jsonl':
+        specifier: workspace:^
+        version: link:../../session/session-persistence-jsonl
+      '@oasisailab/sponge-storage':
+        specifier: workspace:^
+        version: link:../../storage/storage
+      '@oasisailab/sponge-storage-domain':
+        specifier: workspace:^
+        version: link:../../storage/storage-domain
+      '@oasisailab/sponge-storage-json':
+        specifier: workspace:^
+        version: link:../../storage/storage-json
+      '@oasisailab/sponge-tools':
+        specifier: workspace:^
+        version: link:../../core/tools
+      '@oasisailab/sponge-user-questions':
+        specifier: workspace:^
+        version: link:../../interaction/user-questions
 
   packages/experimental/tool-agent-team:
     dependencies:

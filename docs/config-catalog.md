@@ -9,7 +9,7 @@ This file is GENERATED from source (`scripts/gen-config-catalog.ts`) and verifie
 
 A `Requires:` line lists the service keys the plugin `inject`s: its `cordis.yml` tree must also load providers for those services. Scope is the harness tier (`packages/`); the vendored cordis plugins a config tree may also load (`hmr`, the console logger, …) are pinned upstream source ([vendoring policy](../vendor/README.md)) and not catalogued here.
 
-<a id="deepseek-aidsh-acp"></a>
+<a id="oasisailabsponge-acp"></a>
 
 ## `@oasisailab/sponge-acp`
 
@@ -31,7 +31,7 @@ Depends on: `Stream` (`@agentclientprotocol/sdk`)
 
 Source: [`packages/acp/acp/src/index.ts:71`](../packages/acp/acp/src/index.ts)
 
-<a id="deepseek-aidsh-acp-demo"></a>
+<a id="oasisailabsponge-acp-demo"></a>
 
 ## `@oasisailab/sponge-acp-demo`
 
@@ -57,7 +57,7 @@ export interface Config {
   toolOrder?: string[]
   /** Tool-registry config — its presentation `mode` (forwarded through agent-spine-demo; see dsh-tools). */
   tools?: ToolsConfig
-  /** DeepSeek Harness home directory exposed to bash and used for local skill discovery. */
+  /** Sponge home directory exposed to bash and used for local skill discovery. */
   dshHome?: string
   /** Fallback session-title limits forwarded through agent-spine-demo. */
   sessionTitle?: NonNullable<agentCore.Config['sessionTitle']>
@@ -82,11 +82,11 @@ export interface Config {
 }
 ```
 
-Depends on: [`agentCore`](../packages/examples/agent-spine-demo/src/index.ts) · [`JsonlCompression`](../packages/session/session-persistence-jsonl/src/index.ts) · [`ToolsConfig`](#deepseek-aidsh-tools)
+Depends on: [`agentCore`](../packages/examples/agent-spine-demo/src/index.ts) · [`JsonlCompression`](../packages/session/session-persistence-jsonl/src/index.ts) · [`ToolsConfig`](#oasisailabsponge-tools)
 
 Source: [`packages/examples/acp-demo/src/index.ts:39`](../packages/examples/acp-demo/src/index.ts)
 
-<a id="deepseek-aidsh-agent-default-model"></a>
+<a id="oasisailabsponge-agent-default-model"></a>
 
 ## `@oasisailab/sponge-agent-default-model`
 
@@ -102,7 +102,7 @@ export interface Config {
 
 Source: [`packages/core/agent-default-model/src/index.ts:41`](../packages/core/agent-default-model/src/index.ts)
 
-<a id="deepseek-aidsh-agent-instructions"></a>
+<a id="oasisailabsponge-agent-instructions"></a>
 
 ## `@oasisailab/sponge-agent-instructions`
 
@@ -132,7 +132,7 @@ export interface Config {
 
 Source: [`packages/context/agent-instructions/src/config.ts:18`](../packages/context/agent-instructions/src/config.ts)
 
-<a id="deepseek-aidsh-agent-loop"></a>
+<a id="oasisailabsponge-agent-loop"></a>
 
 ## `@oasisailab/sponge-agent-loop`
 
@@ -164,7 +164,7 @@ Depends on: [`AgentOptions`](subsystems/core.md) · [`SessionId`](subsystems/cor
 
 Source: [`packages/core/agent-loop/src/index.ts:255`](../packages/core/agent-loop/src/index.ts)
 
-<a id="deepseek-aidsh-agent-presets"></a>
+<a id="oasisailabsponge-agent-presets"></a>
 
 ## `@oasisailab/sponge-agent-presets`
 
@@ -202,7 +202,7 @@ export type PresetTrust = 'system' | 'user'
 
 Source: [`packages/preset/agent-presets/src/preset.ts:52`](../packages/preset/agent-presets/src/preset.ts)
 
-<a id="deepseek-aidsh-agent-spine-demo"></a>
+<a id="oasisailabsponge-agent-spine-demo"></a>
 
 ## `@oasisailab/sponge-agent-spine-demo`
 
@@ -245,7 +245,7 @@ export interface Config {
   toolOrder?: SystemPromptConfig['toolOrder']
   /** The tool registry's config — its presentation `mode` (see dsh-tools' `Config`). */
   tools?: ToolsConfig
-  /** DeepSeek Harness home directory shared by shell context and local skill discovery. */
+  /** Sponge home directory shared by shell context and local skill discovery. */
   dshHome?: string
   /** Deterministic fallback and accepted-title limits; omission uses the bundle's example policy. */
   sessionTitle?: SessionTitleConfig
@@ -290,11 +290,11 @@ export interface GoalConfig {
 }
 ```
 
-Depends on: [`AgentLoopConfig`](#deepseek-aidsh-agent-loop) · [`GoalDomainConfig`](#deepseek-aidsh-goal) · [`InvariantConfig`](#deepseek-aidsh-invariants) · [`JobsConfig`](#deepseek-aidsh-jobs-local) · [`SessionTitleConfig`](#deepseek-aidsh-session-title) · [`SkillFileSystem`](../packages/skill/skill-filesystem/src/index.ts) · [`SkillRegistryConfig`](#deepseek-aidsh-skill) · [`SystemPromptConfig`](#deepseek-aidsh-system-prompt) · [`toolBash`](../packages/shell/tool-bash/src/index.ts) · [`toolGoal`](../packages/goal/tool-goal/src/index.ts) · [`toolJobs`](../packages/jobs/tool-jobs/src/index.ts) · [`ToolsConfig`](#deepseek-aidsh-tools) · [`toolSkill`](../packages/skill/tool-skill/src/index.ts) · [`workspaceContext`](../packages/context/agent-instructions/src/index.ts)
+Depends on: [`AgentLoopConfig`](#oasisailabsponge-agent-loop) · [`GoalDomainConfig`](#oasisailabsponge-goal) · [`InvariantConfig`](#oasisailabsponge-invariants) · [`JobsConfig`](#oasisailabsponge-jobs-local) · [`SessionTitleConfig`](#oasisailabsponge-session-title) · [`SkillFileSystem`](../packages/skill/skill-filesystem/src/index.ts) · [`SkillRegistryConfig`](#oasisailabsponge-skill) · [`SystemPromptConfig`](#oasisailabsponge-system-prompt) · [`toolBash`](../packages/shell/tool-bash/src/index.ts) · [`toolGoal`](../packages/goal/tool-goal/src/index.ts) · [`toolJobs`](../packages/jobs/tool-jobs/src/index.ts) · [`ToolsConfig`](#oasisailabsponge-tools) · [`toolSkill`](../packages/skill/tool-skill/src/index.ts) · [`workspaceContext`](../packages/context/agent-instructions/src/index.ts)
 
 Source: [`packages/examples/agent-spine-demo/src/index.ts:92`](../packages/examples/agent-spine-demo/src/index.ts)
 
-<a id="deepseek-aidsh-agent-tool-presentation"></a>
+<a id="oasisailabsponge-agent-tool-presentation"></a>
 
 ## `@oasisailab/sponge-agent-tool-presentation`
 
@@ -318,7 +318,7 @@ Depends on: [`ToolPresentationMode`](subsystems/tools.md)
 
 Source: [`packages/core/agent-tool-presentation/src/index.ts:38`](../packages/core/agent-tool-presentation/src/index.ts)
 
-<a id="deepseek-aidsh-attachment-local"></a>
+<a id="oasisailabsponge-attachment-local"></a>
 
 ## `@oasisailab/sponge-attachment-local`
 
@@ -342,7 +342,7 @@ export interface Config {
 
 Source: [`packages/attachment/attachment-local/src/index.ts:31`](../packages/attachment/attachment-local/src/index.ts)
 
-<a id="deepseek-aidsh-bash-local"></a>
+<a id="oasisailabsponge-bash-local"></a>
 
 ## `@oasisailab/sponge-bash-local`
 
@@ -368,7 +368,7 @@ export interface Config {
 
 Source: [`packages/shell/bash-local/src/index.ts:41`](../packages/shell/bash-local/src/index.ts)
 
-<a id="deepseek-aidsh-bash-sandbox"></a>
+<a id="oasisailabsponge-bash-sandbox"></a>
 
 ## `@oasisailab/sponge-bash-sandbox`
 
@@ -385,11 +385,11 @@ Requires: `subprocess` · `sandbox` · `sandboxPolicy`
 export type Config = LocalConfig
 ```
 
-Depends on: [`LocalConfig`](#deepseek-aidsh-bash-local)
+Depends on: [`LocalConfig`](#oasisailabsponge-bash-local)
 
 Source: [`packages/shell/bash-sandbox/src/index.ts:35`](../packages/shell/bash-sandbox/src/index.ts)
 
-<a id="deepseek-aidsh-client-connection"></a>
+<a id="oasisailabsponge-client-connection"></a>
 
 ## `@oasisailab/sponge-client-connection`
 
@@ -414,7 +414,7 @@ export interface ConnectionConfig {
 
 Source: [`packages/client/connection/src/index.ts:50`](../packages/client/connection/src/index.ts)
 
-<a id="deepseek-aidsh-client-hmr"></a>
+<a id="oasisailabsponge-client-hmr"></a>
 
 ## `@oasisailab/sponge-client-hmr`
 
@@ -430,7 +430,7 @@ export interface Config {
 
 Source: [`packages/client/hmr/src/index.ts:31`](../packages/client/hmr/src/index.ts)
 
-<a id="deepseek-aidsh-code-runtime-worker-thread"></a>
+<a id="oasisailabsponge-code-runtime-worker-thread"></a>
 
 ## `@oasisailab/sponge-code-runtime-worker-thread`
 
@@ -467,7 +467,7 @@ export interface Config {
 
 Source: [`packages/code-runtime/code-runtime-worker-thread/src/index.ts:25`](../packages/code-runtime/code-runtime-worker-thread/src/index.ts)
 
-<a id="deepseek-aidsh-compaction-basic"></a>
+<a id="oasisailabsponge-compaction-basic"></a>
 
 ## `@oasisailab/sponge-compaction-basic`
 
@@ -513,7 +513,7 @@ export interface ModelCompactPolicyConfig extends CompactionPolicyConfig {
 
 Source: [`packages/compaction/compaction-basic/src/types.ts:38`](../packages/compaction/compaction-basic/src/types.ts)
 
-<a id="deepseek-aidsh-compaction-tool-result-pruner"></a>
+<a id="oasisailabsponge-compaction-tool-result-pruner"></a>
 
 ## `@oasisailab/sponge-compaction-tool-result-pruner`
 
@@ -533,7 +533,7 @@ export interface ToolResultPruneConfig {
 
 Source: [`packages/compaction/compaction-tool-result-pruner/src/types.ts:4`](../packages/compaction/compaction-tool-result-pruner/src/types.ts)
 
-<a id="deepseek-aidsh-cordis-host-runner"></a>
+<a id="oasisailabsponge-cordis-host-runner"></a>
 
 ## `@oasisailab/sponge-cordis-host-runner`
 
@@ -549,7 +549,7 @@ export interface Config {
 
 Source: [`packages/extensions/cordis-host-runner/src/index.ts:88`](../packages/extensions/cordis-host-runner/src/index.ts)
 
-<a id="deepseek-aidsh-credentials-local"></a>
+<a id="oasisailabsponge-credentials-local"></a>
 
 ## `@oasisailab/sponge-credentials-local`
 
@@ -569,7 +569,7 @@ export interface Config {
 
 Source: [`packages/credentials/credentials-local/src/index.ts:55`](../packages/credentials/credentials-local/src/index.ts)
 
-<a id="deepseek-aidsh-e2b"></a>
+<a id="oasisailabsponge-e2b"></a>
 
 ## `@oasisailab/sponge-e2b`
 
@@ -587,7 +587,7 @@ export interface Config {
 
 Source: [`packages/e2b/e2b/src/index.ts:43`](../packages/e2b/e2b/src/index.ts)
 
-<a id="deepseek-aidsh-experimental-agent-team"></a>
+<a id="oasisailabsponge-experimental-agent-team"></a>
 
 ## `@oasisailab/sponge-experimental-agent-team`
 
@@ -611,7 +611,43 @@ export interface Config {
 
 Source: [`packages/experimental/agent-team/src/types.ts:125`](../packages/experimental/agent-team/src/types.ts)
 
-<a id="deepseek-aidsh-experimental-tool-agent-team"></a>
+<a id="oasisailabsponge-experimental-move-up-detector"></a>
+
+## `@oasisailab/sponge-experimental-move-up-detector`
+
+```ts config-catalog
+/** Deployment configuration for the Move Up detector plugin. */
+export interface Config {
+  /** Registered detector ids to run per chunk, in order. */
+  readonly detectors?: string[]
+  /** Maximum recent conversation events supplied as judgment context. */
+  readonly contextWindow?: number
+  /** Maximum observations retained in memory for inspection. */
+  readonly recentLimit?: number
+}
+```
+
+Source: [`packages/experimental/move-up-detector/src/types.ts:125`](../packages/experimental/move-up-detector/src/types.ts)
+
+<a id="oasisailabsponge-experimental-move-up-space"></a>
+
+## `@oasisailab/sponge-experimental-move-up-space`
+
+Requires: `storageDomain` · `tools` · `moveUpDetector`
+
+```ts config-catalog
+/** Deployment configuration for the Move Up space plugin. */
+export interface Config {
+  /** Maximum recent conversation events supplied as judgment context. */
+  readonly contextWindow?: number
+  /** Maximum objects one `space_recall` call returns. */
+  readonly maxRecalled?: number
+}
+```
+
+Source: [`packages/experimental/move-up-space/src/index.ts:56`](../packages/experimental/move-up-space/src/index.ts)
+
+<a id="oasisailabsponge-experimental-tool-agent-team"></a>
 
 ## `@oasisailab/sponge-experimental-tool-agent-team`
 
@@ -629,7 +665,7 @@ export interface Config {
 
 Source: [`packages/experimental/tool-agent-team/src/index.ts:17`](../packages/experimental/tool-agent-team/src/index.ts)
 
-<a id="deepseek-aidsh-file-reference-local"></a>
+<a id="oasisailabsponge-file-reference-local"></a>
 
 ## `@oasisailab/sponge-file-reference-local`
 
@@ -649,7 +685,7 @@ export interface Config {
 
 Source: [`packages/context/file-reference-local/src/index.ts:35`](../packages/context/file-reference-local/src/index.ts)
 
-<a id="deepseek-aidsh-fs-local"></a>
+<a id="oasisailabsponge-fs-local"></a>
 
 ## `@oasisailab/sponge-fs-local`
 
@@ -668,7 +704,7 @@ export interface Config {
 
 Source: [`packages/fs/fs-local/src/index.ts:41`](../packages/fs/fs-local/src/index.ts)
 
-<a id="deepseek-aidsh-fs-sandbox"></a>
+<a id="oasisailabsponge-fs-sandbox"></a>
 
 ## `@oasisailab/sponge-fs-sandbox`
 
@@ -684,11 +720,11 @@ Requires: `sandboxPolicy`
 export type Config = LocalConfig
 ```
 
-Depends on: [`LocalConfig`](#deepseek-aidsh-fs-local)
+Depends on: [`LocalConfig`](#oasisailabsponge-fs-local)
 
 Source: [`packages/fs/fs-sandbox/src/index.ts:49`](../packages/fs/fs-sandbox/src/index.ts)
 
-<a id="deepseek-aidsh-goal"></a>
+<a id="oasisailabsponge-goal"></a>
 
 ## `@oasisailab/sponge-goal`
 
@@ -704,7 +740,7 @@ export interface Config {
 
 Source: [`packages/goal/goal/src/index.ts:116`](../packages/goal/goal/src/index.ts)
 
-<a id="deepseek-aidsh-headless"></a>
+<a id="oasisailabsponge-headless"></a>
 
 ## `@oasisailab/sponge-headless`
 
@@ -720,7 +756,7 @@ export interface Config {
 
 Source: [`packages/bundle/headless/src/index.ts:31`](../packages/bundle/headless/src/index.ts)
 
-<a id="deepseek-aidsh-hooks-claude-code"></a>
+<a id="oasisailabsponge-hooks-claude-code"></a>
 
 ## `@oasisailab/sponge-hooks-claude-code`
 
@@ -758,7 +794,7 @@ export interface Config {
 
 Source: [`packages/hooks/hooks-claude-code/src/index.ts:45`](../packages/hooks/hooks-claude-code/src/index.ts)
 
-<a id="deepseek-aidsh-hooks-codex"></a>
+<a id="oasisailabsponge-hooks-codex"></a>
 
 ## `@oasisailab/sponge-hooks-codex`
 
@@ -785,7 +821,7 @@ export interface Config {
 
 Source: [`packages/hooks/hooks-codex/src/index.ts:44`](../packages/hooks/hooks-codex/src/index.ts)
 
-<a id="deepseek-aidsh-host-apiproxy"></a>
+<a id="oasisailabsponge-host-apiproxy"></a>
 
 ## `@oasisailab/sponge-host-apiproxy`
 
@@ -819,7 +855,7 @@ export interface Config {
 
 Source: [`packages/host/apiproxy/src/index.ts:41`](../packages/host/apiproxy/src/index.ts)
 
-<a id="deepseek-aidsh-host-directory-picker-browse"></a>
+<a id="oasisailabsponge-host-directory-picker-browse"></a>
 
 ## `@oasisailab/sponge-host-directory-picker-browse`
 
@@ -833,7 +869,7 @@ export interface Config {
 
 Source: [`packages/host/directory-picker-browse/src/index.ts:181`](../packages/host/directory-picker-browse/src/index.ts)
 
-<a id="deepseek-aidsh-host-frontend-static"></a>
+<a id="oasisailabsponge-host-frontend-static"></a>
 
 ## `@oasisailab/sponge-host-frontend-static`
 
@@ -849,7 +885,7 @@ export interface Config {
 
 Source: [`packages/host/frontend-static/src/index.ts:28`](../packages/host/frontend-static/src/index.ts)
 
-<a id="deepseek-aidsh-host-webserver"></a>
+<a id="oasisailabsponge-host-webserver"></a>
 
 ## `@oasisailab/sponge-host-webserver`
 
@@ -865,7 +901,7 @@ export interface Config {
 
 Source: [`packages/host/webserver/src/index.ts:45`](../packages/host/webserver/src/index.ts)
 
-<a id="deepseek-aidsh-invariants"></a>
+<a id="oasisailabsponge-invariants"></a>
 
 ## `@oasisailab/sponge-invariants`
 
@@ -883,7 +919,7 @@ export interface Config {
 
 Source: [`packages/runtime-diagnostics/invariants/src/index.ts:15`](../packages/runtime-diagnostics/invariants/src/index.ts)
 
-<a id="deepseek-aidsh-jobs-local"></a>
+<a id="oasisailabsponge-jobs-local"></a>
 
 ## `@oasisailab/sponge-jobs-local`
 
@@ -900,7 +936,7 @@ export interface Config {
 
 Source: [`packages/jobs/jobs-local/src/index.ts:31`](../packages/jobs/jobs-local/src/index.ts)
 
-<a id="deepseek-aidsh-llm-deepseek"></a>
+<a id="oasisailabsponge-llm-deepseek"></a>
 
 ## `@oasisailab/sponge-llm-deepseek`
 
@@ -959,7 +995,7 @@ Depends on: [`ModelModality`](../packages/llm/llm/src/index.ts) · [`RetryPolicy
 
 Source: [`packages/llm/llm-deepseek/src/index.ts:66`](../packages/llm/llm-deepseek/src/index.ts)
 
-<a id="deepseek-aidsh-llm-pi-ai"></a>
+<a id="oasisailabsponge-llm-pi-ai"></a>
 
 ## `@oasisailab/sponge-llm-pi-ai`
 
@@ -1209,7 +1245,7 @@ Depends on: `Api` (`@earendil-works/pi-ai`) · `CacheRetention` (`@earendil-work
 
 Source: [`packages/llm/llm-pi-ai/src/config.ts:201`](../packages/llm/llm-pi-ai/src/config.ts)
 
-<a id="deepseek-aidsh-llm-replay"></a>
+<a id="oasisailabsponge-llm-replay"></a>
 
 ## `@oasisailab/sponge-llm-replay`
 
@@ -1277,7 +1313,7 @@ Depends on: [`ModelModality`](../packages/llm/llm/src/index.ts) · [`RetryPolicy
 
 Source: [`packages/test-support/llm-replay/src/index.ts:776`](../packages/test-support/llm-replay/src/index.ts)
 
-<a id="deepseek-aidsh-llm-retry"></a>
+<a id="oasisailabsponge-llm-retry"></a>
 
 ## `@oasisailab/sponge-llm-retry`
 
@@ -1290,7 +1326,7 @@ export type Config = Readonly<Record<string, never>>
 
 Source: [`packages/llm/llm-retry/src/index.ts:24`](../packages/llm/llm-retry/src/index.ts)
 
-<a id="deepseek-aidsh-lsp-stdio"></a>
+<a id="oasisailabsponge-lsp-stdio"></a>
 
 ## `@oasisailab/sponge-lsp-stdio`
 
@@ -1332,7 +1368,7 @@ export interface LspLocalServerConfig {
 
 Source: [`packages/lsp/lsp-stdio/src/index.ts:82`](../packages/lsp/lsp-stdio/src/index.ts)
 
-<a id="deepseek-aidsh-mcp-client"></a>
+<a id="oasisailabsponge-mcp-client"></a>
 
 ## `@oasisailab/sponge-mcp-client`
 
@@ -1405,7 +1441,7 @@ export interface ReconnectConfig {
 
 Source: [`packages/mcp/mcp-client/src/index.ts:98`](../packages/mcp/mcp-client/src/index.ts)
 
-<a id="deepseek-aidsh-message-feedback"></a>
+<a id="oasisailabsponge-message-feedback"></a>
 
 ## `@oasisailab/sponge-message-feedback`
 
@@ -1421,7 +1457,7 @@ export interface Config {
 
 Source: [`packages/feedback/message-feedback/src/index.ts:49`](../packages/feedback/message-feedback/src/index.ts)
 
-<a id="deepseek-aidsh-permission-presets"></a>
+<a id="oasisailabsponge-permission-presets"></a>
 
 ## `@oasisailab/sponge-permission-presets`
 
@@ -1460,7 +1496,7 @@ Depends on: [`ApprovalPolicy`](subsystems/approval.md) · [`SandboxMode`](subsys
 
 Source: [`packages/interaction/permission-presets/src/index.ts:140`](../packages/interaction/permission-presets/src/index.ts)
 
-<a id="deepseek-aidsh-persona"></a>
+<a id="oasisailabsponge-persona"></a>
 
 ## `@oasisailab/sponge-persona`
 
@@ -1484,7 +1520,7 @@ export interface Config {
 
 Source: [`packages/preset/persona/src/index.ts:34`](../packages/preset/persona/src/index.ts)
 
-<a id="deepseek-aidsh-plan-mode"></a>
+<a id="oasisailabsponge-plan-mode"></a>
 
 ## `@oasisailab/sponge-plan-mode`
 
@@ -1500,7 +1536,7 @@ export interface PlanModeConfig {
 
 Source: [`packages/plan/plan-mode/src/index.ts:71`](../packages/plan/plan-mode/src/index.ts)
 
-<a id="deepseek-aidsh-pwsh-local"></a>
+<a id="oasisailabsponge-pwsh-local"></a>
 
 ## `@oasisailab/sponge-pwsh-local`
 
@@ -1533,7 +1569,7 @@ export interface Config {
 
 Source: [`packages/shell/pwsh-local/src/index.ts:58`](../packages/shell/pwsh-local/src/index.ts)
 
-<a id="deepseek-aidsh-pwsh-sandbox"></a>
+<a id="oasisailabsponge-pwsh-sandbox"></a>
 
 ## `@oasisailab/sponge-pwsh-sandbox`
 
@@ -1551,11 +1587,11 @@ Requires: `subprocess` · `sandbox` · `sandboxPolicy`
 export type Config = LocalConfig
 ```
 
-Depends on: [`LocalConfig`](#deepseek-aidsh-pwsh-local)
+Depends on: [`LocalConfig`](#oasisailabsponge-pwsh-local)
 
 Source: [`packages/shell/pwsh-sandbox/src/index.ts:40`](../packages/shell/pwsh-sandbox/src/index.ts)
 
-<a id="deepseek-aidsh-repeat-tool-reminder"></a>
+<a id="oasisailabsponge-repeat-tool-reminder"></a>
 
 ## `@oasisailab/sponge-repeat-tool-reminder`
 
@@ -1589,7 +1625,7 @@ export interface Config {
 
 Source: [`packages/guard/repeat-tool-reminder/src/index.ts:28`](../packages/guard/repeat-tool-reminder/src/index.ts)
 
-<a id="deepseek-aidsh-sandbox-local"></a>
+<a id="oasisailabsponge-sandbox-local"></a>
 
 ## `@oasisailab/sponge-sandbox-local`
 
@@ -1621,7 +1657,7 @@ export interface Config {
 
 Source: [`packages/sandbox/sandbox-local/src/index.ts:44`](../packages/sandbox/sandbox-local/src/index.ts)
 
-<a id="deepseek-aidsh-sandbox-policy"></a>
+<a id="oasisailabsponge-sandbox-policy"></a>
 
 ## `@oasisailab/sponge-sandbox-policy`
 
@@ -1648,7 +1684,7 @@ Depends on: [`SandboxMode`](subsystems/sandbox.md)
 
 Source: [`packages/sandbox/sandbox-policy/src/index.ts:67`](../packages/sandbox/sandbox-policy/src/index.ts)
 
-<a id="deepseek-aidsh-sdk-jsonrpc-server"></a>
+<a id="oasisailabsponge-sdk-jsonrpc-server"></a>
 
 ## `@oasisailab/sponge-sdk-jsonrpc-server`
 
@@ -1672,7 +1708,7 @@ Depends on: `Readable` (`node:stream`) · `Writable` (`node:stream`)
 
 Source: [`packages/sdk/server/src/index.ts:25`](../packages/sdk/server/src/index.ts)
 
-<a id="deepseek-aidsh-session-persistence-jsonl"></a>
+<a id="oasisailabsponge-session-persistence-jsonl"></a>
 
 ## `@oasisailab/sponge-session-persistence-jsonl`
 
@@ -1711,7 +1747,7 @@ export type JsonlCompression = 'zstd' | 'none'
 
 Source: [`packages/session/session-persistence-jsonl/src/index.ts:60`](../packages/session/session-persistence-jsonl/src/index.ts)
 
-<a id="deepseek-aidsh-session-persistence-sqlite"></a>
+<a id="oasisailabsponge-session-persistence-sqlite"></a>
 
 ## `@oasisailab/sponge-session-persistence-sqlite`
 
@@ -1738,7 +1774,7 @@ export type JournalMode = 'wal' | 'delete' | 'truncate' | 'persist'
 
 Source: [`packages/session/session-persistence-sqlite/src/index.ts:36`](../packages/session/session-persistence-sqlite/src/index.ts)
 
-<a id="deepseek-aidsh-session-projection-cache"></a>
+<a id="oasisailabsponge-session-projection-cache"></a>
 
 ## `@oasisailab/sponge-session-projection-cache`
 
@@ -1761,7 +1797,7 @@ export interface Config {
 
 Source: [`packages/session/session-projection-cache/src/index.ts:42`](../packages/session/session-projection-cache/src/index.ts)
 
-<a id="deepseek-aidsh-session-query-sqlite"></a>
+<a id="oasisailabsponge-session-query-sqlite"></a>
 
 ## `@oasisailab/sponge-session-query-sqlite`
 
@@ -1807,7 +1843,7 @@ Depends on: [`SessionQueryConfig`](../packages/session-query/session-query/src/i
 
 Source: [`packages/session-query/session-query-sqlite/src/index.ts:89`](../packages/session-query/session-query-sqlite/src/index.ts)
 
-<a id="deepseek-aidsh-session-reference"></a>
+<a id="oasisailabsponge-session-reference"></a>
 
 ## `@oasisailab/sponge-session-reference`
 
@@ -1827,7 +1863,7 @@ export interface Config {
 
 Source: [`packages/context/session-reference/src/config.ts:11`](../packages/context/session-reference/src/config.ts)
 
-<a id="deepseek-aidsh-session-telemetry-otel"></a>
+<a id="oasisailabsponge-session-telemetry-otel"></a>
 
 ## `@oasisailab/sponge-session-telemetry-otel`
 
@@ -1873,7 +1909,7 @@ Depends on: `BatchLogRecordProcessorOptions` (`@opentelemetry/sdk-logs`) · `OTL
 
 Source: [`packages/session/session-telemetry-otel/src/index.ts:91`](../packages/session/session-telemetry-otel/src/index.ts)
 
-<a id="deepseek-aidsh-session-title"></a>
+<a id="oasisailabsponge-session-title"></a>
 
 ## `@oasisailab/sponge-session-title`
 
@@ -1893,7 +1929,7 @@ export interface Config {
 
 Source: [`packages/session/session-title/src/index.ts:79`](../packages/session/session-title/src/index.ts)
 
-<a id="deepseek-aidsh-session-title-all-prompts-llm"></a>
+<a id="oasisailabsponge-session-title-all-prompts-llm"></a>
 
 ## `@oasisailab/sponge-session-title-all-prompts-llm`
 
@@ -1908,7 +1944,7 @@ Depends on: [`SessionTitleLlmConfig`](../packages/session/session-title-llm/src/
 
 Source: [`packages/session/session-title-all-prompts-llm/src/index.ts:15`](../packages/session/session-title-all-prompts-llm/src/index.ts)
 
-<a id="deepseek-aidsh-session-title-first-prompt-llm"></a>
+<a id="oasisailabsponge-session-title-first-prompt-llm"></a>
 
 ## `@oasisailab/sponge-session-title-first-prompt-llm`
 
@@ -1923,7 +1959,7 @@ Depends on: [`SessionTitleLlmConfig`](../packages/session/session-title-llm/src/
 
 Source: [`packages/session/session-title-first-prompt-llm/src/index.ts:15`](../packages/session/session-title-first-prompt-llm/src/index.ts)
 
-<a id="deepseek-aidsh-settings-file"></a>
+<a id="oasisailabsponge-settings-file"></a>
 
 ## `@oasisailab/sponge-settings-file`
 
@@ -1943,21 +1979,21 @@ export interface Config {
 
 Source: [`packages/settings/settings-file/src/index.ts:21`](../packages/settings/settings-file/src/index.ts)
 
-<a id="deepseek-aidsh-shell-env"></a>
+<a id="oasisailabsponge-shell-env"></a>
 
 ## `@oasisailab/sponge-shell-env`
 
 ```ts config-catalog
 /** Plugin config (all optional — the built-in facts resolve without defaults). */
 export interface Config {
-  /** DeepSeek Harness home directory exposed as `DSH_HOME`; defaults to `$DSH_HOME` or `~/.dsh`. */
+  /** Sponge home directory exposed as `DSH_HOME`; defaults to `$DSH_HOME` or `~/.dsh`. */
   dshHome?: string
 }
 ```
 
 Source: [`packages/shell/shell-env/src/index.ts:29`](../packages/shell/shell-env/src/index.ts)
 
-<a id="deepseek-aidsh-skill"></a>
+<a id="oasisailabsponge-skill"></a>
 
 ## `@oasisailab/sponge-skill`
 
@@ -1971,7 +2007,7 @@ export interface Config {
 
 Source: [`packages/skill/skill/src/index.ts:279`](../packages/skill/skill/src/index.ts)
 
-<a id="deepseek-aidsh-skill-filesystem"></a>
+<a id="oasisailabsponge-skill-filesystem"></a>
 
 ## `@oasisailab/sponge-skill-filesystem`
 
@@ -1984,7 +2020,7 @@ export interface Config {
   providerName?: string
   /** Whether project and user roots are included around custom roots. */
   includeDefaultRoots?: boolean
-  /** DeepSeek Harness config root. Defaults to `$DSH_HOME` or `~/.dsh`. */
+  /** Sponge config root. Defaults to `$DSH_HOME` or `~/.dsh`. */
   dshHome?: string
   /** Shared agent config root. Defaults to `$DSH_AGENTS_HOME` or `~/.agents`. */
   agentsHome?: string
@@ -2009,7 +2045,7 @@ export interface Config {
 
 Source: [`packages/skill/skill-filesystem/src/index.ts:49`](../packages/skill/skill-filesystem/src/index.ts)
 
-<a id="deepseek-aidsh-spill-local"></a>
+<a id="oasisailabsponge-spill-local"></a>
 
 ## `@oasisailab/sponge-spill-local`
 
@@ -2027,7 +2063,7 @@ export interface Config {
 
 Source: [`packages/spill/spill-local/src/index.ts:22`](../packages/spill/spill-local/src/index.ts)
 
-<a id="deepseek-aidsh-spill-policy"></a>
+<a id="oasisailabsponge-spill-policy"></a>
 
 ## `@oasisailab/sponge-spill-policy`
 
@@ -2047,7 +2083,7 @@ export interface Config {
 
 Source: [`packages/spill/spill-policy/src/index.ts:60`](../packages/spill/spill-policy/src/index.ts)
 
-<a id="deepseek-aidsh-storage-domain"></a>
+<a id="oasisailabsponge-storage-domain"></a>
 
 ## `@oasisailab/sponge-storage-domain`
 
@@ -2070,7 +2106,7 @@ export interface Config {
 
 Source: [`packages/storage/storage-domain/src/index.ts:52`](../packages/storage/storage-domain/src/index.ts)
 
-<a id="deepseek-aidsh-storage-json"></a>
+<a id="oasisailabsponge-storage-json"></a>
 
 ## `@oasisailab/sponge-storage-json`
 
@@ -2091,7 +2127,7 @@ export interface Config {
 
 Source: [`packages/storage/storage-json/src/index.ts:27`](../packages/storage/storage-json/src/index.ts)
 
-<a id="deepseek-aidsh-storage-sqlite"></a>
+<a id="oasisailabsponge-storage-sqlite"></a>
 
 ## `@oasisailab/sponge-storage-sqlite`
 
@@ -2131,7 +2167,7 @@ export type JournalMode = 'wal' | 'delete' | 'truncate' | 'persist'
 
 Source: [`packages/storage/storage-sqlite/src/index.ts:24`](../packages/storage/storage-sqlite/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-acp"></a>
+<a id="oasisailabsponge-subagent-acp"></a>
 
 ## `@oasisailab/sponge-subagent-acp`
 
@@ -2184,7 +2220,7 @@ export type PermissionPolicy = 'allow' | 'reject'
 
 Source: [`packages/subagent/subagent-acp/src/index.ts:27`](../packages/subagent/subagent-acp/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-claude-code"></a>
+<a id="oasisailabsponge-subagent-claude-code"></a>
 
 ## `@oasisailab/sponge-subagent-claude-code`
 
@@ -2217,7 +2253,7 @@ export type ClaudeCodePermissionMode = typeof CLAUDE_CODE_PERMISSION_MODES[numbe
 
 Source: [`packages/subagent/subagent-claude-code/src/index.ts:38`](../packages/subagent/subagent-claude-code/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-codex"></a>
+<a id="oasisailabsponge-subagent-codex"></a>
 
 ## `@oasisailab/sponge-subagent-codex`
 
@@ -2248,7 +2284,7 @@ export type CodexPermissionMode =
 
 Source: [`packages/subagent/subagent-codex/src/index.ts:36`](../packages/subagent/subagent-codex/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-dsh-sdk"></a>
+<a id="oasisailabsponge-subagent-dsh-sdk"></a>
 
 ## `@oasisailab/sponge-subagent-dsh-sdk`
 
@@ -2301,7 +2337,7 @@ export interface Config {
 
 Source: [`packages/subagent/subagent-dsh-sdk/src/index.ts:29`](../packages/subagent/subagent-dsh-sdk/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-fork-in-process"></a>
+<a id="oasisailabsponge-subagent-fork-in-process"></a>
 
 ## `@oasisailab/sponge-subagent-fork-in-process`
 
@@ -2317,7 +2353,7 @@ export interface Config {
 
 Source: [`packages/subagent/subagent-fork-in-process/src/index.ts:31`](../packages/subagent/subagent-fork-in-process/src/index.ts)
 
-<a id="deepseek-aidsh-subagent-spawn-in-process"></a>
+<a id="oasisailabsponge-subagent-spawn-in-process"></a>
 
 ## `@oasisailab/sponge-subagent-spawn-in-process`
 
@@ -2333,7 +2369,7 @@ export interface Config {
 
 Source: [`packages/subagent/subagent-spawn-in-process/src/index.ts:25`](../packages/subagent/subagent-spawn-in-process/src/index.ts)
 
-<a id="deepseek-aidsh-subprocess-e2b"></a>
+<a id="oasisailabsponge-subprocess-e2b"></a>
 
 ## `@oasisailab/sponge-subprocess-e2b`
 
@@ -2349,14 +2385,14 @@ export interface Config {
 
 Source: [`packages/e2b/subprocess-e2b/src/index.ts:25`](../packages/e2b/subprocess-e2b/src/index.ts)
 
-<a id="deepseek-aidsh-system-prompt"></a>
+<a id="oasisailabsponge-system-prompt"></a>
 
 ## `@oasisailab/sponge-system-prompt`
 
 ```ts config-catalog
 /** Plugin config: the deployment-authored fragment of the system prompt (see {@link Config.persona} for its contract). */
 export interface Config {
-  /** Include the fixed DeepSeek Harness identity before the deployment persona (default true). */
+  /** Include the fixed Sponge identity before the deployment persona (default true). */
   includeHarnessIdentity?: boolean
   /** Include dynamic runtime-context snapshots in model history (default true). */
   includeRuntimeContext?: boolean
@@ -2376,7 +2412,7 @@ export interface Config {
 
 Source: [`packages/core/system-prompt/src/index.ts:186`](../packages/core/system-prompt/src/index.ts)
 
-<a id="deepseek-aidsh-terminal-bash"></a>
+<a id="oasisailabsponge-terminal-bash"></a>
 
 ## `@oasisailab/sponge-terminal-bash`
 
@@ -2426,7 +2462,7 @@ export type ShellDialect = 'bash' | 'pwsh'
 
 Source: [`packages/terminal/terminal-bash/src/config.ts:10`](../packages/terminal/terminal-bash/src/config.ts)
 
-<a id="deepseek-aidsh-time-context"></a>
+<a id="oasisailabsponge-time-context"></a>
 
 ## `@oasisailab/sponge-time-context`
 
@@ -2444,7 +2480,7 @@ export interface Config {
 
 Source: [`packages/context/time-context/src/index.ts:27`](../packages/context/time-context/src/index.ts)
 
-<a id="deepseek-aidsh-tmux-context"></a>
+<a id="oasisailabsponge-tmux-context"></a>
 
 ## `@oasisailab/sponge-tmux-context`
 
@@ -2460,7 +2496,7 @@ export interface Config {
 
 Source: [`packages/context/tmux-context/src/index.ts:34`](../packages/context/tmux-context/src/index.ts)
 
-<a id="deepseek-aidsh-token-meter"></a>
+<a id="oasisailabsponge-token-meter"></a>
 
 ## `@oasisailab/sponge-token-meter`
 
@@ -2471,7 +2507,7 @@ export type TokenMeterConfig = Record<string, never>
 
 Source: [`packages/llm/token-meter/src/types.ts:12`](../packages/llm/token-meter/src/types.ts)
 
-<a id="deepseek-aidsh-tool-bash"></a>
+<a id="oasisailabsponge-tool-bash"></a>
 
 ## `@oasisailab/sponge-tool-bash`
 
@@ -2487,7 +2523,7 @@ export interface Config {
 
 Source: [`packages/shell/tool-bash/src/index.ts:34`](../packages/shell/tool-bash/src/index.ts)
 
-<a id="deepseek-aidsh-tool-bash-persistent"></a>
+<a id="oasisailabsponge-tool-bash-persistent"></a>
 
 ## `@oasisailab/sponge-tool-bash-persistent`
 
@@ -2509,7 +2545,7 @@ export interface Config {
 
 Source: [`packages/shell/tool-bash-persistent/src/index.ts:432`](../packages/shell/tool-bash-persistent/src/index.ts)
 
-<a id="deepseek-aidsh-tool-fs"></a>
+<a id="oasisailabsponge-tool-fs"></a>
 
 ## `@oasisailab/sponge-tool-fs`
 
@@ -2531,7 +2567,7 @@ export interface Config {
 
 Source: [`packages/fs/tool-fs/src/index.ts:25`](../packages/fs/tool-fs/src/index.ts)
 
-<a id="deepseek-aidsh-tool-fs-search"></a>
+<a id="oasisailabsponge-tool-fs-search"></a>
 
 ## `@oasisailab/sponge-tool-fs-search`
 
@@ -2566,7 +2602,7 @@ export interface Config {
 
 Source: [`packages/fs/tool-fs-search/src/index.ts:73`](../packages/fs/tool-fs-search/src/index.ts)
 
-<a id="deepseek-aidsh-tool-goal"></a>
+<a id="oasisailabsponge-tool-goal"></a>
 
 ## `@oasisailab/sponge-tool-goal`
 
@@ -2582,7 +2618,7 @@ export interface Config {
 
 Source: [`packages/goal/tool-goal/src/index.ts:26`](../packages/goal/tool-goal/src/index.ts)
 
-<a id="deepseek-aidsh-tool-jobs"></a>
+<a id="oasisailabsponge-tool-jobs"></a>
 
 ## `@oasisailab/sponge-tool-jobs`
 
@@ -2616,7 +2652,7 @@ export type CompletionDelivery = 'quiet' | 'wakeup'
 
 Source: [`packages/jobs/tool-jobs/src/index.ts:32`](../packages/jobs/tool-jobs/src/index.ts)
 
-<a id="deepseek-aidsh-tool-lsp"></a>
+<a id="oasisailabsponge-tool-lsp"></a>
 
 ## `@oasisailab/sponge-tool-lsp`
 
@@ -2636,7 +2672,7 @@ export interface Config {
 
 Source: [`packages/lsp/tool-lsp/src/index.ts:58`](../packages/lsp/tool-lsp/src/index.ts)
 
-<a id="deepseek-aidsh-tool-pwsh"></a>
+<a id="oasisailabsponge-tool-pwsh"></a>
 
 ## `@oasisailab/sponge-tool-pwsh`
 
@@ -2652,7 +2688,7 @@ export interface Config {
 
 Source: [`packages/shell/tool-pwsh/src/index.ts:52`](../packages/shell/tool-pwsh/src/index.ts)
 
-<a id="deepseek-aidsh-tool-pwsh-persistent"></a>
+<a id="oasisailabsponge-tool-pwsh-persistent"></a>
 
 ## `@oasisailab/sponge-tool-pwsh-persistent`
 
@@ -2674,7 +2710,7 @@ export interface Config {
 
 Source: [`packages/shell/tool-pwsh-persistent/src/index.ts:472`](../packages/shell/tool-pwsh-persistent/src/index.ts)
 
-<a id="deepseek-aidsh-tool-ralph"></a>
+<a id="oasisailabsponge-tool-ralph"></a>
 
 ## `@oasisailab/sponge-tool-ralph`
 
@@ -2696,7 +2732,7 @@ export interface Config {
 
 Source: [`packages/workflow/tool-ralph/src/index.ts:23`](../packages/workflow/tool-ralph/src/index.ts)
 
-<a id="deepseek-aidsh-tool-session-query"></a>
+<a id="oasisailabsponge-tool-session-query"></a>
 
 ## `@oasisailab/sponge-tool-session-query`
 
@@ -2714,7 +2750,7 @@ export interface Config {
 
 Source: [`packages/session-query/tool-session-query/src/index.ts:29`](../packages/session-query/tool-session-query/src/index.ts)
 
-<a id="deepseek-aidsh-tool-skill"></a>
+<a id="oasisailabsponge-tool-skill"></a>
 
 ## `@oasisailab/sponge-tool-skill`
 
@@ -2730,7 +2766,7 @@ export interface Config {
 
 Source: [`packages/skill/tool-skill/src/index.ts:61`](../packages/skill/tool-skill/src/index.ts)
 
-<a id="deepseek-aidsh-tool-str-replace-editor"></a>
+<a id="oasisailabsponge-tool-str-replace-editor"></a>
 
 ## `@oasisailab/sponge-tool-str-replace-editor`
 
@@ -2748,7 +2784,7 @@ export interface Config {
 
 Source: [`packages/fs/tool-str-replace-editor/src/index.ts:497`](../packages/fs/tool-str-replace-editor/src/index.ts)
 
-<a id="deepseek-aidsh-tool-subagent"></a>
+<a id="oasisailabsponge-tool-subagent"></a>
 
 ## `@oasisailab/sponge-tool-subagent`
 
@@ -2813,7 +2849,7 @@ Depends on: [`AgentOptions`](subsystems/core.md)
 
 Source: [`packages/subagent/tool-subagent/src/index.ts:29`](../packages/subagent/tool-subagent/src/index.ts)
 
-<a id="deepseek-aidsh-tool-subagent-report"></a>
+<a id="oasisailabsponge-tool-subagent-report"></a>
 
 ## `@oasisailab/sponge-tool-subagent-report`
 
@@ -2835,7 +2871,7 @@ Depends on: [`SubagentReportDelivery`](subsystems/subagent.md)
 
 Source: [`packages/subagent/tool-subagent-report/src/index.ts:27`](../packages/subagent/tool-subagent-report/src/index.ts)
 
-<a id="deepseek-aidsh-tool-terminal"></a>
+<a id="oasisailabsponge-tool-terminal"></a>
 
 ## `@oasisailab/sponge-tool-terminal`
 
@@ -2853,7 +2889,7 @@ export interface Config {
 
 Source: [`packages/terminal/tool-terminal/src/index.ts:35`](../packages/terminal/tool-terminal/src/index.ts)
 
-<a id="deepseek-aidsh-tool-todo"></a>
+<a id="oasisailabsponge-tool-todo"></a>
 
 ## `@oasisailab/sponge-tool-todo`
 
@@ -2875,7 +2911,7 @@ export interface Config {
 
 Source: [`packages/todo/tool-todo/src/index.ts:29`](../packages/todo/tool-todo/src/index.ts)
 
-<a id="deepseek-aidsh-tool-web"></a>
+<a id="oasisailabsponge-tool-web"></a>
 
 ## `@oasisailab/sponge-tool-web`
 
@@ -2903,7 +2939,7 @@ export interface Config {
 
 Source: [`packages/web/tool-web/src/index.ts:37`](../packages/web/tool-web/src/index.ts)
 
-<a id="deepseek-aidsh-tool-workflow"></a>
+<a id="oasisailabsponge-tool-workflow"></a>
 
 ## `@oasisailab/sponge-tool-workflow`
 
@@ -2921,7 +2957,7 @@ export interface Config {
 
 Source: [`packages/workflow/tool-workflow/src/index.ts:33`](../packages/workflow/tool-workflow/src/index.ts)
 
-<a id="deepseek-aidsh-tools"></a>
+<a id="oasisailabsponge-tools"></a>
 
 ## `@oasisailab/sponge-tools`
 
@@ -2957,7 +2993,7 @@ export type ToolPresentationMode = 'native' | 'code' | 'both'
 
 Source: [`packages/core/tools/src/index.ts:654`](../packages/core/tools/src/index.ts)
 
-<a id="deepseek-aidsh-typert-loader"></a>
+<a id="oasisailabsponge-typert-loader"></a>
 
 ## `@oasisailab/sponge-typert-loader`
 
@@ -2973,7 +3009,7 @@ export interface Config {
 
 Source: [`packages/typert/loader/src/index.ts:47`](../packages/typert/loader/src/index.ts)
 
-<a id="deepseek-aidsh-user-approval"></a>
+<a id="oasisailabsponge-user-approval"></a>
 
 ## `@oasisailab/sponge-user-approval`
 
@@ -3004,7 +3040,7 @@ export type ApprovalPolicy = 'ask' | 'never'
 
 Source: [`packages/interaction/user-approval/src/index.ts:177`](../packages/interaction/user-approval/src/index.ts)
 
-<a id="deepseek-aidsh-web"></a>
+<a id="oasisailabsponge-web"></a>
 
 ## `@oasisailab/sponge-web`
 
@@ -3025,7 +3061,7 @@ export interface WebRuntimeConfig {
 
 Source: [`packages/web/web/src/index.ts:55`](../packages/web/web/src/index.ts)
 
-<a id="deepseek-aidsh-web-app"></a>
+<a id="oasisailabsponge-web-app"></a>
 
 ## `@oasisailab/sponge-web-app`
 
@@ -3036,6 +3072,12 @@ Requires: `webServer`
 export interface Config {
   /** Permit default-browser handoff after the Loader tree settles; an SSH launch suppresses it. */
   openBrowser: boolean
+  /** Open the browser into the Portal surface instead of the conversation. */
+  portal: boolean
+  /** Open the browser on the session history list. */
+  history: boolean
+  /** `--resume` session id, absent when the invocation named none. */
+  resume?: string
   /** Print the URL line on activation; a non-interactive layer can turn it off. */
   printUrl: boolean
   /**
@@ -3052,7 +3094,7 @@ export interface Config {
 
 Source: [`packages/bundle/web-app/src/index.ts:42`](../packages/bundle/web-app/src/index.ts)
 
-<a id="deepseek-aidsh-web-fetch-http"></a>
+<a id="oasisailabsponge-web-fetch-http"></a>
 
 ## `@oasisailab/sponge-web-fetch-http`
 
@@ -3078,7 +3120,7 @@ export interface Config {
 
 Source: [`packages/web/web-fetch-http/src/index.ts:34`](../packages/web/web-fetch-http/src/index.ts)
 
-<a id="deepseek-aidsh-web-search-deepseek"></a>
+<a id="oasisailabsponge-web-search-deepseek"></a>
 
 ## `@oasisailab/sponge-web-search-deepseek`
 
@@ -3106,7 +3148,7 @@ export interface Config {
 
 Source: [`packages/web/web-search-deepseek/src/index.ts:46`](../packages/web/web-search-deepseek/src/index.ts)
 
-<a id="deepseek-aidsh-web-search-exa"></a>
+<a id="oasisailabsponge-web-search-exa"></a>
 
 ## `@oasisailab/sponge-web-search-exa`
 
@@ -3130,7 +3172,7 @@ export interface Config {
 
 Source: [`packages/web/web-search-exa/src/index.ts:38`](../packages/web/web-search-exa/src/index.ts)
 
-<a id="deepseek-aidsh-web-search-perplexity"></a>
+<a id="oasisailabsponge-web-search-perplexity"></a>
 
 ## `@oasisailab/sponge-web-search-perplexity`
 
@@ -3154,7 +3196,7 @@ export interface Config {
 
 Source: [`packages/web/web-search-perplexity/src/index.ts:32`](../packages/web/web-search-perplexity/src/index.ts)
 
-<a id="deepseek-aidsh-workflow-worker-thread"></a>
+<a id="oasisailabsponge-workflow-worker-thread"></a>
 
 ## `@oasisailab/sponge-workflow-worker-thread`
 
@@ -3220,6 +3262,8 @@ These load from a `cordis.yml` entry with no `config:` block; they declare no co
 - `@oasisailab/sponge-client-ui-settings-plugins` ([`packages/client/ui-settings-plugins/src/index.ts`](../packages/client/ui-settings-plugins/src/index.ts))
 - `@oasisailab/sponge-client-ui-sidebar` ([`packages/client/ui-sidebar/src/index.ts`](../packages/client/ui-sidebar/src/index.ts))
 - `@oasisailab/sponge-client-ui-skill` ([`packages/client/ui-skill/src/index.ts`](../packages/client/ui-skill/src/index.ts))
+- `@oasisailab/sponge-client-ui-sponge-portal` ([`packages/client/ui-sponge-portal/src/index.ts`](../packages/client/ui-sponge-portal/src/index.ts))
+- `@oasisailab/sponge-client-ui-sponge-sandbox` ([`packages/client/ui-sponge-sandbox/src/index.ts`](../packages/client/ui-sponge-sandbox/src/index.ts))
 - `@oasisailab/sponge-client-ui-subagent` ([`packages/client/ui-subagent/src/index.ts`](../packages/client/ui-subagent/src/index.ts))
 - `@oasisailab/sponge-client-ui-theme` ([`packages/client/ui-theme/src/index.ts`](../packages/client/ui-theme/src/index.ts))
 - `@oasisailab/sponge-client-ui-tool` ([`packages/client/ui-tool/src/index.ts`](../packages/client/ui-tool/src/index.ts))

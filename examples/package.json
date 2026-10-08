@@ -83,6 +83,8 @@
     "@oasisailab/sponge-system-prompt": "workspace:*",
     "@oasisailab/sponge-jobs-local": "workspace:*",
     "@oasisailab/sponge-experimental-agent-team": "workspace:*",
+    "@oasisailab/sponge-experimental-move-up-detector": "workspace:*",
+    "@oasisailab/sponge-experimental-move-up-space": "workspace:*",
     "@oasisailab/sponge-time-context": "workspace:*",
     "@oasisailab/sponge-tool-call-timeout-policy": "workspace:*",
     "@oasisailab/sponge-token-meter": "workspace:*",

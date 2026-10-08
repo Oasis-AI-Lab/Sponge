@@ -19,6 +19,7 @@ Planning artifacts for Sponge.
 | `editor` | [2026-08-30-plan-mode-switch](exec/editor/2026-08-30-plan-mode-switch.md) | **draft** — mode switch first; canvas gated on the content model | E0–E2 |
 | `desktop` | [2026-08-30-plan-desktop-runnable](exec/desktop/2026-08-30-plan-desktop-runnable.md) | **draft** — P1 install our UI into Desktop, then P2 host replacement | D0–D4 |
 | `core` | not written — blocked on **D-N** | — | — |
+| `move-up` | [2026-10-08-plan-move-up-mvp](exec/move-up/2026-10-08-plan-move-up-mvp.md) | **draft** — prove one semantic unit leaves the conversation and affects a later session | M0–M3 |
 | `experiment` | not written | — | — |
 
 ## Brainstorms and research
@@ -38,6 +39,7 @@ Planning artifacts for Sponge.
 | **S1′** — structure-on-disk format (structure registration) | structure browser, editor file level (E3), structure service |
 | **D-E1/E2/E3** — the one structure operation; prototype data source; top bar vs `sponge.portal.nav` | `editor` E0/E1/E3 |
 | **Domain granularity** (P1-10) — MVP口径 = slice level? | domain surfaces |
+| **D-Q** — Move Up MVP landing site and authority (object store, detect→promote wiring, promotion logging, Space identity) | `move-up` track plan (M0/M1) |
 
 ## Current status
 
